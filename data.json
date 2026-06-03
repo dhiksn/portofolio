@@ -13,36 +13,21 @@
     },
     {
       "id": 2,
-      "title": "Youtube converter",
-      "description": "Aplikasi web untuk mengkonversi video YouTube ke format MP3/MP4 menggunakan Python Flask sebagai backend dengan FFmpeg untuk pemrosesan media.",
-      "longDesc": "Aplikasi web full-stack yang memungkinkan pengguna mengkonversi video YouTube ke format audio MP3 atau video MP4. Backend dibangun dengan Python Flask yang mengelola proses konversi menggunakan FFmpeg, sementara frontend menampilkan progress download secara real-time dan antarmuka yang mudah digunakan.",
-      "tech": ["Python", "Flask", "FFmpeg"],
-      "image": "project/youtube.png",
+      "title": "RaiSaver",
+      "description": "Platform download video YouTube, Tiktok, dan Instagram tersedia sebagai aplikasi Flutter (Android/iOS) dan website, dengan backend FastAPI dan dukungan resolusi hingga 4K.",
+      "longDesc": "RaiSaver adalah platform downloader YouTube, Tiktok, dan Instagram yang hadir dalam dua versi: aplikasi mobile Flutter untuk Android/iOS dengan UI glassmorphism, dan website yang bisa diakses langsung di browser. Backend dibangun dengan FastAPI dan yt-dlp untuk proses download, serta FFmpeg untuk merging video dan audio secara otomatis. Mendukung resolusi hingga 4K, download audio MP3, real-time progress tracking, serta embed thumbnail dan metadata.",
+      "tech": ["Flutter", "HTML", "JavaScript", "Python", "yt-dlp", "FFmpeg"],
+      "image": "assets/img/raisaver.png",
       "thumbBg": "youtube",
-      "github": "https://github.com/andhikarafi/youtube-converter",
-      "demo": "#"
+      "github": "https://github.com/dhiksn/downloader",
+      "demo": "https://raisaver.netlify.app/"
     },
     {
       "id": 3,
-      "title": "TikTok Photo Downloader",
-      "description": "Aplikasi desktop GUI untuk mengunduh foto dari TikTok menggunakan Python PyQt5 sebagai antarmuka pengguna yang intuitif dan responsif.",
-      "longDesc": "Aplikasi desktop berbasis Python dengan antarmuka grafis menggunakan PyQt5. Memungkinkan pengguna mengunduh foto-foto dari postingan TikTok hanya dengan memasukkan URL. Aplikasi menangani proses scraping, unduhan batch, dan menyimpan file ke folder yang ditentukan pengguna secara otomatis.",
-      "tech": ["Python", "PyQt5"],
-      "image": "project/tiktok.png",
-      "thumbBg": "tiktok",
-      "github": "https://github.com/andhikarafi/tiktok-downloader",
-      "demo": "#"
-    },
-    {
-      "id": 4,
-      "title": "Music Streaming Website",
-      "description": "Platform streaming musik berbasis web dengan fitur upload, streaming, manajemen playlist, dan sistem autentikasi pengguna menggunakan PHP dan MySQL.",
-      "longDesc": "Platform streaming musik berbasis web yang dibangun dari awal menggunakan PHP native dan MySQL. Mendukung upload lagu oleh pengguna, streaming audio langsung di browser, pembuatan dan manajemen playlist pribadi, serta sistem autentikasi lengkap dengan registrasi dan login.",
-      "tech": ["PHP", "MySQL", "JavaScript"],
-      "image": "project/music.png",
-      "thumbBg": "music",
-      "github": "https://github.com/andhikarafi/music-streaming",
-      "demo": "#"
+      "title": "Dokumentasi ASAT Praktik TJKT",
+      "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
+      "demotype": "download",
+      "downloadFile": "assets/docs/ASAT.docx"
     }
   ],
   "certificates": [

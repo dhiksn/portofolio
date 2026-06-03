@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="RaiSaver — Platform download video YouTube tersedia sebagai app Flutter & website" />
+  <title>RaiSaver — Andhika Rafi</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --bg: #000000;
+      --bg-2: #0d0d0d;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-bg-hover: rgba(255,255,255,0.1);
+      --border: rgba(255,255,255,0.12);
+      --border-hover: rgba(255,255,255,0.25);
+      --text: #ffffff;
+      --text-muted: #b0b0b0;
+      --text-dim: #555;
+      --accent: #ffffff;
+      --accent-2: #cccccc;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-full: 9999px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* Background */
+    .bg-grid {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+    }
+    .bg-glow {
+      position: fixed; pointer-events: none; z-index: 0;
+      border-radius: 50%; filter: blur(120px);
+    }
+    .bg-glow-1 {
+      width: 500px; height: 500px; top: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    }
+    .bg-glow-2 {
+      width: 400px; height: 400px; bottom: 10%; left: -80px;
+      background: radial-gradient(circle, rgba(200,200,200,0.07) 0%, transparent 70%);
+    }
+
+    /* Topbar */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+    }
+    .topbar-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.45rem 1rem; border-radius: var(--radius-full);
+      font-size: 0.82rem; font-weight: 500; transition: var(--transition);
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); border-color: var(--border-hover); }
+    .back-btn svg { width: 14px; height: 14px; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--text-dim);
+    }
+    .breadcrumb .sep { color: var(--text-dim); }
+    .breadcrumb .current { color: var(--text); font-weight: 500; }
+
+    /* Main */
+    .main {
+      max-width: 1100px; margin: 0 auto;
+      padding: 3.5rem 2rem 6rem;
+      position: relative; z-index: 1;
+    }
+
+    /* Hero */
+    .hero-row {
+      display: grid; grid-template-columns: 1fr 1.15fr;
+      gap: 3.5rem; align-items: start; margin-bottom: 4rem;
+    }
+
+    .project-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.35rem 0.9rem; border-radius: var(--radius-full);
+      margin-bottom: 1.25rem;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    .project-title {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.04em; color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .title-line {
+      width: 50px; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, #fff, #888);
+      margin-bottom: 1.75rem;
+    }
+    .project-desc {
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--text-muted); font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Stats */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 1rem;
+      text-align: center; transition: var(--transition);
+    }
+    .stat-card:hover { background: var(--card-bg-hover); border-color: var(--border-hover); }
+    .stat-num {
+      font-size: 1.6rem; font-weight: 800; color: var(--text); line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.05em; }
+
+    /* Buttons */
+    .action-row { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .btn-action {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; border-radius: var(--radius-sm);
+      font-size: 0.88rem; font-weight: 600; transition: var(--transition);
+      border: 1px solid transparent;
+    }
+    .btn-action svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .btn-demo {
+      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25);
+      color: var(--text);
+    }
+    .btn-demo:hover { background: rgba(255,255,255,0.17); border-color: rgba(255,255,255,0.45); }
+    .btn-github {
+      background: rgba(255,255,255,0.05); border-color: var(--border);
+      color: var(--text-muted);
+    }
+    .btn-github:hover { background: rgba(255,255,255,0.1); color: var(--text); border-color: var(--border-hover); }
+
+    /* Tech chips */
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--text-dim); text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .tech-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tech-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: 7px;
+      font-size: 0.8rem; font-weight: 500; transition: var(--transition);
+    }
+    .tech-chip:hover { background: rgba(255,255,255,0.1); color: var(--text); border-color: rgba(255,255,255,0.3); }
+    .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* Hero image */
+    .image-frame {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+      aspect-ratio: 16/10;
+      background: #111;
+      position: relative;
+    }
+    .image-frame img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .image-frame:hover img { transform: scale(1.03); }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--border); margin: 3rem 0; }
+
+    /* Platform cards */
+    .section-title {
+      font-size: 1.4rem; font-weight: 700; color: var(--text);
+      margin-bottom: 1.5rem; letter-spacing: -0.02em;
+    }
+
+    .platform-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem; margin-bottom: 3rem;
+    }
+    .platform-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      transition: var(--transition);
+    }
+    .platform-card:hover {
+      background: var(--card-bg-hover); border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .platform-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .platform-name { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .platform-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; font-weight: 300; }
+
+    /* Features */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .feature-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 1.25rem;
+      transition: var(--transition);
+    }
+    .feature-card:hover {
+      background: var(--card-bg-hover); border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 36px; height: 36px; border-radius: 8px; margin-bottom: 0.9rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .feature-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+    .feature-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-row { grid-template-columns: 1fr; gap: 2.5rem; }
+      .main { padding: 2.5rem 1.25rem 4rem; }
+    }
+    @media (max-width: 480px) {
+      .topbar { padding: 0.9rem 1.25rem; }
+      .breadcrumb { display: none; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .action-row { flex-direction: column; }
+      .btn-action { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a href="../index.html#portofolio" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back
+      </a>
+      <div class="breadcrumb">
+        <span>Projects</span>
+        <span class="sep">›</span>
+        <span class="current">RaiSaver</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- Hero Row -->
+    <div class="hero-row">
+
+      <!-- Left -->
+      <div>
+        <div class="project-badge">
+          <span class="badge-dot"></span>
+          Mobile + Web App
+        </div>
+        <h1 class="project-title">RaiSaver</h1>
+        <div class="title-line"></div>
+        <p class="project-desc">
+          RaiSaver adalah platform downloader YouTube, Tiktok, dan Instagram yang hadir dalam dua versi: aplikasi mobile Flutter untuk Android/iOS dengan UI glassmorphism, dan website yang bisa diakses langsung di browser. Backend dibangun dengan FastAPI dan yt-dlp untuk proses download, serta FFmpeg untuk merging video dan audio secara otomatis. Mendukung resolusi hingga 4K, download audio MP3, real-time progress tracking, serta embed thumbnail dan metadata.
+        </p>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Teknologi</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">4K</div>
+            <div class="stat-label">Resolusi Max</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Platform</div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="action-row">
+          <a href="https://raisaver.netlify.app/" target="_blank" class="btn-action btn-demo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+          <a href="https://github.com/dhiksn/downloader" target="_blank" class="btn-action btn-github">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+
+        <!-- Tech -->
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-chips">
+          <span class="tech-chip"><span class="chip-dot"></span>Flutter</span>
+          <span class="tech-chip"><span class="chip-dot"></span>HTML/JS</span>
+          <span class="tech-chip"><span class="chip-dot"></span>Python</span>
+          <span class="tech-chip"><span class="chip-dot"></span>FastAPI</span>
+          <span class="tech-chip"><span class="chip-dot"></span>yt-dlp</span>
+          <span class="tech-chip"><span class="chip-dot"></span>FFmpeg</span>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div>
+        <div class="image-frame">
+          <img src="../assets/img/raisaver.png" alt="RaiSaver Screenshot"
+               onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;background:#111;\'>⬇️</div>'">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Platforms -->
+    <h2 class="section-title">Tersedia di 2 Platform</h2>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="platform-icon">📱</div>
+        <div class="platform-name">Mobile App (Flutter)</div>
+        <div class="platform-desc">Aplikasi Android/iOS dibangun dengan Flutter menggunakan desain glassmorphism. Mendukung input URL langsung, pilih resolusi, dan unduh ke storage lokal perangkat.</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">🌐</div>
+        <div class="platform-name">Web App</div>
+        <div class="platform-desc">Versi website yang bisa diakses dari browser manapun tanpa perlu install. Antarmuka bersih dan responsif untuk desktop maupun mobile.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Features -->
+    <h2 class="section-title">Fitur Unggulan</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎥</div>
+        <div class="feature-title">Resolusi hingga 4K</div>
+        <div class="feature-desc">Pilih kualitas video mulai dari 360p hingga 4K sesuai kebutuhan.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-title">Download Audio MP3</div>
+        <div class="feature-desc">Ekstrak audio dari video YouTube dan simpan dalam format MP3.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Real-time Progress</div>
+        <div class="feature-desc">Pantau progres download secara real-time langsung di antarmuka.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <div class="feature-title">Embed Thumbnail & Metadata</div>
+        <div class="feature-desc">Thumbnail dan metadata video otomatis tertanam di file hasil unduhan.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">FFmpeg Auto Merge</div>
+        <div class="feature-desc">Video dan audio digabungkan otomatis oleh FFmpeg untuk kualitas terbaik.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔧</div>
+        <div class="feature-title">Backend FastAPI</div>
+        <div class="feature-desc">API Python yang cepat dan efisien untuk menangani proses download.</div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

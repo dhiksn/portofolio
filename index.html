@@ -7,12 +7,8 @@
   <meta name="keywords" content="Andhika Rafi, TJKT, SMK Wikrama Bogor, Network Engineer, Linux, Web Developer, Portfolio" />
   <meta name="author" content="Andhika Rafi" />
   <title>Andhika Rafi — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Load fonts non-blocking, fallback to system fonts until ready -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
 
@@ -26,7 +22,7 @@
   <!-- Floating Navbar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#beranda" class="nav-logo">AR</a>
+      <a href="#beranda" class="nav-logo"><span class="logo-bracket">&lt;</span>dhiksn<span class="logo-bracket">/&gt;</span></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#beranda" class="nav-link active">Beranda</a></li>
         <li><a href="#tentang" class="nav-link">Tentang</a></li>
@@ -60,7 +56,7 @@
         </h1>
 
         <p class="hero-desc">
-          Saya adalah siswa kelas 11 SMK Wikrama Bogor jurusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT) yang memiliki ketertarikan dalam bidang jaringan komputer, administrasi server Linux, cloud computing, pengembangan web, dan keamanan siber.
+          Saya adalah siswa kelas 11 SMK Wikrama Bogor jurusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT) yang memiliki ketertarikan dalam bidang jaringan komputer, administrasi server Linux, pengembangan web, dan keamanan siber.
         </p>
         <div class="hero-buttons">
           <a href="#portofolio" class="btn btn-primary">
@@ -85,27 +81,18 @@
       </div>
       <div class="hero-image-wrap reveal">
         <div class="hero-image-container">
-          <div class="hero-img-glow"></div>
           <div class="hero-avatar">
-            <div class="avatar-inner">
-              <img src="#" alt="Andhika Rafi" class="avatar-photo">
-            </div>
-            <div class="avatar-ring ring-1"></div>
-            <div class="avatar-ring ring-2"></div>
-            <div class="avatar-ring ring-3"></div>
-          </div>
-          <div class="hero-float-badge badge-top">
-            <span>🌐</span> Network
-          </div>
-          <div class="hero-float-badge badge-bottom">
-            <span>🔒</span> Security
+            <lottie-player
+              src="assets/img/server.json"
+              background="transparent"
+              speed="1"
+              loop
+              autoplay
+              class="avatar-gif">
+            </lottie-player>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
     </div>
   </section>
 
@@ -120,13 +107,13 @@
       <div class="tentang-wrapper reveal">
         <div class="tentang-avatar-wrap">
           <div class="tentang-avatar">
-            <img src="#" alt="Andhika Rafi" class="tentang-avatar-photo">
+            <img src="assets/img/cover.jpg" alt="Andhika Rafi" class="tentang-avatar-photo" loading="lazy" decoding="async">
           </div>
           <div class="tentang-avatar-glow"></div>
         </div>
         <div class="tentang-content">
-          <p class="tentang-desc">Saya, <strong>Andhika Rafi</strong>, adalah seorang pelajar yang bersemangat di bidang teknologi informasi, khususnya dalam <strong>jaringan komputer</strong> dan <strong>keamanan siber</strong>. Sebagai siswa kelas 11 TJKT di SMK Wikrama Bogor, saya aktif mengembangkan keterampilan teknis saya melalui berbagai proyek nyata.</p>
-          <p class="tentang-desc">Minat saya mencakup <strong>Linux Server Administration</strong> untuk pengelolaan infrastruktur server yang andal, <strong>Cloud Computing</strong> menggunakan platform AWS, serta <strong>Web Development</strong> untuk membangun aplikasi web yang fungsional dan modern.</p>
+          <p class="tentang-desc">Saya, <strong>Andhika Rafi</strong>, adalah seorang pelajar yang bersemangat di bidang teknologi informasi, khususnya dalam <strong>jaringan komputer</strong> dan <strong>keamanan siber</strong>. Sebagai siswa kelas 11 dengan jurusan TJKT di SMK Wikrama Bogor, saya aktif mengembangkan keterampilan teknis saya melalui berbagai proyek nyata.</p>
+          <p class="tentang-desc">Minat saya mencakup <strong>Linux Server </strong> untuk pengelolaan infrastruktur server yang andal, <strong>Cloud Computing</strong> menggunakan platform AWS, serta <strong>Web Development</strong> untuk membangun aplikasi web yang fungsional dan modern.</p>
           <div class="tentang-stats-grid">
             <div class="tentang-stat">
               <div class="tentang-stat-num" data-target="10">0</div>
@@ -142,12 +129,9 @@
             </div>
           </div>
           <div class="tentang-tags">
-            <span class="tag">Networking</span>
+            <span class="tag">System Administrator</span>
             <span class="tag">Linux</span>
-            <span class="tag">Cloud Computing</span>
-            <span class="tag">Web Developer</span>
             <span class="tag">Cyber Security</span>
-            <span class="tag">IT Infrastructure</span>
           </div>
         </div>
       </div>
@@ -216,70 +200,92 @@
         <h2 class="section-title">Keahlian</h2>
         <p class="section-subtitle">Teknologi yang Saya Kuasai</p>
       </div>
-      <div class="skills-scroll-wrap reveal">
-        <div class="skills-scroll scroll-left">
-          <span class="skill-item">Mikrotik</span>
-          <span class="skill-item">Cisco</span>
-          <span class="skill-item">TCP/IP</span>
-          <span class="skill-item">VLAN</span>
-          <span class="skill-item">Routing</span>
-          <span class="skill-item">Switching</span>
-          <span class="skill-item">Linux</span>
-          <span class="skill-item">Ubuntu Server</span>
-          <span class="skill-item">Docker</span>
-          <span class="skill-item">Nginx</span>
-          <span class="skill-item">Apache</span>
-          <span class="skill-item">AWS</span>
-          <span class="skill-item">HTML</span>
-          <span class="skill-item">CSS</span>
-          <span class="skill-item">JavaScript</span>
-          <span class="skill-item">PHP</span>
-          <span class="skill-item">Python</span>
-          <span class="skill-item">Node.js</span>
-          <!-- Duplicate for seamless loop -->
-          <span class="skill-item">Mikrotik</span>
-          <span class="skill-item">Cisco</span>
-          <span class="skill-item">TCP/IP</span>
-          <span class="skill-item">VLAN</span>
-          <span class="skill-item">Routing</span>
-          <span class="skill-item">Switching</span>
-          <span class="skill-item">Linux</span>
-          <span class="skill-item">Ubuntu Server</span>
-          <span class="skill-item">Docker</span>
-          <span class="skill-item">Nginx</span>
-          <span class="skill-item">Apache</span>
-          <span class="skill-item">AWS</span>
-          <span class="skill-item">HTML</span>
-          <span class="skill-item">CSS</span>
-          <span class="skill-item">JavaScript</span>
-          <span class="skill-item">PHP</span>
-          <span class="skill-item">Python</span>
-          <span class="skill-item">Node.js</span>
+    </div>
+
+    <!-- Row 1: kiri → kanan -->
+    <div class="marquee-wrapper reveal">
+      <div class="marquee-track marquee-left">
+        <div class="marquee-content">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
         </div>
-        <div class="skills-scroll scroll-right">
-          <span class="skill-item">Git</span>
-          <span class="skill-item">GitHub</span>
-          <span class="skill-item">Express.js</span>
-          <span class="skill-item">REST API</span>
-          <span class="skill-item">MySQL</span>
-          <span class="skill-item">PostgreSQL</span>
-          <span class="skill-item">MongoDB</span>
-          <span class="skill-item">Network Security</span>
-          <span class="skill-item">Firewall</span>
-          <span class="skill-item">VPN</span>
-          <span class="skill-item">Ethical Hacking</span>
-          <!-- Duplicate for seamless loop -->
-          <span class="skill-item">Git</span>
-          <span class="skill-item">GitHub</span>
-          <span class="skill-item">Express.js</span>
-          <span class="skill-item">REST API</span>
-          <span class="skill-item">MySQL</span>
-          <span class="skill-item">PostgreSQL</span>
-          <span class="skill-item">MongoDB</span>
-          <span class="skill-item">Network Security</span>
-          <span class="skill-item">Firewall</span>
-          <span class="skill-item">VPN</span>
-          <span class="skill-item">Ethical Hacking</span>
+        <div class="marquee-content" aria-hidden="true">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: kanan → kiri -->
+    <div class="marquee-wrapper reveal">
+      <div class="marquee-track marquee-right">
+        <div class="marquee-content">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
+          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
         </div>
       </div>
     </div>
@@ -319,16 +325,12 @@
 
   <!-- Certificate Modal -->
   <div class="modal-overlay" id="certModal" onclick="closeCertModal()">
+    <button class="modal-close" onclick="closeCertModal()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
     <div class="modal-content glass-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeCertModal()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
-      </button>
-      <button class="modal-nav modal-prev" onclick="navigateCert(-1)">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg>
-      </button>
-      <button class="modal-nav modal-next" onclick="navigateCert(1)">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
-      </button>
       <div class="modal-cert-image-wrap">
         <img id="modalCertImage" src="" alt="Certificate">
       </div>

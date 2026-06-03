@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Reader — Andhika Rafi</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-size: 16px; }
+
+    :root {
+      --bg: #1a1a1a;
+      --topbar-bg: #000000;
+      --border: rgba(255,255,255,0.12);
+      --border-hover: rgba(255,255,255,0.25);
+      --text: #ffffff;
+      --text-muted: #b0b0b0;
+      --text-dim: #555;
+      --radius-full: 9999px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+    .topbar-right { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full);
+      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      transition: var(--transition); white-space: nowrap; text-decoration: none;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); border-color: var(--border-hover); }
+    .back-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .doc-title {
+      font-size: 0.88rem; font-weight: 600; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 400px;
+    }
+    .doc-badge {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-dim); padding: 0.2rem 0.55rem; border-radius: 4px;
+      text-transform: uppercase; flex-shrink: 0;
+    }
+
+    .topbar-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full);
+      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      transition: var(--transition); white-space: nowrap; text-decoration: none;
+      border: 1px solid var(--border);
+    }
+    .topbar-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); border-color: var(--border-hover); }
+    .topbar-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .topbar-btn.primary {
+      background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);
+      color: var(--text);
+    }
+    .topbar-btn.primary:hover { background: rgba(255,255,255,0.2); }
+
+    /* ===== IFRAME VIEWER ===== */
+    #viewerFrame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ===== STATE (loading / error) ===== */
+    .state-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 2rem;
+    }
+    .state-icon { font-size: 3rem; }
+    .state-wrap h2 { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+    .state-wrap p { font-size: 0.88rem; max-width: 420px; line-height: 1.7; }
+    .state-wrap .note {
+      font-size: 0.78rem; color: var(--text-dim);
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.75rem 1.25rem; max-width: 480px;
+      line-height: 1.6; text-align: left;
+    }
+    .state-wrap .note code {
+      font-family: 'Courier New', monospace; font-size: 0.75rem;
+      background: rgba(255,255,255,0.08); padding: 0.1rem 0.35rem; border-radius: 3px;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .topbar { padding: 0.6rem 1rem; }
+      .doc-title { max-width: 150px; font-size: 0.82rem; }
+      .topbar-btn span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../index.html#portofolio" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back
+      </a>
+      <span class="doc-title" id="docTitle">Memuat...</span>
+      <span class="doc-badge">Read Only</span>
+    </div>
+    <div class="topbar-right">
+      <a class="topbar-btn primary" id="downloadBtn" title="Download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Download</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- akan diisi JS: iframe atau state -->
+  <div id="app"></div>
+
+  <script>
+    const params   = new URLSearchParams(window.location.search);
+    const fileParam = params.get('file');   // e.g. "assets/docs/ASAT.docx"
+    const title     = params.get('title') || 'Dokumen';
+
+    document.title = title + ' — Reader';
+    document.getElementById('docTitle').textContent = title;
+
+    const app = document.getElementById('app');
+
+    // Deteksi apakah sedang di localhost / file://
+    const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+
+    if (!fileParam) {
+      showError('File tidak ditemukan.', 'Parameter <code>file</code> tidak ada di URL.');
+      return;
+    }
+
+    // Setup download button
+    const dlBtn = document.getElementById('downloadBtn');
+    const localPath = '../' + fileParam;
+    dlBtn.href = localPath;
+    dlBtn.download = title + '.docx';
+
+    if (isLocal) {
+      // Tampilkan pesan: file harus di-host dulu
+      showOfflineNotice();
+    } else {
+      // Buat URL absolut ke file docx
+      const absoluteUrl = location.origin + '/' + fileParam;
+      loadViewer(absoluteUrl);
+    }
+
+    function loadViewer(fileUrl) {
+      // Microsoft Office Online Viewer — render persis seperti Word
+      const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
+
+      app.style.cssText = 'flex:1;display:flex;flex-direction:column;';
+      app.innerHTML = `<iframe
+        id="viewerFrame"
+        src="${viewerUrl}"
+        style="flex:1;width:100%;border:none;"
+        allowfullscreen
+        title="${title}"
+      ></iframe>`;
+    }
+
+    function showOfflineNotice() {
+      app.innerHTML = `
+        <div class="state-wrap">
+          <div class="state-icon">🖥️</div>
+          <h2>Buka di Browser Setelah Deploy</h2>
+          <p>
+            Microsoft Office Viewer membutuhkan URL publik untuk membuka dokumen.
+            Saat ini kamu sedang di <strong>localhost</strong> — viewer tidak bisa mengakses file lokal.
+          </p>
+          <div class="note">
+            <strong>Cara pakai:</strong><br>
+            1. Upload portfolio ke hosting (GitHub Pages / Vercel / Netlify)<br>
+            2. Buka halaman ini dari URL publik<br>
+            3. Dokumen akan tampil otomatis persis seperti Word ✓<br><br>
+            File tetap bisa kamu <a href="../${fileParam}" download style="color:#aaa;text-decoration:underline;">download di sini</a>.
+          </div>
+        </div>`;
+    }
+
+    function showError(title, detail) {
+      app.innerHTML = `
+        <div class="state-wrap">
+          <div class="state-icon">📄</div>
+          <h2>${title}</h2>
+          <p>${detail}</p>
+          <a href="../index.html#portofolio"
+             style="margin-top:1rem;padding:0.55rem 1.25rem;background:rgba(255,255,255,0.08);
+                    border:1px solid rgba(255,255,255,0.2);border-radius:999px;
+                    color:#ccc;font-size:0.82rem;text-decoration:none;">
+            ← Kembali
+          </a>
+        </div>`;
+    }
+  </script>
+
+</body>
+</html>

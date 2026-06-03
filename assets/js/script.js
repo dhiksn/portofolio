@@ -26,7 +26,52 @@ function renderProjects() {
   if (!projectsGrid || !portfolioData.projects) return;
 
   projectsGrid.innerHTML = portfolioData.projects.map((project, index) => {
+    const isDoc = project.demotype === 'download';
+
+    if (isDoc) {
+      // Document/file type card
+      return `
+      <div class="project-card glass-card reveal" data-delay="${index * 100}">
+        <div class="project-doc-thumb">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span class="project-doc-ext">.docx</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-desc">${project.description}</p>
+          <div class="project-buttons">
+            <a href="project/reader.html?file=${encodeURIComponent(project.downloadFile)}&title=${encodeURIComponent(project.title)}" class="proj-btn proj-btn-primary">
+              Baca
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </a>
+            <a href="${project.downloadFile}" download class="proj-btn proj-btn-ghost">
+              Download
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      `;
+    }
+
+    // Normal project card
     const imgSrc = project.image && project.image.startsWith('http') ? project.image : project.image;
+    const detailLink = project.id === 1 ? 'project/donghua.html'
+                     : project.id === 2 ? 'project/raisaver.html'
+                     : `project/detail.html?id=${project.id}`;
     return `
     <div class="project-card glass-card reveal" data-delay="${index * 100}">
       <div class="project-image-wrap">
@@ -48,7 +93,7 @@ function renderProjects() {
               <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
           </a>
-          <a href="project/detail.html?id=${project.id}" class="proj-btn proj-btn-ghost">
+          <a href="${detailLink}" class="proj-btn proj-btn-ghost">
             Details
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -59,7 +104,6 @@ function renderProjects() {
     </div>
   `}).join('');
 
-  // Re-attach project card tilt events
   attachProjectCardEvents();
 }
 
@@ -73,7 +117,7 @@ function renderCertificates() {
       onclick="openCertModal(this)"
       data-image="${cert.image}">
       <div class="cert-image-wrap">
-        <div class="cert-image" style="background: url('${cert.image}') center/cover no-repeat;"></div>
+        <img class="cert-image" src="${cert.image}" alt="${cert.title}" loading="lazy" decoding="async">
         <div class="cert-overlay">
           <div class="cert-overlay-info">
             <h3 class="cert-title">${cert.title}</h3>
@@ -122,8 +166,8 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateRing() {
-  ringX += (mouseX - ringX) * 0.25;
-  ringY += (mouseY - ringY) * 0.25;
+  ringX += (mouseX - ringX) * 0.4;
+  ringY += (mouseY - ringY) * 0.4;
   ring.style.left = ringX + 'px';
   ring.style.top = ringY + 'px';
   requestAnimationFrame(animateRing);
