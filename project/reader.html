@@ -30,7 +30,7 @@
       overflow: hidden;
     }
 
-    /* ===== TOPBAR ===== */
+    /* TOPBAR */
     .topbar {
       background: var(--topbar-bg);
       border-bottom: 1px solid var(--border);
@@ -49,7 +49,7 @@
       display: inline-flex; align-items: center; gap: 0.45rem;
       background: rgba(255,255,255,0.07); border: 1px solid var(--border);
       color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full);
-      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      font-size: 0.8rem; font-weight: 500;
       transition: var(--transition); white-space: nowrap; text-decoration: none;
     }
     .back-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); border-color: var(--border-hover); }
@@ -71,37 +71,36 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       background: rgba(255,255,255,0.07); border: 1px solid var(--border);
       color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full);
-      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      font-size: 0.8rem; font-weight: 500;
       transition: var(--transition); white-space: nowrap; text-decoration: none;
-      border: 1px solid var(--border);
     }
     .topbar-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); border-color: var(--border-hover); }
     .topbar-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
     .topbar-btn.primary {
-      background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);
-      color: var(--text);
+      background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: var(--text);
     }
     .topbar-btn.primary:hover { background: rgba(255,255,255,0.2); }
 
-    /* ===== IFRAME VIEWER ===== */
-    #viewerFrame {
+    /* VIEWER */
+    #app {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #pdfFrame {
       flex: 1;
       width: 100%;
       border: none;
       display: block;
     }
 
-    /* ===== STATE (loading / error) ===== */
+    /* STATE */
     .state-wrap {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: var(--text-muted);
-      text-align: center;
-      padding: 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; color: var(--text-muted); text-align: center; padding: 2rem;
     }
     .state-icon { font-size: 3rem; }
     .state-wrap h2 { font-size: 1.3rem; font-weight: 700; color: var(--text); }
@@ -110,20 +109,14 @@
       font-size: 0.78rem; color: var(--text-dim);
       background: rgba(255,255,255,0.04); border: 1px solid var(--border);
       border-radius: 8px; padding: 0.75rem 1.25rem; max-width: 480px;
-      line-height: 1.6; text-align: left;
-    }
-    .state-wrap .note code {
-      font-family: 'Courier New', monospace; font-size: 0.75rem;
-      background: rgba(255,255,255,0.08); padding: 0.1rem 0.35rem; border-radius: 3px;
+      line-height: 1.8; text-align: left;
     }
 
-    /* ===== SCROLLBAR ===== */
+    /* scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .topbar { padding: 0.6rem 1rem; }
       .doc-title { max-width: 150px; font-size: 0.82rem; }
@@ -133,7 +126,6 @@
 </head>
 <body>
 
-  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-left">
       <a href="../index.html#portofolio" class="back-btn">
@@ -144,75 +136,76 @@
       <span class="doc-badge">Read Only</span>
     </div>
     <div class="topbar-right">
-      <a class="topbar-btn primary" id="downloadBtn" title="Download">
+      <a class="topbar-btn" id="downloadDocxBtn" title="Download DOCX">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Download</span>
+        <span>Download .docx</span>
       </a>
     </div>
   </div>
 
-  <!-- akan diisi JS: iframe atau state -->
   <div id="app"></div>
 
   <script>
-    (function() {
-      const params    = new URLSearchParams(window.location.search);
-      const fileParam = params.get('file');
-      const title     = params.get('title') || 'Dokumen';
+    (function () {
+      const p         = new URLSearchParams(location.search);
+      const pdfParam  = p.get('pdf');   // "assets/docs/ASAT.pdf"
+      const fileParam = p.get('file');  // "assets/docs/ASAT.docx"
+      const title     = p.get('title') || 'Dokumen';
 
       document.title = title + ' — Reader';
       document.getElementById('docTitle').textContent = title;
 
-      const app = document.getElementById('app');
-      const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
-
-      // Setup download button
-      const dlBtn = document.getElementById('downloadBtn');
+      // Download .docx button
+      const dlBtn = document.getElementById('downloadDocxBtn');
       if (fileParam) {
-        dlBtn.href = '../' + fileParam;
+        dlBtn.href     = '../' + fileParam;
         dlBtn.download = title + '.docx';
+      } else {
+        dlBtn.style.display = 'none';
       }
 
-      if (!fileParam) {
-        showError('File tidak ditemukan.', 'Parameter <code>file</code> tidak ada di URL.');
+      const app = document.getElementById('app');
+
+      if (!pdfParam) {
+        showError('PDF tidak ditemukan.', 'Parameter <code>pdf</code> tidak ada di URL. Pastikan field <code>pdfFile</code> sudah diisi di data.json.');
         return;
       }
 
-      if (isLocal) {
-        showOfflineNotice(fileParam);
-        return;
-      }
+      // Path relatif dari /project/ ke root
+      const pdfPath = '../' + pdfParam;
 
-      // Buat URL absolut ke file docx
-      const absoluteUrl = location.origin + '/' + fileParam;
-      loadViewer(absoluteUrl, title);
+      // Embed PDF langsung — browser render native, cepat
+      app.innerHTML = `<iframe
+        id="pdfFrame"
+        src="${pdfPath}#toolbar=1&view=FitH"
+        type="application/pdf"
+        style="flex:1;width:100%;height:100%;border:none;"
+        title="${title}"
+      ></iframe>`;
 
-      function loadViewer(fileUrl, docTitle) {
-        const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
-        app.style.cssText = 'flex:1;display:flex;flex-direction:column;';
-        app.innerHTML = `<iframe
-          src="${viewerUrl}"
-          style="flex:1;width:100%;border:none;"
-          allowfullscreen
-          title="${docTitle}"
-        ></iframe>`;
-      }
+      // Fallback: kalau browser tidak support embed PDF (misal mobile)
+      const frame = document.getElementById('pdfFrame');
+      frame.addEventListener('error', function () {
+        showFallback(pdfPath, fileParam, title);
+      });
 
-      function showOfflineNotice(fp) {
+      function showFallback(pdf, docx, t) {
         app.innerHTML = `
           <div class="state-wrap">
-            <div class="state-icon">🖥️</div>
-            <h2>Buka Setelah Deploy</h2>
-            <p>
-              Microsoft Office Viewer membutuhkan URL publik. Kamu sedang di
-              <strong>${location.hostname || 'localhost'}</strong> yang tidak bisa diakses oleh viewer eksternal.
-            </p>
-            <div class="note">
-              <strong>Cara pakai:</strong><br>
-              1. Upload portfolio ke hosting (Vercel / Netlify / GitHub Pages)<br>
-              2. Buka halaman ini dari URL publik<br>
-              3. Dokumen tampil otomatis persis seperti Word ✓<br><br>
-              File tetap bisa kamu <a href="../${fp}" download style="color:#aaa;text-decoration:underline;">download di sini</a>.
+            <div class="state-icon">📄</div>
+            <h2>Browser tidak mendukung PDF viewer</h2>
+            <p>Kamu bisa membuka atau mendownload file secara langsung.</p>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-top:0.5rem;">
+              <a href="${pdf}" target="_blank"
+                 style="padding:0.6rem 1.25rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+                        border-radius:999px;color:#fff;font-size:0.85rem;text-decoration:none;">
+                Buka PDF
+              </a>
+              ${docx ? `<a href="../${docx}" download
+                 style="padding:0.6rem 1.25rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);
+                        border-radius:999px;color:#ccc;font-size:0.85rem;text-decoration:none;">
+                Download .docx
+              </a>` : ''}
             </div>
           </div>`;
       }
