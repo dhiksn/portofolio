@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Detail — Andhika Rafi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg: #07091a;
+      --bg-2: #0d1025;
+      --card-bg: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.1);
+      --border-hover: rgba(255,255,255,0.2);
+      --text: #ffffff;
+      --text-muted: #9aa0b8;
+      --text-dim: #555a70;
+      --accent: #7b5cfa;
+      --accent-2: #a78bfa;
+      --accent-blue: #4B9EFF;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-full: 9999px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* === BACKGROUND === */
+    .bg-grid {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(123,92,250,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,92,250,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .bg-glow {
+      position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; filter: blur(120px);
+    }
+    .bg-glow-1 {
+      width: 500px; height: 500px; top: -100px; left: -100px;
+      background: radial-gradient(circle, rgba(123,92,250,0.18) 0%, transparent 70%);
+    }
+    .bg-glow-2 {
+      width: 400px; height: 400px; bottom: 10%; right: -80px;
+      background: radial-gradient(circle, rgba(75,158,255,0.12) 0%, transparent 70%);
+    }
+
+    /* === TOPBAR === */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,9,26,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+    }
+    .topbar-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+      color: var(--text); padding: 0.45rem 1rem; border-radius: var(--radius-full);
+      font-size: 0.82rem; font-weight: 500; transition: var(--transition);
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.13); border-color: var(--border-hover); }
+    .back-btn svg { width: 14px; height: 14px; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--text-dim);
+    }
+    .breadcrumb span { color: var(--text-muted); }
+    .breadcrumb .current { color: var(--text); font-weight: 500; }
+    .breadcrumb-sep { color: var(--text-dim); }
+
+    /* === MAIN LAYOUT === */
+    .main {
+      max-width: 1100px; margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      position: relative; z-index: 1;
+    }
+
+    /* === HERO ROW === */
+    .hero-row {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 3rem; align-items: start; margin-bottom: 2.5rem;
+    }
+    .hero-left { display: flex; flex-direction: column; }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .title-underline {
+      width: 60px; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      margin-bottom: 1.5rem;
+    }
+    .project-long-desc {
+      font-size: 0.95rem; line-height: 1.8; color: var(--text-muted);
+      font-weight: 300; margin-bottom: 2rem;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.75rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 0.9rem 1.1rem;
+      display: flex; align-items: center; gap: 0.85rem;
+      transition: var(--transition);
+    }
+    .stat-card:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.07); }
+    .stat-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #5b3fcf);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-icon.blue { background: linear-gradient(135deg, var(--accent-blue), #2c6fd4); }
+    .stat-icon svg { width: 16px; height: 16px; color: #fff; }
+    .stat-num {
+      font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 700;
+      color: var(--text); line-height: 1;
+    }
+    .stat-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+    /* Action buttons */
+    .action-buttons {
+      display: flex; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .action-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; border-radius: var(--radius-sm);
+      font-size: 0.88rem; font-weight: 600; transition: var(--transition);
+      border: 1px solid transparent;
+    }
+    .action-btn svg { width: 16px; height: 16px; }
+    .action-btn-demo {
+      background: rgba(123,92,250,0.2); border-color: rgba(123,92,250,0.4);
+      color: var(--accent-2);
+    }
+    .action-btn-demo:hover { background: rgba(123,92,250,0.3); border-color: var(--accent); }
+    .action-btn-github {
+      background: rgba(255,255,255,0.06); border-color: var(--border);
+      color: var(--text-muted);
+    }
+    .action-btn-github:hover { background: rgba(255,255,255,0.1); border-color: var(--border-hover); color: var(--text); }
+
+    /* Tech list */
+    .tech-section-title {
+      font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
+      color: var(--text); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .tech-section-title span { color: var(--accent); }
+    .tech-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tech-chip {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: rgba(123,92,250,0.12); border: 1px solid rgba(123,92,250,0.3);
+      color: var(--accent-2); padding: 0.35rem 0.85rem; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 500; font-family: 'DM Sans', monospace;
+      transition: var(--transition);
+    }
+    .tech-chip:hover { background: rgba(123,92,250,0.22); border-color: var(--accent); }
+    .tech-chip-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* === HERO RIGHT — project image === */
+    .hero-right {}
+    .project-image-frame {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      background: #0d1025;
+      aspect-ratio: 16/10;
+      position: relative;
+    }
+    .project-main-image {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s ease;
+    }
+    .project-image-frame:hover .project-main-image { transform: scale(1.02); }
+    /* Placeholder shown when no image */
+    .project-image-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      background: linear-gradient(135deg, #0d1025, #1a1f3c);
+    }
+
+    /* === LOADING / ERROR STATE === */
+    .state-center {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 60vh; gap: 1rem; color: var(--text-muted);
+    }
+    .state-center .icon { font-size: 3rem; }
+    .state-center h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; color: var(--text); }
+    .state-center p { font-size: 0.9rem; text-align: center; max-width: 360px; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .hero-row { grid-template-columns: 1fr; gap: 2rem; }
+      .main { padding: 2rem 1.25rem 4rem; }
+      .project-title { font-size: 2rem; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .topbar { padding: 0.9rem 1.25rem; }
+      .breadcrumb { display: none; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a href="../index.html#portofolio" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Back
+      </a>
+      <div class="breadcrumb">
+        <span>Projects</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="current" id="breadcrumbTitle">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main" id="mainContent">
+    <div class="state-center" id="loadingState">
+      <div class="icon">⏳</div>
+      <h2>Memuat...</h2>
+      <p>Mengambil data proyek</p>
+    </div>
+  </main>
+
+  <script>
+    // Get project ID from URL query param: detail.html?id=1
+    function getProjectId() {
+      const params = new URLSearchParams(window.location.search);
+      return parseInt(params.get('id'));
+    }
+
+    async function loadProject() {
+      const id = getProjectId();
+      if (!id) { showError('ID proyek tidak ditemukan.'); return; }
+
+      try {
+        const res = await fetch('../data.json');
+        const data = await res.json();
+        const project = data.projects.find(p => p.id === id);
+        if (!project) { showError('Proyek tidak ditemukan.'); return; }
+        renderProject(project);
+      } catch (e) {
+        showError('Gagal memuat data proyek.');
+      }
+    }
+
+    function renderProject(p) {
+      // Update page title & breadcrumb
+      document.title = p.title + ' — Andhika Rafi';
+      document.getElementById('breadcrumbTitle').textContent = p.title;
+
+      const imgSrc = p.image
+        ? (p.image.startsWith('http') ? p.image : `../${p.image}`)
+        : null;
+
+      const imageHTML = imgSrc
+        ? `<img class="project-main-image" src="${imgSrc}" alt="${p.title}" onerror="this.parentElement.innerHTML='<div class=\\'project-image-placeholder\\'>🖥️</div>'">`
+        : `<div class="project-image-placeholder">🖥️</div>`;
+
+      const techChipsHTML = p.tech.map(t => `
+        <span class="tech-chip">
+          <span class="tech-chip-dot"></span>${t}
+        </span>`).join('');
+
+      const demoHref = p.demo && p.demo !== '#' ? p.demo : null;
+      const demoBtn = demoHref
+        ? `<a href="${demoHref}" target="_blank" class="action-btn action-btn-demo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+           </a>`
+        : `<span class="action-btn action-btn-demo" style="opacity:0.4;cursor:default;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+           </span>`;
+
+      document.getElementById('mainContent').innerHTML = `
+        <div class="hero-row">
+
+          <!-- LEFT -->
+          <div class="hero-left">
+            <h1 class="project-title">${p.title}</h1>
+            <div class="title-underline"></div>
+
+            <p class="project-long-desc">${p.longDesc || p.description}</p>
+
+            <!-- Stats -->
+            <div class="stats-row">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="stat-num">${p.tech.length}</div>
+                  <div class="stat-label">Total Teknologi</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="stat-num">${new Date().getFullYear()}</div>
+                  <div class="stat-label">Tahun Proyek</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="action-buttons">
+              ${demoBtn}
+              <a href="${p.github}" target="_blank" class="action-btn action-btn-github">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                Github
+              </a>
+            </div>
+
+            <!-- Technologies -->
+            <div class="tech-section-title">
+              <span>&lt;/&gt;</span> Technologies Used
+            </div>
+            <div class="tech-chips">${techChipsHTML}</div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="hero-right">
+            <div class="project-image-frame">
+              ${imageHTML}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function showError(msg) {
+      document.getElementById('mainContent').innerHTML = `
+        <div class="state-center">
+          <div class="icon">❌</div>
+          <h2>Oops!</h2>
+          <p>${msg}</p>
+          <a href="../index.html#portofolio" style="margin-top:1rem;padding:0.6rem 1.4rem;background:rgba(123,92,250,0.2);border:1px solid rgba(123,92,250,0.4);border-radius:8px;color:#a78bfa;font-size:0.88rem;">
+            ← Kembali ke Portofolio
+          </a>
+        </div>`;
+    }
+
+    loadProject();
+  </script>
+</body>
+</html>
