@@ -279,7 +279,7 @@
       if (!id) { showError('ID proyek tidak ditemukan.'); return; }
 
       try {
-        const res = await fetch('../data.json');
+        const res = await fetch('/data.json');
         const data = await res.json();
         const project = data.projects.find(p => p.id === id);
         if (!project) { showError('Proyek tidak ditemukan.'); return; }

@@ -11,7 +11,7 @@ let portfolioData = null;
 /* ===== LOAD DATA ===== */
 async function loadPortfolioData() {
   try {
-    const response = await fetch('data.json');
+    const response = await fetch('/data.json');
     portfolioData = await response.json();
     renderProjects();
     renderCertificates();
