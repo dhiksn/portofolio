@@ -33,9 +33,9 @@ button { cursor: none; border: none; background: none; }
   --accent-2: #cccccc;
   --accent-glow: rgba(255, 255, 255, 0.25);
   --accent-2-glow: rgba(200, 200, 200, 0.25);
-  --font-display: Arial, sans-serif;
-  --font-mono: Arial, sans-serif;
-  --font-body: Arial, sans-serif;
+  --font-display: 'Syne', Arial, sans-serif;
+  --font-mono: 'DM Sans', Arial, sans-serif;
+  --font-body: 'DM Sans', Arial, sans-serif;
   --radius: 16px;
   --radius-sm: 10px;
   --radius-full: 9999px;

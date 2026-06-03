@@ -30,7 +30,7 @@ function renderProjects() {
     return `
     <div class="project-card glass-card reveal" data-delay="${index * 100}">
       <div class="project-image-wrap">
-        <img class="project-image" src="${imgSrc}" alt="${project.title}">
+        <img class="project-image" src="${imgSrc}" alt="${project.title}" loading="lazy" decoding="async">
         <div class="project-overlay"></div>
       </div>
       <div class="project-body">
@@ -136,7 +136,8 @@ document.querySelectorAll('a, button, .cert-card, .project-card, .nav-logo, .nav
 });
 
 /* ===== PARTICLES ===== */
-(function initParticles() {
+// Defer particles init until after first render to avoid blocking
+function initParticles() {
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
   let particles = [];
@@ -201,7 +202,14 @@ document.querySelectorAll('a, button, .cert-card, .project-card, .nav-logo, .nav
     requestAnimationFrame(loop);
   }
   loop();
-})();
+}
+
+// Start particles after page is loaded and idle — doesn't block initial render
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initParticles, { timeout: 2000 });
+} else {
+  setTimeout(initParticles, 200);
+}
 
 
 

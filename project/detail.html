@@ -299,7 +299,7 @@
         : null;
 
       const imageHTML = imgSrc
-        ? `<img class="project-main-image" src="${imgSrc}" alt="${p.title}" onerror="this.parentElement.innerHTML='<div class=\\'project-image-placeholder\\'>🖥️</div>'">`
+        ? `<img class="project-main-image" src="${imgSrc}" alt="${p.title}" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='<div class=\\'project-image-placeholder\\'>🖥️</div>'">`
         : `<div class="project-image-placeholder">🖥️</div>`;
 
       const techChipsHTML = p.tech.map(t => `
