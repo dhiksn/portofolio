@@ -155,85 +155,83 @@
   <div id="app"></div>
 
   <script>
-    const params   = new URLSearchParams(window.location.search);
-    const fileParam = params.get('file');   // e.g. "assets/docs/ASAT.docx"
-    const title     = params.get('title') || 'Dokumen';
+    (function() {
+      const params    = new URLSearchParams(window.location.search);
+      const fileParam = params.get('file');
+      const title     = params.get('title') || 'Dokumen';
 
-    document.title = title + ' — Reader';
-    document.getElementById('docTitle').textContent = title;
+      document.title = title + ' — Reader';
+      document.getElementById('docTitle').textContent = title;
 
-    const app = document.getElementById('app');
+      const app = document.getElementById('app');
+      const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
 
-    // Deteksi apakah sedang di localhost / file://
-    const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+      // Setup download button
+      const dlBtn = document.getElementById('downloadBtn');
+      if (fileParam) {
+        dlBtn.href = '../' + fileParam;
+        dlBtn.download = title + '.docx';
+      }
 
-    if (!fileParam) {
-      showError('File tidak ditemukan.', 'Parameter <code>file</code> tidak ada di URL.');
-      return;
-    }
+      if (!fileParam) {
+        showError('File tidak ditemukan.', 'Parameter <code>file</code> tidak ada di URL.');
+        return;
+      }
 
-    // Setup download button
-    const dlBtn = document.getElementById('downloadBtn');
-    const localPath = '../' + fileParam;
-    dlBtn.href = localPath;
-    dlBtn.download = title + '.docx';
+      if (isLocal) {
+        showOfflineNotice(fileParam);
+        return;
+      }
 
-    if (isLocal) {
-      // Tampilkan pesan: file harus di-host dulu
-      showOfflineNotice();
-    } else {
       // Buat URL absolut ke file docx
       const absoluteUrl = location.origin + '/' + fileParam;
-      loadViewer(absoluteUrl);
-    }
+      loadViewer(absoluteUrl, title);
 
-    function loadViewer(fileUrl) {
-      // Microsoft Office Online Viewer — render persis seperti Word
-      const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
+      function loadViewer(fileUrl, docTitle) {
+        const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(fileUrl);
+        app.style.cssText = 'flex:1;display:flex;flex-direction:column;';
+        app.innerHTML = `<iframe
+          src="${viewerUrl}"
+          style="flex:1;width:100%;border:none;"
+          allowfullscreen
+          title="${docTitle}"
+        ></iframe>`;
+      }
 
-      app.style.cssText = 'flex:1;display:flex;flex-direction:column;';
-      app.innerHTML = `<iframe
-        id="viewerFrame"
-        src="${viewerUrl}"
-        style="flex:1;width:100%;border:none;"
-        allowfullscreen
-        title="${title}"
-      ></iframe>`;
-    }
+      function showOfflineNotice(fp) {
+        app.innerHTML = `
+          <div class="state-wrap">
+            <div class="state-icon">🖥️</div>
+            <h2>Buka Setelah Deploy</h2>
+            <p>
+              Microsoft Office Viewer membutuhkan URL publik. Kamu sedang di
+              <strong>${location.hostname || 'localhost'}</strong> yang tidak bisa diakses oleh viewer eksternal.
+            </p>
+            <div class="note">
+              <strong>Cara pakai:</strong><br>
+              1. Upload portfolio ke hosting (Vercel / Netlify / GitHub Pages)<br>
+              2. Buka halaman ini dari URL publik<br>
+              3. Dokumen tampil otomatis persis seperti Word ✓<br><br>
+              File tetap bisa kamu <a href="../${fp}" download style="color:#aaa;text-decoration:underline;">download di sini</a>.
+            </div>
+          </div>`;
+      }
 
-    function showOfflineNotice() {
-      app.innerHTML = `
-        <div class="state-wrap">
-          <div class="state-icon">🖥️</div>
-          <h2>Buka di Browser Setelah Deploy</h2>
-          <p>
-            Microsoft Office Viewer membutuhkan URL publik untuk membuka dokumen.
-            Saat ini kamu sedang di <strong>localhost</strong> — viewer tidak bisa mengakses file lokal.
-          </p>
-          <div class="note">
-            <strong>Cara pakai:</strong><br>
-            1. Upload portfolio ke hosting (GitHub Pages / Vercel / Netlify)<br>
-            2. Buka halaman ini dari URL publik<br>
-            3. Dokumen akan tampil otomatis persis seperti Word ✓<br><br>
-            File tetap bisa kamu <a href="../${fileParam}" download style="color:#aaa;text-decoration:underline;">download di sini</a>.
-          </div>
-        </div>`;
-    }
-
-    function showError(title, detail) {
-      app.innerHTML = `
-        <div class="state-wrap">
-          <div class="state-icon">📄</div>
-          <h2>${title}</h2>
-          <p>${detail}</p>
-          <a href="../index.html#portofolio"
-             style="margin-top:1rem;padding:0.55rem 1.25rem;background:rgba(255,255,255,0.08);
-                    border:1px solid rgba(255,255,255,0.2);border-radius:999px;
-                    color:#ccc;font-size:0.82rem;text-decoration:none;">
-            ← Kembali
-          </a>
-        </div>`;
-    }
+      function showError(t, detail) {
+        app.innerHTML = `
+          <div class="state-wrap">
+            <div class="state-icon">📄</div>
+            <h2>${t}</h2>
+            <p>${detail}</p>
+            <a href="../index.html#portofolio"
+               style="margin-top:1rem;padding:0.55rem 1.25rem;background:rgba(255,255,255,0.08);
+                      border:1px solid rgba(255,255,255,0.2);border-radius:999px;
+                      color:#ccc;font-size:0.82rem;text-decoration:none;">
+              ← Kembali
+            </a>
+          </div>`;
+      }
+    })();
   </script>
 
 </body>
