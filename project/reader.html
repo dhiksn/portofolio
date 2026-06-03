@@ -34,7 +34,7 @@
     .topbar {
       background: var(--topbar-bg);
       border-bottom: 1px solid var(--border);
-      padding: 0.7rem 1.5rem;
+      padding: 0.65rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -42,7 +42,8 @@
       flex-shrink: 0;
       z-index: 10;
     }
-    .topbar-left { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+    .topbar-left  { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+    .topbar-center { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
     .topbar-right { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 
     .back-btn {
@@ -57,8 +58,7 @@
 
     .doc-title {
       font-size: 0.88rem; font-weight: 600; color: var(--text);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-width: 400px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;
     }
     .doc-badge {
       font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
@@ -70,62 +70,81 @@
     .topbar-btn {
       display: inline-flex; align-items: center; gap: 0.4rem;
       background: rgba(255,255,255,0.07); border: 1px solid var(--border);
-      color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: var(--radius-full);
-      font-size: 0.8rem; font-weight: 500;
+      color: var(--text-muted); padding: 0.38rem 0.85rem; border-radius: var(--radius-full);
+      font-size: 0.8rem; font-weight: 500; cursor: pointer;
       transition: var(--transition); white-space: nowrap; text-decoration: none;
+      -webkit-user-select: none; user-select: none;
     }
     .topbar-btn:hover { background: rgba(255,255,255,0.12); color: var(--text); border-color: var(--border-hover); }
+    .topbar-btn:disabled { opacity: 0.35; pointer-events: none; }
     .topbar-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
     .topbar-btn.primary {
       background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: var(--text);
     }
     .topbar-btn.primary:hover { background: rgba(255,255,255,0.2); }
 
-    /* VIEWER */
-    #app {
+    .page-info {
+      font-size: 0.78rem; color: var(--text-muted);
+      min-width: 70px; text-align: center;
+    }
+
+    /* CANVAS VIEWER */
+    #viewerScroll {
       flex: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+      background: var(--bg);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      align-items: center;
+      padding: 1.5rem 1rem 3rem;
+      gap: 1rem;
     }
-    #pdfFrame {
-      flex: 1;
-      width: 100%;
-      border: none;
-      display: block;
+
+    .pdf-page-wrap {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      border-radius: 2px;
+      line-height: 0;
+      background: #fff;
     }
+    .pdf-page-wrap canvas { display: block; }
 
     /* STATE */
     .state-wrap {
-      flex: 1;
-      display: flex; flex-direction: column;
+      flex: 1; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 1rem; color: var(--text-muted); text-align: center; padding: 2rem;
     }
     .state-icon { font-size: 3rem; }
     .state-wrap h2 { font-size: 1.3rem; font-weight: 700; color: var(--text); }
-    .state-wrap p { font-size: 0.88rem; max-width: 420px; line-height: 1.7; }
-    .state-wrap .note {
-      font-size: 0.78rem; color: var(--text-dim);
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.75rem 1.25rem; max-width: 480px;
-      line-height: 1.8; text-align: left;
+    .state-wrap p  { font-size: 0.88rem; max-width: 420px; line-height: 1.7; }
+
+    /* spinner */
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: rgba(255,255,255,0.55);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+    #viewerScroll::-webkit-scrollbar { width: 6px; }
+    #viewerScroll::-webkit-scrollbar-track { background: transparent; }
+    #viewerScroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
 
     @media (max-width: 600px) {
       .topbar { padding: 0.6rem 1rem; }
-      .doc-title { max-width: 150px; font-size: 0.82rem; }
+      .doc-title { max-width: 120px; font-size: 0.8rem; }
       .topbar-btn span { display: none; }
+      .topbar-center { gap: 0.35rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-left">
       <a href="../index.html#portofolio" class="back-btn">
@@ -135,28 +154,54 @@
       <span class="doc-title" id="docTitle">Memuat...</span>
       <span class="doc-badge">Read Only</span>
     </div>
+
+    <div class="topbar-center">
+      <button class="topbar-btn" id="zoomOutBtn" title="Zoom out">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <span class="page-info" id="zoomLabel">100%</span>
+      <button class="topbar-btn" id="zoomInBtn" title="Zoom in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
+
     <div class="topbar-right">
-      <a class="topbar-btn" id="downloadDocxBtn" title="Download DOCX">
+      <span class="page-info" id="pageInfo">—</span>
+      <a class="topbar-btn primary" id="downloadBtn" title="Download DOCX">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Download .docx</span>
+        <span>Download</span>
       </a>
     </div>
   </div>
 
-  <div id="app"></div>
+  <!-- PDF pages rendered here -->
+  <div id="viewerScroll">
+    <div class="state-wrap" id="loadingState">
+      <div class="spinner"></div>
+      <h2>Memuat Dokumen</h2>
+      <p>Harap tunggu sebentar...</p>
+    </div>
+  </div>
+
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
   <script>
     (function () {
+      // Configure PDF.js worker
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
       const p         = new URLSearchParams(location.search);
-      const pdfParam  = p.get('pdf');   // "assets/docs/ASAT.pdf"
-      const fileParam = p.get('file');  // "assets/docs/ASAT.docx"
+      const pdfParam  = p.get('pdf');
+      const fileParam = p.get('file');
       const title     = p.get('title') || 'Dokumen';
 
       document.title = title + ' — Reader';
       document.getElementById('docTitle').textContent = title;
 
-      // Download .docx button
-      const dlBtn = document.getElementById('downloadDocxBtn');
+      // Download button
+      const dlBtn = document.getElementById('downloadBtn');
       if (fileParam) {
         dlBtn.href     = '../' + fileParam;
         dlBtn.download = title + '.docx';
@@ -164,54 +209,81 @@
         dlBtn.style.display = 'none';
       }
 
-      const app = document.getElementById('app');
-
       if (!pdfParam) {
-        showError('PDF tidak ditemukan.', 'Parameter <code>pdf</code> tidak ada di URL. Pastikan field <code>pdfFile</code> sudah diisi di data.json.');
+        showError('PDF tidak ditemukan.', 'Pastikan field <code>pdfFile</code> sudah diisi di data.json.');
         return;
       }
 
-      // Path relatif dari /project/ ke root
-      const pdfPath = '../' + pdfParam;
+      const pdfUrl = '../' + pdfParam;
+      const scroll = document.getElementById('viewerScroll');
 
-      // Embed PDF langsung — browser render native, cepat
-      app.innerHTML = `<iframe
-        id="pdfFrame"
-        src="${pdfPath}#toolbar=1&view=FitH"
-        type="application/pdf"
-        style="flex:1;width:100%;height:100%;border:none;"
-        title="${title}"
-      ></iframe>`;
+      let pdfDoc   = null;
+      let scale    = 1.2;
+      const DPR    = window.devicePixelRatio || 1;
 
-      // Fallback: kalau browser tidak support embed PDF (misal mobile)
-      const frame = document.getElementById('pdfFrame');
-      frame.addEventListener('error', function () {
-        showFallback(pdfPath, fileParam, title);
-      });
+      // ── Load PDF ──────────────────────────────────────────
+      pdfjsLib.getDocument(pdfUrl).promise
+        .then(function (pdf) {
+          pdfDoc = pdf;
+          document.getElementById('loadingState').remove();
+          renderAllPages();
+        })
+        .catch(function (err) {
+          console.error(err);
+          showError('Gagal memuat PDF.', err.message);
+        });
 
-      function showFallback(pdf, docx, t) {
-        app.innerHTML = `
-          <div class="state-wrap">
-            <div class="state-icon">📄</div>
-            <h2>Browser tidak mendukung PDF viewer</h2>
-            <p>Kamu bisa membuka atau mendownload file secara langsung.</p>
-            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-top:0.5rem;">
-              <a href="${pdf}" target="_blank"
-                 style="padding:0.6rem 1.25rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
-                        border-radius:999px;color:#fff;font-size:0.85rem;text-decoration:none;">
-                Buka PDF
-              </a>
-              ${docx ? `<a href="../${docx}" download
-                 style="padding:0.6rem 1.25rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);
-                        border-radius:999px;color:#ccc;font-size:0.85rem;text-decoration:none;">
-                Download .docx
-              </a>` : ''}
-            </div>
-          </div>`;
+      // ── Render semua halaman sekaligus ──────────────────
+      function renderAllPages() {
+        scroll.innerHTML = '';
+        const total = pdfDoc.numPages;
+        document.getElementById('pageInfo').textContent = total + ' halaman';
+
+        for (let i = 1; i <= total; i++) {
+          renderPage(i);
+        }
       }
 
+      function renderPage(num) {
+        pdfDoc.getPage(num).then(function (page) {
+          const viewport = page.getViewport({ scale: scale * DPR });
+
+          const wrap   = document.createElement('div');
+          wrap.className = 'pdf-page-wrap';
+
+          const canvas  = document.createElement('canvas');
+          const ctx     = canvas.getContext('2d');
+          canvas.width  = viewport.width;
+          canvas.height = viewport.height;
+          // Display size (CSS pixels)
+          canvas.style.width  = (viewport.width  / DPR) + 'px';
+          canvas.style.height = (viewport.height / DPR) + 'px';
+
+          wrap.appendChild(canvas);
+          scroll.appendChild(wrap);
+
+          page.render({ canvasContext: ctx, viewport: viewport });
+        });
+      }
+
+      // ── Zoom ─────────────────────────────────────────────
+      document.getElementById('zoomInBtn').addEventListener('click', function () {
+        scale = Math.min(scale + 0.2, 3);
+        updateZoomLabel();
+        renderAllPages();
+      });
+      document.getElementById('zoomOutBtn').addEventListener('click', function () {
+        scale = Math.max(scale - 0.2, 0.5);
+        updateZoomLabel();
+        renderAllPages();
+      });
+      function updateZoomLabel() {
+        document.getElementById('zoomLabel').textContent = Math.round(scale / 1.2 * 100) + '%';
+      }
+
+      // ── Error state ───────────────────────────────────────
       function showError(t, detail) {
-        app.innerHTML = `
+        scroll.innerHTML = `
           <div class="state-wrap">
             <div class="state-icon">📄</div>
             <h2>${t}</h2>
