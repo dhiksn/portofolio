@@ -70,30 +70,106 @@
 
     .tb-label { font-size: 0.75rem; color: var(--text-dim); white-space: nowrap; }
 
-    /* ── SEARCH BAR (collapsible) ── */
-    .search-bar {
-      background: #0a0a0a; border-bottom: 1px solid var(--border);
-      padding: 0.55rem 1.25rem;
-      display: none; align-items: center; gap: 0.6rem;
-      flex-shrink: 0;
+    /* ── SEARCH MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      top: 52px;
+      right: 1rem;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease, visibility 0.15s ease, transform 0.15s ease;
+      transform: translateY(-8px);
     }
-    .search-bar.open { display: flex; }
-    .search-input-wrap { position: relative; flex: 1; max-width: 360px; }
-    .search-input {
-      width: 100%; background: rgba(255,255,255,0.07); border: 1px solid var(--border);
-      color: var(--text); border-radius: var(--radius-full); padding: 0.38rem 2.5rem 0.38rem 1rem;
-      font-size: 0.82rem; outline: none; transition: var(--transition);
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
-    .search-input:focus { border-color: var(--border-hover); background: rgba(255,255,255,0.1); }
-    .search-input::placeholder { color: var(--text-dim); }
-    .search-clear {
-      position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
-      color: var(--text-dim); cursor: pointer; font-size: 1rem; line-height: 1;
-      display: none;
+
+    .modal-box {
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 380px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+      overflow: hidden;
     }
-    .search-clear.show { display: block; }
-    .search-count { font-size: 0.75rem; color: var(--text-dim); white-space: nowrap; min-width: 60px; }
-    .search-nav { display: flex; gap: 0.35rem; }
+
+    .modal-head {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 1rem 1rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-search-icon { color: var(--text-dim); flex-shrink: 0; }
+    .modal-search-icon svg { width: 16px; height: 16px; }
+
+    .modal-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: var(--text); font-size: 0.95rem;
+      placeholder-color: var(--text-dim);
+    }
+    .modal-input::placeholder { color: var(--text-dim); }
+
+    .modal-count {
+      font-size: 0.72rem; color: var(--text-dim);
+      white-space: nowrap; min-width: 48px; text-align: right;
+    }
+    .modal-close-btn {
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text-muted); width: 26px; height: 26px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; line-height: 1; flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .modal-close-btn:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+
+    .modal-results {
+      max-height: 320px; overflow-y: auto;
+      padding: 0.5rem 0;
+    }
+    .modal-results::-webkit-scrollbar { width: 4px; }
+    .modal-results::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+
+    .result-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.65rem 1rem; cursor: pointer;
+      transition: background 0.15s ease;
+      border-radius: 0;
+    }
+    .result-item:hover { background: rgba(255,255,255,0.06); }
+    .result-item.active { background: rgba(255,255,255,0.1); }
+
+    .result-page {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--text-dim); background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.15rem 0.45rem; white-space: nowrap; flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .result-text {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+      overflow: hidden; display: -webkit-box;
+      -webkit-line-clamp: 2; line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .result-text mark {
+      background: rgba(255,220,0,0.35); color: var(--text);
+      border-radius: 2px; padding: 0 1px;
+    }
+
+    .modal-empty {
+      padding: 2rem 1rem; text-align: center;
+      font-size: 0.82rem; color: var(--text-dim);
+    }
+
+    .modal-footer {
+      border-top: 1px solid var(--border);
+      padding: 0.55rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+    }
+    .modal-nav { display: flex; gap: 0.35rem; }
+    .modal-hint { font-size: 0.68rem; color: var(--text-dim); }
 
     /* ── VIEWER ── */
     #viewerScroll {
@@ -202,22 +278,32 @@
   </div>
 </div>
 
-<!-- ── SEARCH BAR ── -->
-<div class="search-bar" id="searchBar">
-  <div class="search-input-wrap">
-    <input class="search-input" id="searchInput" type="text" placeholder="Cari teks dalam dokumen..." autocomplete="off" />
-    <span class="search-clear" id="searchClear">×</span>
+<!-- ── SEARCH MODAL ── -->
+<div class="modal-overlay" id="searchModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-search-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </span>
+      <input class="modal-input" id="searchInput" type="text" placeholder="Cari teks dalam dokumen..." autocomplete="off" />
+      <span class="modal-count" id="searchCount"></span>
+      <button class="modal-close-btn" id="searchCloseBtn" title="Tutup (Esc)">×</button>
+    </div>
+    <div class="modal-results" id="searchResults">
+      <div class="modal-empty" id="searchEmpty" style="display:none;">Tidak ditemukan</div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-nav">
+        <button class="tb-btn" id="searchPrevBtn" disabled title="Sebelumnya">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="tb-btn" id="searchNextBtn" disabled title="Berikutnya">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <span class="modal-hint">Enter ↓ &nbsp; Shift+Enter ↑ &nbsp; Esc tutup</span>
+    </div>
   </div>
-  <span class="search-count" id="searchCount"></span>
-  <div class="search-nav">
-    <button class="tb-btn" id="searchPrevBtn" title="Hasil sebelumnya" disabled>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <button class="tb-btn" id="searchNextBtn" title="Hasil berikutnya" disabled>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
-  </div>
-  <button class="tb-btn" id="searchCloseBtn">Tutup</button>
 </div>
 
 <!-- ── PDF VIEWER ── -->
@@ -269,13 +355,14 @@
   const zoomInBtn    = document.getElementById('zoomInBtn');
   const zoomOutBtn   = document.getElementById('zoomOutBtn');
   const searchToggle = document.getElementById('searchToggleBtn');
-  const searchBar    = document.getElementById('searchBar');
+  const searchModal  = document.getElementById('searchModal');
   const searchInput  = document.getElementById('searchInput');
-  const searchClear  = document.getElementById('searchClear');
   const searchCount  = document.getElementById('searchCount');
   const searchPrev   = document.getElementById('searchPrevBtn');
   const searchNext   = document.getElementById('searchNextBtn');
   const searchClose  = document.getElementById('searchCloseBtn');
+  const searchResults = document.getElementById('searchResults');
+  const searchEmpty  = document.getElementById('searchEmpty');
 
   // ── Load PDF ──
   pdfjsLib.getDocument('../' + pdfParam).promise.then(function (pdf) {
@@ -396,32 +483,37 @@
   });
 
   // ── Search ──
-  searchToggle.addEventListener('click', function () {
-    const open = searchBar.classList.toggle('open');
-    searchToggle.classList.toggle('active', open);
-    if (open) { searchInput.focus(); }
-    else { clearSearch(); }
+  searchToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    searchModal.classList.add('open');
+    searchToggle.classList.add('active');
+    setTimeout(function () { searchInput.focus(); }, 50);
   });
-  searchClose.addEventListener('click', function () {
-    searchBar.classList.remove('open');
+
+  function closeModal() {
+    searchModal.classList.remove('open');
     searchToggle.classList.remove('active');
     clearSearch();
+  }
+
+  searchClose.addEventListener('click', closeModal);
+
+  // Tutup kalau klik di luar modal
+  document.addEventListener('click', function (e) {
+    if (searchModal.classList.contains('open') &&
+        !searchModal.contains(e.target)) {
+      closeModal();
+    }
   });
 
   let searchDebounce;
   searchInput.addEventListener('input', function () {
-    searchClear.classList.toggle('show', this.value.length > 0);
     clearTimeout(searchDebounce);
-    searchDebounce = setTimeout(doSearch, 300);
+    searchDebounce = setTimeout(doSearch, 250);
   });
   searchInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { e.shiftKey ? navigateSearch(-1) : navigateSearch(1); }
-    if (e.key === 'Escape') { searchClose.click(); }
-  });
-  searchClear.addEventListener('click', function () {
-    searchInput.value = '';
-    searchClear.classList.remove('show');
-    clearSearch();
+    if (e.key === 'Escape') closeModal();
   });
   searchPrev.addEventListener('click', function () { navigateSearch(-1); });
   searchNext.addEventListener('click', function () { navigateSearch(1); });
@@ -430,59 +522,98 @@
     clearHighlights();
     searchMatches = [];
     searchCurrent = -1;
+    searchResults.querySelectorAll('.result-item').forEach(function (el) { el.remove(); });
+    searchEmpty.style.display = 'none';
 
     const query = searchInput.value.trim().toLowerCase();
-    if (!query) { searchCount.textContent = ''; searchPrev.disabled = true; searchNext.disabled = true; return; }
-
-    let total = 0;
-    const pending = [];
+    if (!query) {
+      searchCount.textContent = '';
+      searchPrev.disabled = true;
+      searchNext.disabled = true;
+      return;
+    }
 
     for (let p = 1; p <= totalPages; p++) {
       if (!pageTexts[p]) continue;
-      const items = pageTexts[p];
-      const pw    = pageWraps[p];
+      const items  = pageTexts[p];
+      const pw     = pageWraps[p];
       if (!pw) continue;
 
-      const { viewport } = pw;
       const canvasW = parseFloat(pw.wrap.querySelector('canvas').style.width);
       const canvasH = parseFloat(pw.wrap.querySelector('canvas').style.height);
-      const scaleX  = canvasW  / viewport.width  * DPR;
-      const scaleY  = canvasH  / viewport.height * DPR;
+      const { viewport } = pw;
+      const scaleX = canvasW  / viewport.width  * DPR;
+      const scaleY = canvasH  / viewport.height * DPR;
+
+      // Build full page text for context
+      const fullText = items.map(function (i) { return i.str; }).join(' ');
 
       items.forEach(function (item) {
         const text = item.str.toLowerCase();
         let idx = 0;
         while ((idx = text.indexOf(query, idx)) !== -1) {
-          // Transform item position
-          const tx  = item.transform;
-          const x   = tx[4] * scaleX;
-          const y   = canvasH - tx[5] * scaleY;
-          const w   = item.width  * Math.abs(tx[0]) * scaleX / item.str.length * query.length;
-          const h   = item.height * scaleY || 12;
+          const tx    = item.transform;
+          const x     = tx[4] * scaleX;
+          const y     = canvasH - tx[5] * scaleY;
+          const h     = item.height * scaleY || 12;
           const charW = item.width * Math.abs(tx[0]) * scaleX / (item.str.length || 1);
+          const w     = charW * query.length;
           const left  = x + idx * charW;
 
-          searchMatches.push({ page: p, left, top: y - h, width: w, height: h + 2 });
-          total++;
+          const matchIdx = searchMatches.length;
+          searchMatches.push({ page: p, left, top: y - h, width: w, height: h + 2, context: item.str });
+
+          // Result item in modal
+          const div = document.createElement('div');
+          div.className = 'result-item';
+          div.dataset.idx = matchIdx;
+
+          const before = item.str.slice(0, idx);
+          const match  = item.str.slice(idx, idx + query.length);
+          const after  = item.str.slice(idx + query.length);
+
+          div.innerHTML = `
+            <span class="result-page">Hal. ${p}</span>
+            <span class="result-text">${escHtml(before)}<mark>${escHtml(match)}</mark>${escHtml(after)}</span>`;
+
+          div.addEventListener('click', function () {
+            searchCurrent = parseInt(this.dataset.idx);
+            activateMatch(searchCurrent);
+            updateCount();
+          });
+
+          searchResults.appendChild(div);
           idx++;
         }
       });
     }
 
-    if (total === 0) {
+    if (searchMatches.length === 0) {
+      searchEmpty.style.display = 'block';
       searchCount.textContent = 'Tidak ditemukan';
-      searchPrev.disabled = true; searchNext.disabled = true;
+      searchPrev.disabled = true;
+      searchNext.disabled = true;
     } else {
-      searchPrev.disabled = false; searchNext.disabled = false;
+      searchPrev.disabled = false;
+      searchNext.disabled = false;
       searchCurrent = 0;
       drawHighlights();
-      focusMatch(0);
-      searchCount.textContent = `1 / ${total}`;
+      activateMatch(0);
+      updateCount();
     }
   }
 
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function updateCount() {
+    searchCount.textContent = searchMatches.length > 0
+      ? (searchCurrent + 1) + ' / ' + searchMatches.length
+      : '';
+  }
+
   function drawHighlights() {
-    // Clear first
     clearHighlights();
     searchMatches.forEach(function (m, i) {
       const pw = pageWraps[m.page];
@@ -503,31 +634,50 @@
     if (searchMatches.length === 0) return;
     searchCurrent = (searchCurrent + dir + searchMatches.length) % searchMatches.length;
     drawHighlights();
-    focusMatch(searchCurrent);
-    searchCount.textContent = `${searchCurrent + 1} / ${searchMatches.length}`;
+    activateMatch(searchCurrent);
+    updateCount();
   }
 
-  function focusMatch(idx) {
-    const m  = searchMatches[idx];
+  function activateMatch(idx) {
+    // Highlight active in result list
+    searchResults.querySelectorAll('.result-item').forEach(function (el) {
+      el.classList.toggle('active', parseInt(el.dataset.idx) === idx);
+    });
+    // Scroll result item into view inside modal
+    const activeItem = searchResults.querySelector('.result-item.active');
+    if (activeItem) activeItem.scrollIntoView({ block: 'nearest' });
+
+    // Scroll PDF to page
+    const m = searchMatches[idx];
     if (!m) return;
     const pw = pageWraps[m.page];
     if (!pw) return;
     pw.wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
     pageInput.value = m.page;
+    drawHighlights();
   }
 
   function clearSearch() {
     searchInput.value = '';
-    searchClear.classList.remove('show');
     searchMatches = [];
     searchCurrent = -1;
     searchCount.textContent = '';
     searchPrev.disabled = true;
     searchNext.disabled = true;
     clearHighlights();
+    searchResults.querySelectorAll('.result-item').forEach(function (el) { el.remove(); });
+    searchEmpty.style.display = 'none';
   }
 
-  // ── Error state ──
+  // Ctrl+F / Cmd+F shortcut
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+      e.preventDefault();
+      searchModal.classList.add('open');
+      searchToggle.classList.add('active');
+      setTimeout(function () { searchInput.focus(); }, 50);
+    }
+  });
   function showError(t, detail) {
     scroll.innerHTML = `
       <div class="state-wrap">
