@@ -46,7 +46,7 @@ function renderProjects() {
           <h3 class="project-title">${project.title}</h3>
           <p class="project-desc">${project.description}</p>
           <div class="project-buttons">
-            <a href="project/dokumentasi-asat.html" class="proj-btn proj-btn-primary">
+            <a href="project/dokumentasi-asat-tahun-2026" class="proj-btn proj-btn-primary">
               Baca
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -69,8 +69,8 @@ function renderProjects() {
 
     // Normal project card
     const imgSrc = project.image && project.image.startsWith('http') ? project.image : project.image;
-    const detailLink = project.id === 1 ? 'project/donghua.html'
-                     : project.id === 2 ? 'project/raisaver.html'
+    const detailLink = project.id === 1 ? 'project/donghua'
+                     : project.id === 2 ? 'project/raisaver'
                      : `project/detail.html?id=${project.id}`;
     return `
     <div class="project-card glass-card reveal" data-delay="${index * 100}">
@@ -258,9 +258,9 @@ if ('requestIdleCallback' in window) {
 
 
 /* ===== NAVBAR ===== */
-const navbar = document.getElementById('navbar');
+const navbar    = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+const navLinks  = document.getElementById('navLinks');
 
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -271,8 +271,17 @@ hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('open');
 });
 
-navLinks.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
+// Smooth scroll via data-scroll, no hash in URL
+document.querySelectorAll('[data-scroll]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const id = link.dataset.scroll;
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Update URL cleanly without hash
+      history.replaceState(null, '', '/');
+    }
     hamburger.classList.remove('open');
     navLinks.classList.remove('open');
   });
@@ -310,8 +319,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 /* ===== ACTIVE NAV ON SCROLL ===== */
-const sections = document.querySelectorAll('section[id]');
-const allNavLinks = document.querySelectorAll('.nav-link');
+const sections   = document.querySelectorAll('section[id]');
+const allNavLinks = document.querySelectorAll('.nav-link[data-scroll]');
 
 window.addEventListener('scroll', () => {
   let current = '';
@@ -321,7 +330,7 @@ window.addEventListener('scroll', () => {
   });
   allNavLinks.forEach(link => {
     link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    if (link.dataset.scroll === current) link.classList.add('active');
   });
 }, { passive: true });
 

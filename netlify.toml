@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/project/dokumentasi-asat-tahun-2026"
+  to   = "/project/dokumentasi-asat-tahun-2026.html"
+  status = 200
+
+[[redirects]]
+  from = "/project/donghua"
+  to   = "/project/donghua.html"
+  status = 200
+
+[[redirects]]
+  from = "/project/raisaver"
+  to   = "/project/raisaver.html"
+  status = 200

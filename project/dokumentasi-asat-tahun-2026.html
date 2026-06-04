@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document Reader — Andhika Rafi</title>
+  <title>Dokumentasi ASAT Praktik TJKT — Andhika Rafi</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; font-size: 16px; }
@@ -231,7 +231,7 @@
 
   <!-- Left: back + title -->
   <div class="tb-group">
-    <a href="../index.html#portofolio" class="back-btn">
+    <a href="/" class="back-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
       Back
     </a>
@@ -321,19 +321,17 @@
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-  const params    = new URLSearchParams(location.search);
-  const pdfParam  = params.get('pdf');
-  const fileParam = params.get('file');
-  const title     = params.get('title') || 'Dokumen';
+  // ── Hardcoded config ──
+  const pdfParam  = 'assets/docs/ASAT.pdf';
+  const fileParam = 'assets/docs/ASAT.docx';
+  const title     = 'Dokumentasi ASAT Praktik TJKT';
 
   document.title = title + ' — Reader';
   document.getElementById('docTitle').textContent = title;
 
   const dlBtn = document.getElementById('downloadBtn');
-  if (fileParam) { dlBtn.href = '../' + fileParam; dlBtn.download = title + '.docx'; }
-  else dlBtn.style.display = 'none';
-
-  if (!pdfParam) { showError('PDF tidak ditemukan.', 'Pastikan pdfFile diisi di data.json.'); return; }
+  dlBtn.href     = '../' + fileParam;
+  dlBtn.download = 'ASAT.docx';
 
   const scroll     = document.getElementById('viewerScroll');
   const DPR        = window.devicePixelRatio || 1;
@@ -708,7 +706,7 @@
       <div class="state-wrap">
         <div class="state-icon">📄</div>
         <h2>${t}</h2><p>${detail}</p>
-        <a href="../index.html#portofolio"
+        <a href="/"
            style="margin-top:1rem;padding:0.55rem 1.25rem;background:rgba(255,255,255,0.08);
                   border:1px solid rgba(255,255,255,0.2);border-radius:999px;
                   color:#ccc;font-size:0.82rem;text-decoration:none;">← Kembali</a>
