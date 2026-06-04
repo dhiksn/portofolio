@@ -151,6 +151,23 @@ function attachProjectCardEvents() {
 window.addEventListener('load', async () => {
   await loadPortfolioData();
   initReveal();
+
+  // Scroll to section based on URL path (clean URL, no hash)
+  const path = location.pathname.replace('/', '').replace(/\/$/, '');
+  const sectionMap = {
+    'portofolio': 'portofolio',
+    'tentang': 'tentang',
+    'pendidikan': 'pendidikan',
+    'keahlian': 'keahlian',
+    'kontak': 'kontak',
+  };
+  if (sectionMap[path]) {
+    const target = document.getElementById(sectionMap[path]);
+    if (target) {
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+    history.replaceState(null, '', '/');
+  }
 });
 
 /* ===== CUSTOM CURSOR ===== */

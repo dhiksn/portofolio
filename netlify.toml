@@ -2,6 +2,11 @@
   publish = "."
 
 [[redirects]]
+  from = "/portofolio"
+  to   = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/project/dokumentasi-asat-tahun-2026"
   to   = "/project/dokumentasi-asat-tahun-2026.html"
   status = 200
