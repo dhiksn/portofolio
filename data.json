@@ -70,6 +70,13 @@
       "issuer": "Introduction to CyberSecurity dari NetaCad",
       "year": "13 Januari 2026",
       "image": "sertifikat/introduction.png"
+    },
+    {
+      "id": 6,
+      "title": "Introduction to Kali Linux Basics",
+      "issuer": "Introduction to Kali Linux Basics dari Simplilearn",
+      "year": "4 Juni 2026",
+      "image": "sertifikat/kali-linux.png"
     }
   ]
 }
