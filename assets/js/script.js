@@ -46,7 +46,7 @@ function renderProjects() {
           <h3 class="project-title">${project.title}</h3>
           <p class="project-desc">${project.description}</p>
           <div class="project-buttons">
-            <a href="project/reader.html?pdf=${encodeURIComponent(project.pdfFile)}&file=${encodeURIComponent(project.downloadFile)}&title=${encodeURIComponent(project.title)}" class="proj-btn proj-btn-primary">
+            <a href="project/dokumentasi-asat.html" class="proj-btn proj-btn-primary">
               Baca
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
