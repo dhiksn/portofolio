@@ -552,16 +552,22 @@
         const text = item.str.toLowerCase();
         let idx = 0;
         while ((idx = text.indexOf(query, idx)) !== -1) {
-          const tx    = item.transform;
-          const x     = tx[4] * scaleX;
-          const y     = canvasH - tx[5] * scaleY;
-          const h     = item.height * scaleY || 12;
-          const charW = item.width * Math.abs(tx[0]) * scaleX / (item.str.length || 1);
-          const w     = charW * query.length;
-          const left  = x + idx * charW;
+          const tx = item.transform;
+          // PDF koordinat: tx[4]=x, tx[5]=y (dari bawah), tx[0]=scaleX, tx[3]=scaleY
+          // CSS pixel = koordinat_pdf * (cssWidth / viewportWidth)
+          const cssScaleX = canvasW / (viewport.width  / DPR);
+          const cssScaleY = canvasH / (viewport.height / DPR);
+
+          const itemX  = tx[4] * cssScaleX;
+          const itemY  = canvasH - tx[5] * cssScaleY;          // flip Y
+          const itemH  = Math.abs(tx[3]) * cssScaleY || 14;
+          const charW  = (item.width / (item.str.length || 1)) * Math.abs(tx[0]) * cssScaleX;
+          const matchW = charW * query.length;
+          const left   = itemX + idx * charW;
+          const top    = itemY - itemH;
 
           const matchIdx = searchMatches.length;
-          searchMatches.push({ page: p, left, top: y - h, width: w, height: h + 2, context: item.str });
+          searchMatches.push({ page: p, left, top, width: matchW, height: itemH + 2, context: item.str });
 
           // Result item in modal
           const div = document.createElement('div');
@@ -647,12 +653,21 @@
     const activeItem = searchResults.querySelector('.result-item.active');
     if (activeItem) activeItem.scrollIntoView({ block: 'nearest' });
 
-    // Scroll PDF to page
+    // Scroll PDF ke posisi teks yang tepat
     const m = searchMatches[idx];
     if (!m) return;
     const pw = pageWraps[m.page];
     if (!pw) return;
-    pw.wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Hitung posisi absolut teks dalam scroll container
+    const TOPBAR_H = 52;
+    const PADDING  = 32; // jarak ekstra di atas highlight
+    const pageTop  = pw.wrap.offsetTop; // posisi halaman dalam scroll
+    const textTop  = pageTop + m.top;   // posisi teks dalam scroll
+    scroll.scrollTo({
+      top: textTop - TOPBAR_H - PADDING,
+      behavior: 'smooth'
+    });
     pageInput.value = m.page;
     drawHighlights();
   }
