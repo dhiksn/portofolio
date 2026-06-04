@@ -183,8 +183,8 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateRing() {
-  ringX += (mouseX - ringX) * 0.4;
-  ringY += (mouseY - ringY) * 0.4;
+  ringX += (mouseX - ringX) * 0.8; // Lebih cepat
+  ringY += (mouseY - ringY) * 0.8; // Lebih cepat
   ring.style.left = ringX + 'px';
   ring.style.top = ringY + 'px';
   requestAnimationFrame(animateRing);
@@ -278,6 +278,8 @@ if ('requestIdleCallback' in window) {
 const navbar    = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('navLinks');
+const cvBtn = document.getElementById('cvBtn');
+const cvDropdown = document.querySelector('.cv-dropdown');
 
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -286,6 +288,20 @@ window.addEventListener('scroll', () => {
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   navLinks.classList.toggle('open');
+  cvDropdown.classList.remove('open');
+});
+
+// Dropdown CV toggle
+cvBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  cvDropdown.classList.toggle('open');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!cvDropdown.contains(e.target)) {
+    cvDropdown.classList.remove('open');
+  }
 });
 
 // Smooth scroll via data-scroll, no hash in URL
@@ -445,21 +461,47 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ===== CONTACT FORM ===== */
-const contactForm = document.getElementById('contactForm');
+// ====== KONFIGURASI EMAILJS ======
+// Kamu perlu daftar di https://www.emailjs.com/ untuk mendapatkan:
+const EMAILJS_PUBLIC_KEY = "qzdRX-zTWKmqCbjka";       // Ganti dengan Public Key kamu
+const EMAILJS_SERVICE_ID = "service_g9nhsh7";       // Ganti dengan Service ID kamu
+const EMAILJS_TEMPLATE_ID = "template_886xflx";     // Ganti dengan Template ID kamu
 
-function showError(fieldId, errorId, message) {
-  const field = document.getElementById(fieldId);
-  const error = document.getElementById(errorId);
-  field.classList.add('error');
-  error.textContent = message;
+// Inisialisasi EmailJS
+(function() {
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+})();
+
+const contactForm = document.getElementById('contactForm');
+const formErrorToast = document.getElementById('formErrorToast');
+const formErrorText = document.getElementById('formErrorText');
+let errorToastTimeout;
+
+function showError(message) {
+  // Hide success toast if visible
+  document.getElementById('formSuccess').classList.remove('show');
+  
+  // Show error toast
+  formErrorText.textContent = message;
+  formErrorToast.classList.add('show');
+  
+  // Auto hide after 3 seconds
+  clearTimeout(errorToastTimeout);
+  errorToastTimeout = setTimeout(() => {
+    formErrorToast.classList.remove('show');
+  }, 3000);
+  
   return false;
 }
 
-function clearError(fieldId, errorId) {
-  const field = document.getElementById(fieldId);
-  const error = document.getElementById(errorId);
-  field.classList.remove('error');
-  error.textContent = '';
+function clearAllErrors() {
+  // Remove error class from all fields
+  document.querySelectorAll('.form-input.error').forEach(el => {
+    el.classList.remove('error');
+  });
+  formErrorToast.classList.remove('show');
   return true;
 }
 
@@ -467,17 +509,13 @@ function clearError(fieldId, errorId) {
 ['formName', 'formEmail', 'formSubject', 'formMessage'].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener('input', () => {
-    const errorMap = {
-      formName: 'nameError', formEmail: 'emailError',
-      formSubject: 'subjectError', formMessage: 'messageError'
-    };
-    clearError(id, errorMap[id]);
+    el.classList.remove('error');
+    clearAllErrors();
   });
 });
 
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  let valid = true;
 
   const name = document.getElementById('formName').value.trim();
   const email = document.getElementById('formEmail').value.trim();
@@ -485,41 +523,57 @@ contactForm.addEventListener('submit', (e) => {
   const message = document.getElementById('formMessage').value.trim();
 
   // Clear all errors first
-  ['formName', 'formEmail', 'formSubject', 'formMessage'].forEach((id, i) => {
-    clearError(id, ['nameError','emailError','subjectError','messageError'][i]);
-  });
+  clearAllErrors();
 
   if (!name || name.length < 2) {
-    showError('formName', 'nameError', 'Nama harus diisi minimal 2 karakter.');
-    valid = false;
+    document.getElementById('formName').classList.add('error');
+    showError('Nama harus diisi minimal 2 karakter.');
+    return;
   }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showError('formEmail', 'emailError', 'Masukkan alamat email yang valid.');
-    valid = false;
+    document.getElementById('formEmail').classList.add('error');
+    showError('Masukkan alamat email yang valid.');
+    return;
   }
   if (!subject || subject.length < 3) {
-    showError('formSubject', 'subjectError', 'Subjek harus diisi minimal 3 karakter.');
-    valid = false;
+    document.getElementById('formSubject').classList.add('error');
+    showError('Subjek harus diisi minimal 3 karakter.');
+    return;
   }
   if (!message || message.length < 10) {
-    showError('formMessage', 'messageError', 'Pesan harus diisi minimal 10 karakter.');
-    valid = false;
+    document.getElementById('formMessage').classList.add('error');
+    showError('Pesan harus diisi minimal 10 karakter.');
+    return;
   }
-
-  if (!valid) return;
 
   const btn = document.getElementById('submitBtn');
   const successMsg = document.getElementById('formSuccess');
   btn.disabled = true;
   btn.querySelector('span').textContent = 'Mengirim...';
 
-  setTimeout(() => {
+  try {
+    // Kirim email via EmailJS
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message
+    });
+
+    // Berhasil
     successMsg.classList.add('show');
     contactForm.reset();
+    setTimeout(() => {
+      successMsg.classList.remove('show');
+    }, 5000);
+  } catch (error) {
+    // Gagal
+    console.error('Error sending email:', error);
+    showError('Gagal mengirim pesan! Silakan coba lagi nanti.');
+  } finally {
     btn.disabled = false;
     btn.querySelector('span').textContent = 'Kirim Pesan';
-    setTimeout(() => successMsg.classList.remove('show'), 5000);
-  }, 1500);
+  }
 });
 
 /* ===== BACK TO TOP ===== */
@@ -553,3 +607,13 @@ window.addEventListener('scroll', () => {
 console.log('%cHalo Developer!', 'color:#ffffff;font-size:1.5rem;font-weight:bold;');
 console.log('%cPortfolio Andhika Rafi — Dibuat dengan dan banyak ', 'color:#cccccc;font-size:0.9rem;');
 console.log('%cSMK Wikrama Bogor • TJKT • 2026', 'color:#888;font-size:0.8rem;');
+
+/* ===== NO COPY / NO RIGHT CLICK ===== */
+document.addEventListener('copy',        e => e.preventDefault());
+document.addEventListener('cut',         e => e.preventDefault());
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => {
+  // Izinkan seleksi di form input/textarea
+  if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  e.preventDefault();
+});

@@ -1,6 +1,14 @@
 {
   "projects": [
     {
+      "id": 3,
+      "title": "Dokumentasi ASAT Praktik TJKT",
+      "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
+      "demotype": "download",
+      "downloadFile": "assets/docs/ASAT.docx",
+      "pdfFile": "assets/docs/ASAT.pdf"
+    },
+    {
       "id": 1,
       "title": "Donghua Streaming",
       "description": "Website streaming donghua (anime China) dengan scraper otomatis dari anichin.run, dilengkapi player video, pencarian, dan filter genre.",
@@ -21,48 +29,47 @@
       "thumbBg": "youtube",
       "github": "https://github.com/dhiksn/downloader",
       "demo": "https://raisaver.netlify.app/"
-    },
-    {
-      "id": 3,
-      "title": "Dokumentasi ASAT Praktik TJKT",
-      "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
-      "demotype": "download",
-      "downloadFile": "assets/docs/ASAT.docx",
-      "pdfFile": "assets/docs/ASAT.pdf"
     }
   ],
   "certificates": [
     {
       "id": 1,
       "title": "Cisco Dasar",
-      "issuer": "Cisco Dasar dari IDN",
-      "year": 2026,
+      "issuer": "Cisco Dasar dari ID-Networkers",
+      "year": "6 Mei 2026",
       "color": "#00D4FF",
       "image": "sertifikat/cisco.png"
     },
     {
       "id": 2,
       "title": "Cyber Security Dasar",
-      "issuer": "Cyber Security Dasar dari IDN",
-      "year": 2026,
+      "issuer": "Cyber Security Dasar dari ID-Networkers",
+      "year": "4 Mei 2026",
       "color": "#FF6B6B",
       "image": "sertifikat/cyber.png"
     },
     {
       "id": 3,
       "title": "Linux Dasar",
-      "issuer": "Linux Dasar dari IDN",
-      "year": 2026,
+      "issuer": "Linux Dasar dari ID-Networkers",
+      "year": "4 Mei 2026",
       "color": "#00FFB3",
       "image": "sertifikat/linux.png"
     },
     {
       "id": 4,
       "title": "Jaringan Komputer Dasar",
-      "issuer": "Jaringan Komputer Dasar dari IDN",
-      "year": 2026,
+      "issuer": "Jaringan Komputer Dasar dari ID-Networkers",
+      "year": "4 Mei 2026",
       "color": "#FF9F43",
       "image": "sertifikat/jaringan.png"
+    },
+    {
+      "id": 5,
+      "title": "Introduction to CyberSecurity",
+      "issuer": "Introduction to CyberSecurity dari NetaCad",
+      "year": "13 Januari 2026",
+      "image": "sertifikat/introduction.png"
     }
   ]
 }
