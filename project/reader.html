@@ -539,35 +539,46 @@
       const pw     = pageWraps[p];
       if (!pw) continue;
 
-      const canvasW = parseFloat(pw.wrap.querySelector('canvas').style.width);
-      const canvasH = parseFloat(pw.wrap.querySelector('canvas').style.height);
+      // CSS size of the rendered canvas
+      const canvas  = pw.wrap.querySelector('canvas');
+      const cssW    = parseFloat(canvas.style.width);
+      const cssH    = parseFloat(canvas.style.height);
+      // viewport was rendered at scale * DPR, so CSS pixel = viewport_unit / DPR
       const { viewport } = pw;
-      const scaleX = canvasW  / viewport.width  * DPR;
-      const scaleY = canvasH  / viewport.height * DPR;
-
-      // Build full page text for context
-      const fullText = items.map(function (i) { return i.str; }).join(' ');
+      const vpW = viewport.width  / DPR;
+      const vpH = viewport.height / DPR;
 
       items.forEach(function (item) {
+        if (!item.str) return;
         const text = item.str.toLowerCase();
         let idx = 0;
         while ((idx = text.indexOf(query, idx)) !== -1) {
-          const tx = item.transform;
-          // PDF koordinat: tx[4]=x, tx[5]=y (dari bawah), tx[0]=scaleX, tx[3]=scaleY
-          // CSS pixel = koordinat_pdf * (cssWidth / viewportWidth)
-          const cssScaleX = canvasW / (viewport.width  / DPR);
-          const cssScaleY = canvasH / (viewport.height / DPR);
+          const tx = item.transform; // [a, b, c, d, e, f]  — e=x, f=y in PDF units
 
-          const itemX  = tx[4] * cssScaleX;
-          const itemY  = canvasH - tx[5] * cssScaleY;          // flip Y
-          const itemH  = Math.abs(tx[3]) * cssScaleY || 14;
-          const charW  = (item.width / (item.str.length || 1)) * Math.abs(tx[0]) * cssScaleX;
+          // Convert PDF-space point to viewport CSS pixels
+          // PDF.js viewport: origin bottom-left, Y flipped
+          // tx[0]=scaleX, tx[3]=scaleY (font size factor), tx[4]=x, tx[5]=y
+          const pdfX = tx[4];
+          const pdfY = tx[5];
+          // Use viewport transform directly
+          const pt = viewport.convertToViewportPoint(pdfX, pdfY);
+          // pt is in viewport units (width/height = viewport.width, viewport.height)
+          // convert to CSS pixels
+          const cx = pt[0] / DPR;
+          const cy = pt[1] / DPR;
+
+          // Height of the glyph in CSS px
+          const glyphH = Math.abs(tx[3]) * Math.abs(viewport.transform[3]) / DPR;
+          // Width per character
+          const totalW = item.width  * Math.abs(viewport.transform[0]) / DPR;
+          const charW  = totalW / (item.str.length || 1);
           const matchW = charW * query.length;
-          const left   = itemX + idx * charW;
-          const top    = itemY - itemH;
+
+          const left = cx + idx * charW;
+          const top  = cy - glyphH;
 
           const matchIdx = searchMatches.length;
-          searchMatches.push({ page: p, left, top, width: matchW, height: itemH + 2, context: item.str });
+          searchMatches.push({ page: p, left, top, width: Math.max(matchW, 4), height: glyphH + 2 });
 
           // Result item in modal
           const div = document.createElement('div');
@@ -659,15 +670,14 @@
     const pw = pageWraps[m.page];
     if (!pw) return;
 
-    // Hitung posisi absolut teks dalam scroll container
-    const TOPBAR_H = 52;
-    const PADDING  = 32; // jarak ekstra di atas highlight
-    const pageTop  = pw.wrap.offsetTop; // posisi halaman dalam scroll
-    const textTop  = pageTop + m.top;   // posisi teks dalam scroll
-    scroll.scrollTo({
-      top: textTop - TOPBAR_H - PADDING,
-      behavior: 'smooth'
-    });
+    // getBoundingClientRect relatif ke viewport, scroll.scrollTop untuk absolut
+    const pageRect   = pw.wrap.getBoundingClientRect();
+    const scrollRect = scroll.getBoundingClientRect();
+    // posisi top teks relatif ke scroll container
+    const textAbsTop = scroll.scrollTop + (pageRect.top - scrollRect.top) + m.top;
+    const TOPBAR_H   = 52;
+    const PADDING    = 48;
+    scroll.scrollTo({ top: textAbsTop - TOPBAR_H - PADDING, behavior: 'smooth' });
     pageInput.value = m.page;
     drawHighlights();
   }
