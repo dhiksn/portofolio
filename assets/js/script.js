@@ -85,7 +85,7 @@ function renderProjects() {
           ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
         </div>
         <div class="project-buttons">
-          <a href="${project.demo}" class="proj-btn proj-btn-primary">
+          <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="proj-btn proj-btn-primary">
             Live Demo
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
