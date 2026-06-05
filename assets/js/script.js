@@ -147,10 +147,67 @@ function attachProjectCardEvents() {
   });
 }
 
+/* ===== SCRAMBLE TEXT ANIMATION ===== */
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.originalText = el.innerText || el.textContent;
+    this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&!?';
+    this.frameRequest = null;
+    this.frame = 0;
+    
+    // Bind hover event
+    this.el.addEventListener('mouseenter', () => this.scramble());
+  }
+
+  scramble() {
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.totalFrames = 20; // Lebih cepat
+    this.update();
+  }
+
+  update() {
+    let output = '';
+    const length = this.originalText.length;
+    // Reveal characters left to right. Progress goes from 0 to 1
+    const progress = this.frame / this.totalFrames;
+    const revealCount = Math.floor(progress * length);
+
+    for (let i = 0; i < length; i++) {
+      if (this.originalText[i] === ' ') {
+        output += ' ';
+      } else if (i < revealCount) {
+        output += this.originalText[i];
+      } else {
+        output += this.chars[Math.floor(Math.random() * this.chars.length)];
+      }
+    }
+
+    this.el.innerText = output;
+
+    if (this.frame < this.totalFrames) {
+      this.frameRequest = requestAnimationFrame(() => this.update());
+      this.frame++;
+    } else {
+      this.el.innerText = this.originalText; // Ensure exact match at the end
+    }
+  }
+}
+
 /* ===== LOADER ===== */
 window.addEventListener('load', async () => {
   await loadPortfolioData();
   initReveal();
+
+  // Scramble Hero Name
+  const heroNameEl = document.querySelector('.hero-name');
+  if (heroNameEl) {
+    const fx = new TextScramble(heroNameEl);
+    setTimeout(() => {
+      fx.scramble();
+    }, 300);
+  }
 
   // Scroll to section based on URL path (clean URL, no hash)
   const path = location.pathname.replace('/', '').replace(/\/$/, '');
