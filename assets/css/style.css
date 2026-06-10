@@ -40,7 +40,7 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   --border2:  rgba(255,255,255,0.14);
   --text:     #f0f0f0;
   --muted:    #888888;
-  --dim:      #3a3a3a;
+  --dim:      #6b7280;
   --white:    #ffffff;
   --mono:     'JetBrains Mono', monospace;
   --r:        12px;
