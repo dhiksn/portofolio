@@ -1,18 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Andhika Rafi - Siswa TJKT SMK Wikrama Bogor | Network Enthusiast, Linux Administrator, Web Developer" />
-  <meta name="keywords" content="Andhika Rafi, TJKT, SMK Wikrama Bogor, Network Engineer, Linux, Web Developer, Portfolio" />
+  <meta name="description" content="Andhika Rafi - Siswa TJKT SMK Wikrama Bogor | Network Engineer, Linux Administrator, IT Support" />
+  <meta name="keywords" content="Andhika Rafi, TJKT, SMK Wikrama Bogor, Network Engineer, Linux Administrator, IT Support, Portfolio" />
   <meta name="author" content="Andhika Rafi" />
-  <title>Andhika Rafi — Portfolio</title>
+  <title>Andhika Rafi | Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,300;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
 
@@ -20,13 +22,13 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Particles Canvas -->
-  <canvas id="particles"></canvas>
+  <!-- Three.js Canvas -->
+  <canvas id="threeCanvas"></canvas>
 
   <!-- Floating Navbar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="/" class="nav-logo"><span class="logo-bracket">&lt;</span>dhiksn<span class="logo-bracket">/&gt;</span></a>
+      <a href="/" class="nav-logo"><span class="logo-bracket">[</span>dhiksn<span class="logo-bracket">]</span></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="/" data-scroll="beranda" class="nav-link active">Beranda</a></li>
         <li><a href="/" data-scroll="tentang" class="nav-link">Tentang</a></li>
@@ -37,17 +39,17 @@
       </ul>
       <div class="cv-dropdown">
         <button class="nav-cv-btn" id="cvBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           CV
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-arrow"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="dropdown-arrow"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="cv-dropdown-menu" id="cvDropdownMenu">
           <a href="assets/cv/Andhika_Rafi_CV.pdf" target="_blank" class="cv-dropdown-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             Lihat CV
           </a>
           <a href="assets/cv/Andhika_Rafi_CV.pdf" download="Andhika_Rafi_CV.pdf" class="cv-dropdown-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download CV
           </a>
         </div>
@@ -60,59 +62,64 @@
 
   <!-- Hero Section -->
   <section id="beranda" class="hero">
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-      <div class="hero-glow glow-1"></div>
-      <div class="hero-glow glow-2"></div>
-    </div>
+    <div class="hero-noise"></div>
     <div class="container hero-container">
-      <div class="hero-content reveal">
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          Siswa TJKT
-        </div>
+      <div class="hero-content">
         <h1 class="hero-title">
-          <span class="hero-name">Andhika Rafi</span>
+          <span class="hero-name-wrap">
+            <span class="hero-name" id="heroName">Andhika</span>
+          </span>
+          <span class="hero-name-wrap hero-name-wrap--2">
+            <span class="hero-name hero-name--light">Rafi</span>
+          </span>
         </h1>
-
-        <p class="hero-desc">
-          Siswa TJKT yang berfokus pada jaringan komputer, administrasi server Linux, dan cybersecurity.
+        <p class="hero-role" id="heroRole">
+          <span class="role-item active">Network Engineer</span>
+          <span class="role-item">Linux Administrator</span>
+          <span class="role-item">IT Support</span>
         </p>
-        <div class="hero-buttons">
-          <a href="/" data-scroll="portofolio" class="btn btn-primary">
-            <span>Lihat Portofolio</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <p class="hero-desc">
+          Berfokus pada jaringan komputer, administrasi server Linux, dan keamanan siber.
+          Membangun solusi nyata dari infrastruktur hingga web.
+        </p>
+        <div class="hero-actions">
+          <a href="/" data-scroll="portofolio" class="btn-hero-primary">
+            Lihat Karya
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="/" data-scroll="kontak" class="btn btn-outline">
-            <span>Hubungi Saya</span>
-          </a>
+          <a href="/" data-scroll="kontak" class="btn-hero-ghost">Hubungi Saya</a>
         </div>
-        <div class="hero-socials">
-          <a href="https://github.com/dhiksn" target="_blank" class="social-link" title="GitHub">
+        <div class="hero-social-row">
+          <a href="https://github.com/dhiksn" target="_blank" class="hero-social" aria-label="GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           </a>
-          <a href="https://linkedin.com/in/andhikarafi" target="_blank" class="social-link" title="LinkedIn">
+          <span class="social-divider"></span>
+          <a href="https://linkedin.com/in/andhikarafi" target="_blank" class="hero-social" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
-          <a href="https://instagram.com/andhika_itsu" target="_blank" class="social-link" title="Instagram">
+          <span class="social-divider"></span>
+          <a href="https://instagram.com/andhika_itsu" target="_blank" class="hero-social" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
         </div>
       </div>
-      <div class="hero-image-wrap reveal">
-        <div class="hero-image-container">
-          <div class="hero-avatar">
-            <lottie-player
-              src="assets/img/server.json"
-              background="transparent"
-              speed="1"
-              loop
-              autoplay
-              class="avatar-gif">
-            </lottie-player>
-          </div>
+      <div class="hero-visual">
+        <div class="hero-lottie-wrap">
+          <lottie-player
+            src="assets/img/server.json"
+            background="transparent"
+            speed="0.8"
+            loop
+            autoplay>
+          </lottie-player>
+          <div class="lottie-ring lottie-ring--1"></div>
+          <div class="lottie-ring lottie-ring--2"></div>
         </div>
       </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
@@ -120,38 +127,60 @@
   <section id="tentang" class="section tentang">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">// 01</div>
+        <span class="section-num">01</span>
         <h2 class="section-title">Tentang Saya</h2>
-        <p class="section-subtitle">Mengenal Saya Lebih Dekat</p>
+        <div class="section-line"></div>
       </div>
       <div class="tentang-wrapper reveal">
-        <div class="tentang-avatar-wrap">
-          <div class="tentang-avatar">
-            <img src="assets/img/cover.jpg" alt="Andhika Rafi" class="tentang-avatar-photo" loading="lazy" decoding="async">
+        <div class="tentang-photo-col">
+          <div class="lanyard-scene" id="lanyardScene">
+            <div class="lanyard-anchor" id="lanyardAnchor"></div>
+            <svg class="lanyard-svg" id="lanyardSvg">
+              <path id="lanyardRopeShadow" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-linecap="round"/>
+              <path id="lanyardRope" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="lanyard-card" id="lanyardCard">
+              <div class="lanyard-card-hole"></div>
+              <div class="lanyard-card-header">
+                <span class="lanyard-card-org">SMK WIKRAMA BOGOR</span>
+                <span class="lanyard-card-sub">KARTU PELAJAR</span>
+              </div>
+              <div class="lanyard-card-photo-wrap">
+                <div class="tentang-photo-frame">
+                  <img src="/assets/img/cover2.png" alt="Andhika Rafi" loading="lazy" decoding="async">
+                  <div class="photo-border-anim"></div>
+                </div>
+              </div>
+              <div class="lanyard-card-label">
+                <span class="lanyard-name">Andhika Rafi</span>
+                <span class="lanyard-role">TJKT · KELAS 11</span>
+              </div>
+            </div>
           </div>
-          <div class="tentang-avatar-glow"></div>
         </div>
-        <div class="tentang-content">
-          <p class="tentang-desc">Saya adalah seorang pelajar yang bersemangat di bidang teknologi informasi, khususnya dalam <strong>jaringan komputer</strong> dan <strong>keamanan siber</strong>. Sebagai siswa kelas 11 dengan jurusan TJKT di SMK Wikrama Bogor, saya aktif mengembangkan keterampilan teknis saya melalui berbagai proyek nyata.</p>
-          <p class="tentang-desc">Minat saya mencakup <strong>Linux Server </strong> untuk pengelolaan infrastruktur server yang andal, <strong>Cloud Computing</strong> menggunakan platform AWS, serta <strong>Web Development</strong> untuk membangun aplikasi web yang fungsional dan modern.</p>
-          <div class="tentang-stats-grid">
-            <div class="tentang-stat">
-              <div class="tentang-stat-num" data-target="3">0</div>
-              <span class="tentang-stat-label">Proyek Selesai</span>
+        <div class="tentang-text-col">
+          <p class="tentang-intro">
+            Saya pelajar yang <em>serius</em> menekuni teknologi informasi khususnya jaringan komputer dan keamanan siber. Kelas 11 TJKT di SMK Wikrama Bogor, tapi pikiran saya sudah jauh ke depan.
+          </p>
+          <p class="tentang-body">
+            Dari mengkonfigurasi <strong>Mikrotik & Cisco</strong>, mengelola <strong>Ubuntu Server</strong>, hingga membangun aplikasi web dengan <strong>Node.js dan Python</strong>. saya belajar lewat proyek nyata, bukan hanya teori.
+          </p>
+          <p class="tentang-body">
+            Minat saya mencakup <strong>Cyber Security</strong>, containerization dengan <strong>Docker</strong>, serta web development modern. Saya percaya bahwa infrastruktur yang solid adalah fondasi dari semua hal di dunia digital.
+          </p>
+          <div class="tentang-counters">
+            <div class="t-counter">
+              <strong class="t-counter-num" data-target="3">0</strong>
+              <span>Proyek Selesai</span>
             </div>
-            <div class="tentang-stat">
-              <div class="tentang-stat-num" data-target="5">0</div>
-              <span class="tentang-stat-label">Sertifikat</span>
+            <div class="t-counter">
+              <strong class="t-counter-num" data-target="6">0</strong>
+              <span>Sertifikat</span>
             </div>
-            <div class="tentang-stat">
-              <div class="tentang-stat-num" data-target="20">0</div>
-              <span class="tentang-stat-label">Teknologi</span>
+            <div class="t-counter">
+              <strong class="t-counter-num" data-target="20">0</strong>
+              <span>Teknologi</span>
             </div>
-          </div>
-          <div class="tentang-tags">
-            <span class="tag">System Administrator</span>
-            <span class="tag">IT Support</span>
-            <span class="tag">Cyber Security</span>
           </div>
         </div>
       </div>
@@ -162,49 +191,33 @@
   <section id="pendidikan" class="section pendidikan">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">// 02</div>
+        <span class="section-num">02</span>
         <h2 class="section-title">Pendidikan & Pengalaman</h2>
-        <p class="section-subtitle">Perjalanan Akademik Saya</p>
+        <div class="section-line"></div>
       </div>
-      <div class="timeline">
-        <div class="timeline-line"></div>
-        <div class="timeline-item reveal">
-          <div class="timeline-dot">
-            <div class="dot-inner"></div>
-          </div>
-          <div class="timeline-card glass-card">
-            <div class="timeline-header">
-              <div class="timeline-icon">🏫</div>
-              <div>
-                <div class="timeline-period">2025 — Sekarang</div>
-                <h3 class="timeline-title">SMK Wikrama Bogor</h3>
-                <div class="timeline-subtitle">Teknik Jaringan Komputer dan Telekomunikasi (TJKT)</div>
-              </div>
-              <div class="timeline-status">
-                <span class="status-badge">Kelas 11</span>
-              </div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-year">2026</div>
+            <div class="tl-dot-wrap">
+              <div class="tl-dot"></div>
+              <div class="tl-vert-line"></div>
             </div>
-            <ul class="timeline-activities">
-              <li>
-                <span class="activity-dot"></span>
-                Belajar administrasi Linux Server (Ubuntu, Debian) dan konfigurasi server
-              </li>
-              <li>
-                <span class="activity-dot"></span>
-                Belajar Mikrotik dan Cisco untuk konfigurasi jaringan dan routing
-              </li>
-              <li>
-                <span class="activity-dot"></span>
-                Mengikuti pelatihan dan workshop IT dari berbagai institusi
-              </li>
-              <li>
-                <span class="activity-dot"></span>
-                Belajar Cloud Computing dengan platform AWS dan Docker containerization
-              </li>
-              <li>
-                <span class="activity-dot"></span>
-                Mempelajari dasar-dasar Cyber Security dan keamanan jaringan
-              </li>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-top">
+              <div>
+                <h3 class="tl-school">SMK Wikrama Bogor</h3>
+                <p class="tl-jurusan">Teknik Jaringan Komputer dan Telekomunikasi (TJKT)</p>
+              </div>
+              <span class="tl-badge">Kelas 11 · Aktif</span>
+            </div>
+            <ul class="tl-list">
+              <li>Administrasi Linux Server (Ubuntu, Debian) dan konfigurasi layanan</li>
+              <li>Konfigurasi jaringan Mikrotik dan Cisco, routing, VLAN</li>
+              <li>Cloud Computing dengan AWS dan containerization Docker</li>
+              <li>Dasar-dasar Cyber Security dan penetration testing</li>
+              <li>Mengikuti workshop dan pelatihan IT dari berbagai institusi</li>
             </ul>
           </div>
         </div>
@@ -216,96 +229,75 @@
   <section id="keahlian" class="section keahlian">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">// 03</div>
+        <span class="section-num">03</span>
         <h2 class="section-title">Keahlian</h2>
-        <p class="section-subtitle">Teknologi yang Saya Kuasai</p>
+        <div class="section-line"></div>
       </div>
     </div>
 
-    <!-- Row 1: kiri → kanan -->
-    <div class="marquee-wrapper reveal">
-      <div class="marquee-track marquee-left">
-        <div class="marquee-content">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
+    <div class="marquee-row reveal">
+      <div class="marquee-track marquee-fwd">
+        <div class="marquee-set">
+          <div class="skill-card"><svg width="28" height="28" fill="#ffffff" viewBox="0 0 24 24"><path d="M23.041 6.188a1.404 1.404 0 0 0-.218-.36c-.24-.296-.634-.586-1.14-.864l-4.052-2.22L13.576.519C13.074.243 12.61.065 12.22.013A1.772 1.772 0 0 0 12 0c-.432 0-.974.192-1.576.52L6.37 2.74 2.317 4.96c-.504.279-.9.569-1.14.867a1.59 1.59 0 0 0-.122.17 1.654 1.654 0 0 0-.096.19c-.15.348-.22.816-.22 1.368v8.887c0 .66.1 1.2.316 1.558.216.356.66.706 1.262 1.036l4.054 2.22 4.053 2.223c.504.276.966.456 1.36.506.145.02.291.02.436 0 .39-.05.852-.228 1.356-.506l8.107-4.443c.6-.33 1.046-.68 1.262-1.036.036-.06.068-.123.096-.188.15-.348.22-.818.22-1.37V7.556c0-.552-.07-1.02-.22-1.368zM7.233 16.618c0 .2-.218.33-.396.233l-1.45-.796a1.066 1.066 0 0 1-.552-.934v-4.296c0-.2.216-.33.394-.235l1.728.947a.53.53 0 0 1 .276.468v4.612zm11.934-1.497c0 .39-.213.748-.554.936l-1.45.794a.266.266 0 0 1-.394-.234v-5.692c0-.2-.217-.33-.395-.232l-2.62 1.434c-.34.187-.552.545-.552.934v5.646a.532.532 0 0 1-.278.468l-.41.224c-.32.176-.707.176-1.026 0l-.408-.224a.532.532 0 0 1-.278-.468v-5.646c0-.389-.212-.747-.552-.934L4.835 9.16v-.28c0-.388.212-.746.552-.934l.6-.328a1.064 1.064 0 0 1 1.022 0l4.48 2.452c.318.176.704.176 1.021 0l2.07-1.134a.266.266 0 0 0 0-.468L9.932 5.922a.266.266 0 0 1 0-.468l1.556-.852c.32-.176.707-.176 1.026 0l6.1 3.34c.342.188.554.547.553.936v6.243z"/></svg><span>Mikrotik</span></div>
+          <div class="skill-card"><svg width="56" height="30" viewBox="0 0 52 28" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M51.2293 8.37685C51.2293 7.76429 50.7317 7.26562 50.1181 7.26562C49.5033 7.26562 49.0068 7.76429 49.0068 8.37685V10.7143C49.0068 11.3302 49.5033 11.8288 50.1181 11.8288C50.7317 11.8288 51.2293 11.3302 51.2293 10.7143V8.37685ZM45.1136 5.30654C45.1136 4.69288 44.6172 4.19531 43.988 4.19531C43.3744 4.19531 42.8779 4.69288 42.8779 5.30654V10.7123C42.8779 11.3282 43.3744 11.8268 43.988 11.8268C44.6172 11.8268 45.1136 11.3282 45.1136 10.7123V5.30654ZM38.9853 1.11012C38.9853 0.495352 38.4877 0 37.8741 0C37.2604 0 36.7617 0.495352 36.7617 1.11012V12.93C36.7617 13.5481 37.2604 14.0446 37.8741 14.0446C38.4877 14.0446 38.9853 13.5481 38.9853 12.93V1.11012ZM32.8551 5.30654C32.8551 4.69288 32.3587 4.19531 31.7439 4.19531C31.1291 4.19531 30.6338 4.69288 30.6338 5.30654V10.7123C30.6338 11.3282 31.1291 11.8268 31.7439 11.8268C32.3587 11.8268 32.8551 11.3282 32.8551 10.7123V5.30654ZM26.7254 8.37685C26.7254 7.76429 26.23 7.26562 25.6197 7.26562C25.0038 7.26562 24.5029 7.76429 24.5029 8.37685V10.7143C24.5029 11.3302 25.0038 11.8288 25.6197 11.8288C26.23 11.8288 26.7254 11.3302 26.7254 10.7143V8.37685ZM20.6103 5.30654C20.6103 4.69288 20.1083 4.19531 19.4936 4.19531C18.8788 4.19531 18.3779 4.69288 18.3779 5.30654V10.7123C18.3779 11.3282 18.8788 11.8268 19.4936 11.8268C20.1083 11.8268 20.6103 11.3282 20.6103 10.7123V5.30654ZM14.4801 1.11012C14.4801 0.495352 13.9814 0 13.3655 0C12.7541 0 12.251 0.495352 12.251 1.11012V12.93C12.251 13.5481 12.7541 14.0446 13.3655 14.0446C13.9814 14.0446 14.4801 13.5481 14.4801 12.93V1.11012ZM8.35617 5.30654C8.35617 4.69288 7.85418 4.19531 7.24273 4.19531C6.62686 4.19531 6.12598 4.69288 6.12598 5.30654V10.7123C6.12598 11.3282 6.62686 11.8268 7.24273 11.8268C7.85418 11.8268 8.35617 11.3282 8.35617 10.7123V5.30654ZM2.23019 8.37685C2.23019 7.76429 1.72931 7.26562 1.11454 7.26562C0.500881 7.26562 0 7.76429 0 8.37685V10.7143C0 11.3302 0.500881 11.8288 1.11454 11.8288C1.72931 11.8288 2.23019 11.3302 2.23019 10.7143V8.37685ZM25.2545 18.0665C25.186 18.0488 24.1588 17.7812 23.0642 17.7812C20.9954 17.7812 19.7471 18.9002 19.7471 20.5643C19.7471 22.0404 20.7897 22.7735 22.0436 23.1693C22.1818 23.2157 22.3864 23.2777 22.5213 23.3241C23.0807 23.4988 23.523 23.7598 23.523 24.2109C23.523 24.7151 23.0089 25.0413 21.8921 25.0413C20.9114 25.0413 19.9693 24.7615 19.7692 24.7106V26.7606C19.8809 26.7849 20.9998 27.0028 22.1951 27.0028C23.9133 27.0028 25.8804 26.252 25.8804 24.0163C25.8804 22.9316 25.2158 21.9331 23.7585 21.4687L23.1382 21.2719C22.7689 21.1547 22.1088 20.9657 22.1088 20.4239C22.1088 19.9949 22.5987 19.6941 23.4998 19.6941C24.276 19.6941 25.2203 19.955 25.2545 19.9683V18.0665ZM41.9169 20.0469C43.246 20.0469 44.2389 21.0951 44.2389 22.3887C44.2389 23.6824 43.246 24.7306 41.9169 24.7306C40.5824 24.7306 39.5928 23.6824 39.5928 22.3887C39.5928 21.0951 40.5824 20.0469 41.9169 20.0469ZM46.6202 22.3898C46.6202 19.8445 44.6542 17.7812 41.9176 17.7812C39.1788 17.7812 37.2129 19.8445 37.2129 22.3898C37.2129 24.934 39.1788 26.9983 41.9176 26.9983C44.6542 26.9983 46.6202 24.934 46.6202 22.3898ZM11.4013 18.0975C11.1901 18.0378 10.4095 17.7812 9.35242 17.7812C6.62025 17.7812 4.6123 19.7284 4.6123 22.3898C4.6123 25.2569 6.82701 26.9983 9.35242 26.9983C10.3564 26.9983 11.1215 26.7606 11.4013 26.6821V24.2916C11.3051 24.3458 10.5709 24.7637 9.51275 24.7637C8.01674 24.7637 7.05147 23.7111 7.05147 22.3898C7.05147 21.0243 8.05876 20.0148 9.51275 20.0148C10.5886 20.0148 11.3117 20.4427 11.4013 20.4891V18.0975ZM34.8467 18.0975C34.6355 18.0378 33.8538 17.7812 32.799 17.7812C30.0624 17.7812 28.0566 19.7284 28.0566 22.3898C28.0566 25.2569 30.2725 26.9983 32.799 26.9983C33.7974 26.9983 34.5648 26.7606 34.8467 26.6821V24.2916C34.7483 24.3458 34.0141 24.7637 32.9582 24.7637C31.4633 24.7637 30.498 23.7111 30.498 22.3898C30.498 21.0243 31.5053 20.0148 32.9582 20.0148C34.0318 20.0148 34.7572 20.4427 34.8467 20.4891V18.0975ZM14.4893 26.8406H16.736V17.9375H14.4893V26.8406Z" fill="#fff"/></svg><span>Cisco</span></div>
+          <div class="skill-card"><svg width="24" height="28" viewBox="0 0 256 295" fill="none"><path fill="#000" fill-opacity=".2" d="M235.125 249.359c0 17.355-52.617 31.497-117.54 31.497S.044 266.806.044 249.359c0-17.356 52.618-31.498 117.54-31.498c64.924 0 117.45 14.142 117.541 31.498" transform="translate(10)"/><path fill="#000" d="M63.213 215.474c-11.387-16.346-13.591-69.606 12.947-102.39C89.292 97.383 92.69 86.455 93.7 71.67c.734-16.805-11.846-66.851 35.537-70.616c48.027-3.857 45.364 43.526 45.088 68.596c-.183 21.12 15.52 33.15 26.355 49.68c19.927 30.303 18.274 82.461-3.765 110.745c-27.916 35.354-51.791 20.018-67.678 21.304c-29.752 1.745-30.762 17.54-66.024-35.905"/><path fill="#FFEED7" d="M169.1 122.451c8.265 7.622 29.661 41.69-4.224 62.995c-11.937 7.438 10.653 35.721 21.488 22.039c19.193-24.61 6.98-63.913-4.591-77.963c-7.714-9.917-19.651-13.774-12.672-7.07" transform="translate(10)"/><path fill="#000" stroke="#000" stroke-width=".977" d="M176.805 117.86c13.59 11.02 38.292 49.587 2.204 74.748c-11.846 7.806 10.468 32.508 23.049 19.927c43.618-43.894-1.102-94.308-16.53-111.664c-13.774-15.151-25.987 3.49-8.723 16.989z"/><path fill="#000" d="M133.186 57.712c-.092 5.234 2.48 9.458 5.877 9.458c3.306 0 6.153-4.224 6.245-9.366c.091-5.234-2.48-9.459-5.878-9.459c-3.397 0-6.152 4.225-6.244 9.367m-21.212.092c.459 4.316-1.194 7.989-3.582 8.356c-2.387.276-4.683-2.938-5.142-7.254c-.46-4.316 1.194-7.99 3.581-8.357c2.388-.275 4.684 2.939 5.143 7.255"/><path fill="#FFEED7" d="M71.027 145.684c6.52-14.785 20.386-40.772 20.662-60.883c0-15.978 47.843-19.835 51.7-3.856c3.856 15.978 13.59 39.853 19.834 51.424c6.245 11.478 24.335 48.118 5.051 80.074c-17.356 28.284-69.973 50.69-98.073-3.856c-9.55-18.917-7.806-42.333.826-62.903" transform="translate(10)"/><path fill="#FFEED7" d="M65.15 134.664c-5.601 10.56-17.172 38.293 11.112 53.445c30.395 16.162 30.303 49.312-6.245 33.517c-33.425-14.233-18.641-71.902-9.274-85.676c6.06-9.642 15.243-21.488 4.407-1.286" transform="translate(10)"/><path fill="#000" stroke="#000" stroke-width="1.25" d="M79.925 122.727c-8.907 14.509-30.211 48.669-1.652 66.484c38.384 23.6 27.548 47.108-7.53 25.895c-49.404-29.568-5.97-89.257 13.774-112.03c22.59-25.529 4.316 4.683-4.592 19.65z"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="6.25" d="M51.835 258.542c-20.57-10.928-50.414 2.112-39.578-27.457c2.204-6.704-3.214-16.805.275-23.325c4.133-7.989 13.04-6.244 18.366-11.57c5.234-5.51 8.54-15.06 18.366-13.59c9.734 1.468 16.254 13.406 23.049 28.099c5.05 10.468 22.865 25.253 21.672 37.007c-1.47 17.998-21.948 21.396-42.15 10.836z" transform="translate(10)"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="6.251" d="M194.445 253.49c15.06-18.273 48.578-14.508 25.988-39.577c-4.775-5.418-3.306-16.989-9.183-21.947c-6.887-6.061-14.509-1.102-21.488-4.224c-6.979-3.398-14.325-9.918-22.865-5.327c-8.54 4.684-9.459 16.805-10.285 32.783c-.735 11.479-11.203 30.671-5.602 41.231c8.081 16.346 29.11 14.142 43.435-2.938z" transform="translate(10)"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="3.75" d="M97.107 66.344c3.673-3.398 12.58-13.774 29.477-2.939c3.122 2.02 5.693 2.204 11.662 4.775c12.03 4.96 6.336 16.897-6.52 20.937c-5.51 1.745-10.468 8.449-20.386 7.806c-8.54-.46-10.744-6.06-15.978-9.091c-9.275-5.234-10.652-12.305-5.602-16.07c5.051-3.765 6.98-5.143 7.347-5.418z" transform="translate(10)"/><path stroke="#E68C3F" stroke-width="2.5" d="M148.43 75.986c-5.05.275-15.979 11.203-27.457 11.203c-11.479 0-18.366-10.652-20.11-10.652"/></svg><span>Linux</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 32 32"><path d="M15.948,2h.065a10.418,10.418,0,0,1,.972.528Q22.414,5.65,27.843,8.774a.792.792,0,0,1,.414.788c-.008,4.389,0,8.777-.005,13.164a.813.813,0,0,1-.356.507q-5.773,3.324-11.547,6.644a.587.587,0,0,1-.657.037Q9.912,26.6,4.143,23.274a.7.7,0,0,1-.4-.666q0-6.582,0-13.163a.693.693,0,0,1,.387-.67Q9.552,5.657,14.974,2.535c.322-.184.638-.379.974-.535" fill="#019639"/><path d="M8.767,10.538q0,5.429,0,10.859a1.509,1.509,0,0,0,.427,1.087,1.647,1.647,0,0,0,2.06.206,1.564,1.564,0,0,0,.685-1.293c0-2.62-.005-5.24,0-7.86q3.583,4.29,7.181,8.568a2.833,2.833,0,0,0,2.6.782,1.561,1.561,0,0,0,1.251-1.371q.008-5.541,0-11.081a1.582,1.582,0,0,0-3.152,0c0,2.662-.016,5.321,0,7.982-2.346-2.766-4.663-5.556-7-8.332A2.817,2.817,0,0,0,10.17,9.033,1.579,1.579,0,0,0,8.767,10.538Z" fill="#fff"/></svg><span>Nginx</span></div>
+          <div class="skill-card"><svg width="28" height="28" fill="#D22128" viewBox="0 0 24 24"><path d="M17.805 2.197v.066h.156v.44h.072v-.44h.156v-.066zm.9 0l-.175.353-.172-.353h-.087v.506h.067V2.3l.172.35h.045l.172-.35v.404h.066v-.506zm-4.257 1c-.204.31-.424.66-.66 1.06l-.04.062a44.457 44.457 0 00-1.265 2.29c-.187.36-.38.742-.577 1.146l2.267-.25c.66-.302.955-.578 1.242-.976a15.5 15.5 0 00.23-.342c.23-.363.46-.763.663-1.16.197-.386.37-.767.505-1.11.083-.22.15-.422.198-.6.042-.158.074-.307.1-.45-.884.15-1.965.295-2.668.33zM11.894 7.78l-.077.16c-.078.16-.157.32-.236.488-.086.18-.172.364-.26.552l-.132.287a75.265 75.265 0 00-1.427 3.3c-.163.397-.327.807-.493 1.23-.15.38-.297.765-.45 1.164l-.02.06c-.15.396-.3.802-.453 1.22l-.01.027.72-.08a.213.213 0 01-.042-.006c.863-.106 2.01-.75 2.75-1.547.342-.367.652-.8.94-1.306.213-.377.413-.795.604-1.258.168-.405.328-.843.48-1.318-.196.105-.423.18-.673.235a2.184 2.184 0 01-.273.046c.806-.31 1.314-.905 1.683-1.64a2.816 2.816 0 01-.968.428c-.06.012-.116.022-.174.03l-.043.006h.002c.278-.118.514-.248.718-.403a2.571 2.571 0 00.637-.698l.063-.104.077-.154a8.107 8.107 0 00.367-.85l.03-.088a3.04 3.04 0 00.123-.463.733.733 0 01-.094.065c-.243.145-.66.277-.996.34l.663-.074-.664.073h-.017l-.1.017c.006-.003.01-.006.017-.008l-2.265.25-.013.022zM8.27 16.45c-.117.323-.236.654-.355.992l-.005.015c-.016.046-.032.094-.05.142-.08.227-.15.432-.31.9.264.12.475.435.675.793a1.44 1.44 0 00-.466-.99c1.293.06 2.41-.27 2.99-1.217.05-.084.096-.173.14-.268-.26.333-.59.474-1.2.44 0 0-.004 0-.005.002l.004-.002c.9-.404 1.354-.79 1.754-1.433.094-.153.186-.32.28-.503-.788.81-1.702 1.04-2.664.865l-.72.078a6.43 6.43 0 00-.067.183zM15.42.112c-.376.222-1 .85-1.748 1.763l.686 1.294c.48-.687.97-1.307 1.462-1.836l.058-.062c-.02.02-.04.04-.057.062-.16.176-.644.74-1.375 1.863.703-.035 1.784-.18 2.666-.33.262-1.47-.258-2.142-.258-2.142s-.66-1.07-1.436-.61zm-3.084 6.402a40.253 40.253 0 011.306-2.26l.04-.064c.224-.352.45-.693.677-1.02l-.685-1.293-.157.192c-.197.245-.403.51-.613.79a39.853 39.853 0 00-2.016 2.97l-.022.038.893 1.763c.19-.378.38-.752.575-1.118zm-3.73 8.32c.158-.406.319-.81.483-1.225.156-.394.32-.79.484-1.19a91.133 91.133 0 011.6-3.604l.205-.424c.12-.243.237-.485.36-.724a.125.125 0 01.02-.04l-.895-1.763-.044.07c-.207.34-.414.687-.617 1.042a38.056 38.056 0 00-1.092 2.04l-.094.193a24.573 24.573 0 00-1.258 3.087 18.492 18.492 0 00-.52 1.997l.896 1.77c.117-.317.24-.638.364-.963zm-1.376-.476a13.38 13.38 0 00-.234 1.692c0 .02-.004.04-.005.06-.28-.45-1.03-.888-1.026-.884.537.778.944 1.55 1.005 2.31-.29.058-.684-.027-1.14-.195.475.436.83.556.97.588-.434.03-.89.328-1.346.67.668-.27 1.21-.38 1.596-.29-.61 1.74-1.23 3.655-1.843 5.69a.538.538 0 00.364-.354c.11-.368.84-2.786 1.978-5.965l.097-.27.028-.078c.12-.332.246-.672.374-1.02l.09-.237v-.004L7.24 14.3c-.003.02-.01.04-.012.06z"/></svg><span>Apache</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#f47421"/><circle cx="50" cy="50" r="21.8" fill="none" stroke="#fff" stroke-width="8.6"/><g id="ub_a"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g><g transform="rotate(120 50 50)"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g><g transform="rotate(240 50 50)"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g></svg><span>Ubuntu Server</span></div>
+          <div class="skill-card"><svg width="44" height="28" viewBox="0 0 304 182"><path fill="#ffffff" d="m86 66 2 9c0 3 1 5 3 8v2l-1 3-7 4-2 1-3-1-4-5-3-6c-8 9-18 14-29 14-9 0-16-3-20-8-5-4-8-11-8-19s3-15 9-20c6-6 14-8 25-8a79 79 0 0 1 22 3v-7c0-8-2-13-5-16-3-4-8-5-16-5l-11 1a80 80 0 0 0-14 5h-2c-1 0-2-1-2-3v-5l1-3c0-1 1-2 3-2l12-5 16-2c12 0 20 3 26 8 5 6 8 14 8 25v32zM46 82l10-2c4-1 7-4 10-7l3-6 1-9v-4a84 84 0 0 0-19-2c-6 0-11 1-15 4-3 2-4 6-4 11s1 8 3 11c3 2 6 4 11 4zm80 10-4-1-2-3-23-78-1-4 2-2h10l4 1 2 4 17 66 15-66 2-4 4-1h8l4 1 2 4 16 67 17-67 2-4 4-1h9c2 0 3 1 3 2v2l-1 2-24 78-2 4-4 1h-9l-4-1-1-4-16-65-15 64-2 4-4 1h-9zm129 3a66 66 0 0 1-27-6l-3-3-1-2v-5c0-2 1-3 2-3h2l3 1a54 54 0 0 0 23 5c6 0 11-2 14-4 4-2 5-5 5-9l-2-7-10-5-15-5c-7-2-13-6-16-10a24 24 0 0 1 5-34l10-5a44 44 0 0 1 20-2 110 110 0 0 1 12 3l4 2 3 2 1 4v4c0 3-1 4-2 4l-4-2c-6-2-12-3-19-3-6 0-11 0-14 2s-4 5-4 9c0 3 1 5 3 7s5 4 11 6l14 4c7 3 12 6 15 10s5 9 5 14l-3 12-7 8c-3 3-7 5-11 6l-14 2z"/><path d="M274 144A220 220 0 0 1 4 124c-4-3-1-6 2-4a300 300 0 0 0 263 16c5-2 10 4 5 8z" fill="#f90"/><path d="M287 128c-4-5-28-3-38-1-4 0-4-3-1-5 19-13 50-9 53-5 4 5-1 36-18 51-3 2-6 1-5-2 5-10 13-33 9-38z" fill="#f90"/></svg><span>AWS</span></div>
         </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
+        <div class="marquee-set" aria-hidden="true">
+          <div class="skill-card"><svg width="28" height="28" fill="#ffffff" viewBox="0 0 24 24"><path d="M23.041 6.188a1.404 1.404 0 0 0-.218-.36c-.24-.296-.634-.586-1.14-.864l-4.052-2.22L13.576.519C13.074.243 12.61.065 12.22.013A1.772 1.772 0 0 0 12 0c-.432 0-.974.192-1.576.52L6.37 2.74 2.317 4.96c-.504.279-.9.569-1.14.867a1.59 1.59 0 0 0-.122.17 1.654 1.654 0 0 0-.096.19c-.15.348-.22.816-.22 1.368v8.887c0 .66.1 1.2.316 1.558.216.356.66.706 1.262 1.036l4.054 2.22 4.053 2.223c.504.276.966.456 1.36.506.145.02.291.02.436 0 .39-.05.852-.228 1.356-.506l8.107-4.443c.6-.33 1.046-.68 1.262-1.036.036-.06.068-.123.096-.188.15-.348.22-.818.22-1.37V7.556c0-.552-.07-1.02-.22-1.368zM7.233 16.618c0 .2-.218.33-.396.233l-1.45-.796a1.066 1.066 0 0 1-.552-.934v-4.296c0-.2.216-.33.394-.235l1.728.947a.53.53 0 0 1 .276.468v4.612zm11.934-1.497c0 .39-.213.748-.554.936l-1.45.794a.266.266 0 0 1-.394-.234v-5.692c0-.2-.217-.33-.395-.232l-2.62 1.434c-.34.187-.552.545-.552.934v5.646a.532.532 0 0 1-.278.468l-.41.224c-.32.176-.707.176-1.026 0l-.408-.224a.532.532 0 0 1-.278-.468v-5.646c0-.389-.212-.747-.552-.934L4.835 9.16v-.28c0-.388.212-.746.552-.934l.6-.328a1.064 1.064 0 0 1 1.022 0l4.48 2.452c.318.176.704.176 1.021 0l2.07-1.134a.266.266 0 0 0 0-.468L9.932 5.922a.266.266 0 0 1 0-.468l1.556-.852c.32-.176.707-.176 1.026 0l6.1 3.34c.342.188.554.547.553.936v6.243z"/></svg><span>Mikrotik</span></div>
+          <div class="skill-card"><svg width="56" height="30" viewBox="0 0 52 28" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M51.2293 8.37685C51.2293 7.76429 50.7317 7.26562 50.1181 7.26562C49.5033 7.26562 49.0068 7.76429 49.0068 8.37685V10.7143C49.0068 11.3302 49.5033 11.8288 50.1181 11.8288C50.7317 11.8288 51.2293 11.3302 51.2293 10.7143V8.37685ZM45.1136 5.30654C45.1136 4.69288 44.6172 4.19531 43.988 4.19531C43.3744 4.19531 42.8779 4.69288 42.8779 5.30654V10.7123C42.8779 11.3282 43.3744 11.8268 43.988 11.8268C44.6172 11.8268 45.1136 11.3282 45.1136 10.7123V5.30654ZM38.9853 1.11012C38.9853 0.495352 38.4877 0 37.8741 0C37.2604 0 36.7617 0.495352 36.7617 1.11012V12.93C36.7617 13.5481 37.2604 14.0446 37.8741 14.0446C38.4877 14.0446 38.9853 13.5481 38.9853 12.93V1.11012ZM32.8551 5.30654C32.8551 4.69288 32.3587 4.19531 31.7439 4.19531C31.1291 4.19531 30.6338 4.69288 30.6338 5.30654V10.7123C30.6338 11.3282 31.1291 11.8268 31.7439 11.8268C32.3587 11.8268 32.8551 11.3282 32.8551 10.7123V5.30654ZM26.7254 8.37685C26.7254 7.76429 26.23 7.26562 25.6197 7.26562C25.0038 7.26562 24.5029 7.76429 24.5029 8.37685V10.7143C24.5029 11.3302 25.0038 11.8288 25.6197 11.8288C26.23 11.8288 26.7254 11.3302 26.7254 10.7143V8.37685ZM20.6103 5.30654C20.6103 4.69288 20.1083 4.19531 19.4936 4.19531C18.8788 4.19531 18.3779 4.69288 18.3779 5.30654V10.7123C18.3779 11.3282 18.8788 11.8268 19.4936 11.8268C20.1083 11.8268 20.6103 11.3282 20.6103 10.7123V5.30654ZM14.4801 1.11012C14.4801 0.495352 13.9814 0 13.3655 0C12.7541 0 12.251 0.495352 12.251 1.11012V12.93C12.251 13.5481 12.7541 14.0446 13.3655 14.0446C13.9814 14.0446 14.4801 13.5481 14.4801 12.93V1.11012ZM8.35617 5.30654C8.35617 4.69288 7.85418 4.19531 7.24273 4.19531C6.62686 4.19531 6.12598 4.69288 6.12598 5.30654V10.7123C6.12598 11.3282 6.62686 11.8268 7.24273 11.8268C7.85418 11.8268 8.35617 11.3282 8.35617 10.7123V5.30654ZM2.23019 8.37685C2.23019 7.76429 1.72931 7.26562 1.11454 7.26562C0.500881 7.26562 0 7.76429 0 8.37685V10.7143C0 11.3302 0.500881 11.8288 1.11454 11.8288C1.72931 11.8288 2.23019 11.3302 2.23019 10.7143V8.37685ZM25.2545 18.0665C25.186 18.0488 24.1588 17.7812 23.0642 17.7812C20.9954 17.7812 19.7471 18.9002 19.7471 20.5643C19.7471 22.0404 20.7897 22.7735 22.0436 23.1693C22.1818 23.2157 22.3864 23.2777 22.5213 23.3241C23.0807 23.4988 23.523 23.7598 23.523 24.2109C23.523 24.7151 23.0089 25.0413 21.8921 25.0413C20.9114 25.0413 19.9693 24.7615 19.7692 24.7106V26.7606C19.8809 26.7849 20.9998 27.0028 22.1951 27.0028C23.9133 27.0028 25.8804 26.252 25.8804 24.0163C25.8804 22.9316 25.2158 21.9331 23.7585 21.4687L23.1382 21.2719C22.7689 21.1547 22.1088 20.9657 22.1088 20.4239C22.1088 19.9949 22.5987 19.6941 23.4998 19.6941C24.276 19.6941 25.2203 19.955 25.2545 19.9683V18.0665ZM41.9169 20.0469C43.246 20.0469 44.2389 21.0951 44.2389 22.3887C44.2389 23.6824 43.246 24.7306 41.9169 24.7306C40.5824 24.7306 39.5928 23.6824 39.5928 22.3887C39.5928 21.0951 40.5824 20.0469 41.9169 20.0469ZM46.6202 22.3898C46.6202 19.8445 44.6542 17.7812 41.9176 17.7812C39.1788 17.7812 37.2129 19.8445 37.2129 22.3898C37.2129 24.934 39.1788 26.9983 41.9176 26.9983C44.6542 26.9983 46.6202 24.934 46.6202 22.3898ZM11.4013 18.0975C11.1901 18.0378 10.4095 17.7812 9.35242 17.7812C6.62025 17.7812 4.6123 19.7284 4.6123 22.3898C4.6123 25.2569 6.82701 26.9983 9.35242 26.9983C10.3564 26.9983 11.1215 26.7606 11.4013 26.6821V24.2916C11.3051 24.3458 10.5709 24.7637 9.51275 24.7637C8.01674 24.7637 7.05147 23.7111 7.05147 22.3898C7.05147 21.0243 8.05876 20.0148 9.51275 20.0148C10.5886 20.0148 11.3117 20.4427 11.4013 20.4891V18.0975ZM34.8467 18.0975C34.6355 18.0378 33.8538 17.7812 32.799 17.7812C30.0624 17.7812 28.0566 19.7284 28.0566 22.3898C28.0566 25.2569 30.2725 26.9983 32.799 26.9983C33.7974 26.9983 34.5648 26.7606 34.8467 26.6821V24.2916C34.7483 24.3458 34.0141 24.7637 32.9582 24.7637C31.4633 24.7637 30.498 23.7111 30.498 22.3898C30.498 21.0243 31.5053 20.0148 32.9582 20.0148C34.0318 20.0148 34.7572 20.4427 34.8467 20.4891V18.0975ZM14.4893 26.8406H16.736V17.9375H14.4893V26.8406Z" fill="#fff"/></svg><span>Cisco</span></div>
+          <div class="skill-card"><svg width="24" height="28" viewBox="0 0 256 295" fill="none"><path fill="#000" fill-opacity=".2" d="M235.125 249.359c0 17.355-52.617 31.497-117.54 31.497S.044 266.806.044 249.359c0-17.356 52.618-31.498 117.54-31.498c64.924 0 117.45 14.142 117.541 31.498" transform="translate(10)"/><path fill="#000" d="M63.213 215.474c-11.387-16.346-13.591-69.606 12.947-102.39C89.292 97.383 92.69 86.455 93.7 71.67c.734-16.805-11.846-66.851 35.537-70.616c48.027-3.857 45.364 43.526 45.088 68.596c-.183 21.12 15.52 33.15 26.355 49.68c19.927 30.303 18.274 82.461-3.765 110.745c-27.916 35.354-51.791 20.018-67.678 21.304c-29.752 1.745-30.762 17.54-66.024-35.905"/><path fill="#FFEED7" d="M169.1 122.451c8.265 7.622 29.661 41.69-4.224 62.995c-11.937 7.438 10.653 35.721 21.488 22.039c19.193-24.61 6.98-63.913-4.591-77.963c-7.714-9.917-19.651-13.774-12.672-7.07" transform="translate(10)"/><path fill="#000" stroke="#000" stroke-width=".977" d="M176.805 117.86c13.59 11.02 38.292 49.587 2.204 74.748c-11.846 7.806 10.468 32.508 23.049 19.927c43.618-43.894-1.102-94.308-16.53-111.664c-13.774-15.151-25.987 3.49-8.723 16.989z"/><path fill="#000" d="M133.186 57.712c-.092 5.234 2.48 9.458 5.877 9.458c3.306 0 6.153-4.224 6.245-9.366c.091-5.234-2.48-9.459-5.878-9.459c-3.397 0-6.152 4.225-6.244 9.367m-21.212.092c.459 4.316-1.194 7.989-3.582 8.356c-2.387.276-4.683-2.938-5.142-7.254c-.46-4.316 1.194-7.99 3.581-8.357c2.388-.275 4.684 2.939 5.143 7.255"/><path fill="#FFEED7" d="M71.027 145.684c6.52-14.785 20.386-40.772 20.662-60.883c0-15.978 47.843-19.835 51.7-3.856c3.856 15.978 13.59 39.853 19.834 51.424c6.245 11.478 24.335 48.118 5.051 80.074c-17.356 28.284-69.973 50.69-98.073-3.856c-9.55-18.917-7.806-42.333.826-62.903" transform="translate(10)"/><path fill="#FFEED7" d="M65.15 134.664c-5.601 10.56-17.172 38.293 11.112 53.445c30.395 16.162 30.303 49.312-6.245 33.517c-33.425-14.233-18.641-71.902-9.274-85.676c6.06-9.642 15.243-21.488 4.407-1.286" transform="translate(10)"/><path fill="#000" stroke="#000" stroke-width="1.25" d="M79.925 122.727c-8.907 14.509-30.211 48.669-1.652 66.484c38.384 23.6 27.548 47.108-7.53 25.895c-49.404-29.568-5.97-89.257 13.774-112.03c22.59-25.529 4.316 4.683-4.592 19.65z"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="6.25" d="M51.835 258.542c-20.57-10.928-50.414 2.112-39.578-27.457c2.204-6.704-3.214-16.805.275-23.325c4.133-7.989 13.04-6.244 18.366-11.57c5.234-5.51 8.54-15.06 18.366-13.59c9.734 1.468 16.254 13.406 23.049 28.099c5.05 10.468 22.865 25.253 21.672 37.007c-1.47 17.998-21.948 21.396-42.15 10.836z" transform="translate(10)"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="6.251" d="M194.445 253.49c15.06-18.273 48.578-14.508 25.988-39.577c-4.775-5.418-3.306-16.989-9.183-21.947c-6.887-6.061-14.509-1.102-21.488-4.224c-6.979-3.398-14.325-9.918-22.865-5.327c-8.54 4.684-9.459 16.805-10.285 32.783c-.735 11.479-11.203 30.671-5.602 41.231c8.081 16.346 29.11 14.142 43.435-2.938z" transform="translate(10)"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="3.75" d="M97.107 66.344c3.673-3.398 12.58-13.774 29.477-2.939c3.122 2.02 5.693 2.204 11.662 4.775c12.03 4.96 6.336 16.897-6.52 20.937c-5.51 1.745-10.468 8.449-20.386 7.806c-8.54-.46-10.744-6.06-15.978-9.091c-9.275-5.234-10.652-12.305-5.602-16.07c5.051-3.765 6.98-5.143 7.347-5.418z" transform="translate(10)"/><path stroke="#E68C3F" stroke-width="2.5" d="M148.43 75.986c-5.05.275-15.979 11.203-27.457 11.203c-11.479 0-18.366-10.652-20.11-10.652"/></svg><span>Linux</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 32 32"><path d="M15.948,2h.065a10.418,10.418,0,0,1,.972.528Q22.414,5.65,27.843,8.774a.792.792,0,0,1,.414.788c-.008,4.389,0,8.777-.005,13.164a.813.813,0,0,1-.356.507q-5.773,3.324-11.547,6.644a.587.587,0,0,1-.657.037Q9.912,26.6,4.143,23.274a.7.7,0,0,1-.4-.666q0-6.582,0-13.163a.693.693,0,0,1,.387-.67Q9.552,5.657,14.974,2.535c.322-.184.638-.379.974-.535" fill="#019639"/><path d="M8.767,10.538q0,5.429,0,10.859a1.509,1.509,0,0,0,.427,1.087,1.647,1.647,0,0,0,2.06.206,1.564,1.564,0,0,0,.685-1.293c0-2.62-.005-5.24,0-7.86q3.583,4.29,7.181,8.568a2.833,2.833,0,0,0,2.6.782,1.561,1.561,0,0,0,1.251-1.371q.008-5.541,0-11.081a1.582,1.582,0,0,0-3.152,0c0,2.662-.016,5.321,0,7.982-2.346-2.766-4.663-5.556-7-8.332A2.817,2.817,0,0,0,10.17,9.033,1.579,1.579,0,0,0,8.767,10.538Z" fill="#fff"/></svg><span>Nginx</span></div>
+          <div class="skill-card"><svg width="28" height="28" fill="#D22128" viewBox="0 0 24 24"><path d="M17.805 2.197v.066h.156v.44h.072v-.44h.156v-.066zm.9 0l-.175.353-.172-.353h-.087v.506h.067V2.3l.172.35h.045l.172-.35v.404h.066v-.506zm-4.257 1c-.204.31-.424.66-.66 1.06l-.04.062a44.457 44.457 0 00-1.265 2.29c-.187.36-.38.742-.577 1.146l2.267-.25c.66-.302.955-.578 1.242-.976a15.5 15.5 0 00.23-.342c.23-.363.46-.763.663-1.16.197-.386.37-.767.505-1.11.083-.22.15-.422.198-.6.042-.158.074-.307.1-.45-.884.15-1.965.295-2.668.33zM11.894 7.78l-.077.16c-.078.16-.157.32-.236.488-.086.18-.172.364-.26.552l-.132.287a75.265 75.265 0 00-1.427 3.3c-.163.397-.327.807-.493 1.23-.15.38-.297.765-.45 1.164l-.02.06c-.15.396-.3.802-.453 1.22l-.01.027.72-.08a.213.213 0 01-.042-.006c.863-.106 2.01-.75 2.75-1.547.342-.367.652-.8.94-1.306.213-.377.413-.795.604-1.258.168-.405.328-.843.48-1.318-.196.105-.423.18-.673.235a2.184 2.184 0 01-.273.046c.806-.31 1.314-.905 1.683-1.64a2.816 2.816 0 01-.968.428c-.06.012-.116.022-.174.03l-.043.006h.002c.278-.118.514-.248.718-.403a2.571 2.571 0 00.637-.698l.063-.104.077-.154a8.107 8.107 0 00.367-.85l.03-.088a3.04 3.04 0 00.123-.463.733.733 0 01-.094.065c-.243.145-.66.277-.996.34l.663-.074-.664.073h-.017l-.1.017c.006-.003.01-.006.017-.008l-2.265.25-.013.022zM8.27 16.45c-.117.323-.236.654-.355.992l-.005.015c-.016.046-.032.094-.05.142-.08.227-.15.432-.31.9.264.12.475.435.675.793a1.44 1.44 0 00-.466-.99c1.293.06 2.41-.27 2.99-1.217.05-.084.096-.173.14-.268-.26.333-.59.474-1.2.44 0 0-.004 0-.005.002l.004-.002c.9-.404 1.354-.79 1.754-1.433.094-.153.186-.32.28-.503-.788.81-1.702 1.04-2.664.865l-.72.078a6.43 6.43 0 00-.067.183zM15.42.112c-.376.222-1 .85-1.748 1.763l.686 1.294c.48-.687.97-1.307 1.462-1.836l.058-.062c-.02.02-.04.04-.057.062-.16.176-.644.74-1.375 1.863.703-.035 1.784-.18 2.666-.33.262-1.47-.258-2.142-.258-2.142s-.66-1.07-1.436-.61zm-3.084 6.402a40.253 40.253 0 011.306-2.26l.04-.064c.224-.352.45-.693.677-1.02l-.685-1.293-.157.192c-.197.245-.403.51-.613.79a39.853 39.853 0 00-2.016 2.97l-.022.038.893 1.763c.19-.378.38-.752.575-1.118zm-3.73 8.32c.158-.406.319-.81.483-1.225.156-.394.32-.79.484-1.19a91.133 91.133 0 011.6-3.604l.205-.424c.12-.243.237-.485.36-.724a.125.125 0 01.02-.04l-.895-1.763-.044.07c-.207.34-.414.687-.617 1.042a38.056 38.056 0 00-1.092 2.04l-.094.193a24.573 24.573 0 00-1.258 3.087 18.492 18.492 0 00-.52 1.997l.896 1.77c.117-.317.24-.638.364-.963zm-1.376-.476a13.38 13.38 0 00-.234 1.692c0 .02-.004.04-.005.06-.28-.45-1.03-.888-1.026-.884.537.778.944 1.55 1.005 2.31-.29.058-.684-.027-1.14-.195.475.436.83.556.97.588-.434.03-.89.328-1.346.67.668-.27 1.21-.38 1.596-.29-.61 1.74-1.23 3.655-1.843 5.69a.538.538 0 00.364-.354c.11-.368.84-2.786 1.978-5.965l.097-.27.028-.078c.12-.332.246-.672.374-1.02l.09-.237v-.004L7.24 14.3c-.003.02-.01.04-.012.06z"/></svg><span>Apache</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#f47421"/><circle cx="50" cy="50" r="21.8" fill="none" stroke="#fff" stroke-width="8.6"/><g id="ub_a"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g><g transform="rotate(120 50 50)"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g><g transform="rotate(240 50 50)"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g></svg><span>Ubuntu Server</span></div>
+          <div class="skill-card"><svg width="44" height="28" viewBox="0 0 304 182"><path fill="#ffffff" d="m86 66 2 9c0 3 1 5 3 8v2l-1 3-7 4-2 1-3-1-4-5-3-6c-8 9-18 14-29 14-9 0-16-3-20-8-5-4-8-11-8-19s3-15 9-20c6-6 14-8 25-8a79 79 0 0 1 22 3v-7c0-8-2-13-5-16-3-4-8-5-16-5l-11 1a80 80 0 0 0-14 5h-2c-1 0-2-1-2-3v-5l1-3c0-1 1-2 3-2l12-5 16-2c12 0 20 3 26 8 5 6 8 14 8 25v32zM46 82l10-2c4-1 7-4 10-7l3-6 1-9v-4a84 84 0 0 0-19-2c-6 0-11 1-15 4-3 2-4 6-4 11s1 8 3 11c3 2 6 4 11 4zm80 10-4-1-2-3-23-78-1-4 2-2h10l4 1 2 4 17 66 15-66 2-4 4-1h8l4 1 2 4 16 67 17-67 2-4 4-1h9c2 0 3 1 3 2v2l-1 2-24 78-2 4-4 1h-9l-4-1-1-4-16-65-15 64-2 4-4 1h-9zm129 3a66 66 0 0 1-27-6l-3-3-1-2v-5c0-2 1-3 2-3h2l3 1a54 54 0 0 0 23 5c6 0 11-2 14-4 4-2 5-5 5-9l-2-7-10-5-15-5c-7-2-13-6-16-10a24 24 0 0 1 5-34l10-5a44 44 0 0 1 20-2 110 110 0 0 1 12 3l4 2 3 2 1 4v4c0 3-1 4-2 4l-4-2c-6-2-12-3-19-3-6 0-11 0-14 2s-4 5-4 9c0 3 1 5 3 7s5 4 11 6l14 4c7 3 12 6 15 10s5 9 5 14l-3 12-7 8c-3 3-7 5-11 6l-14 2z"/><path d="M274 144A220 220 0 0 1 4 124c-4-3-1-6 2-4a300 300 0 0 0 263 16c5-2 10 4 5 8z" fill="#f90"/><path d="M287 128c-4-5-28-3-38-1-4 0-4-3-1-5 19-13 50-9 53-5 4 5-1 36-18 51-3 2-6 1-5-2 5-10 13-33 9-38z" fill="#f90"/></svg><span>AWS</span></div>
         </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
-        </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Mikrotik</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>Cisco</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>Linux</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Ubuntu Server</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Nginx</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Apache</span>
+        <div class="marquee-set" aria-hidden="true">
+          <div class="skill-card"><svg width="28" height="28" fill="#ffffff" viewBox="0 0 24 24"><path d="M23.041 6.188a1.404 1.404 0 0 0-.218-.36c-.24-.296-.634-.586-1.14-.864l-4.052-2.22L13.576.519C13.074.243 12.61.065 12.22.013A1.772 1.772 0 0 0 12 0c-.432 0-.974.192-1.576.52L6.37 2.74 2.317 4.96c-.504.279-.9.569-1.14.867a1.59 1.59 0 0 0-.122.17 1.654 1.654 0 0 0-.096.19c-.15.348-.22.816-.22 1.368v8.887c0 .66.1 1.2.316 1.558.216.356.66.706 1.262 1.036l4.054 2.22 4.053 2.223c.504.276.966.456 1.36.506.145.02.291.02.436 0 .39-.05.852-.228 1.356-.506l8.107-4.443c.6-.33 1.046-.68 1.262-1.036.036-.06.068-.123.096-.188.15-.348.22-.818.22-1.37V7.556c0-.552-.07-1.02-.22-1.368zM7.233 16.618c0 .2-.218.33-.396.233l-1.45-.796a1.066 1.066 0 0 1-.552-.934v-4.296c0-.2.216-.33.394-.235l1.728.947a.53.53 0 0 1 .276.468v4.612zm11.934-1.497c0 .39-.213.748-.554.936l-1.45.794a.266.266 0 0 1-.394-.234v-5.692c0-.2-.217-.33-.395-.232l-2.62 1.434c-.34.187-.552.545-.552.934v5.646a.532.532 0 0 1-.278.468l-.41.224c-.32.176-.707.176-1.026 0l-.408-.224a.532.532 0 0 1-.278-.468v-5.646c0-.389-.212-.747-.552-.934L4.835 9.16v-.28c0-.388.212-.746.552-.934l.6-.328a1.064 1.064 0 0 1 1.022 0l4.48 2.452c.318.176.704.176 1.021 0l2.07-1.134a.266.266 0 0 0 0-.468L9.932 5.922a.266.266 0 0 1 0-.468l1.556-.852c.32-.176.707-.176 1.026 0l6.1 3.34c.342.188.554.547.553.936v6.243z"/></svg><span>Mikrotik</span></div>
+          <div class="skill-card"><svg width="56" height="30" viewBox="0 0 52 28" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M51.2293 8.37685C51.2293 7.76429 50.7317 7.26562 50.1181 7.26562C49.5033 7.26562 49.0068 7.76429 49.0068 8.37685V10.7143C49.0068 11.3302 49.5033 11.8288 50.1181 11.8288C50.7317 11.8288 51.2293 11.3302 51.2293 10.7143V8.37685ZM45.1136 5.30654C45.1136 4.69288 44.6172 4.19531 43.988 4.19531C43.3744 4.19531 42.8779 4.69288 42.8779 5.30654V10.7123C42.8779 11.3282 43.3744 11.8268 43.988 11.8268C44.6172 11.8268 45.1136 11.3282 45.1136 10.7123V5.30654ZM38.9853 1.11012C38.9853 0.495352 38.4877 0 37.8741 0C37.2604 0 36.7617 0.495352 36.7617 1.11012V12.93C36.7617 13.5481 37.2604 14.0446 37.8741 14.0446C38.4877 14.0446 38.9853 13.5481 38.9853 12.93V1.11012ZM32.8551 5.30654C32.8551 4.69288 32.3587 4.19531 31.7439 4.19531C31.1291 4.19531 30.6338 4.69288 30.6338 5.30654V10.7123C30.6338 11.3282 31.1291 11.8268 31.7439 11.8268C32.3587 11.8268 32.8551 11.3282 32.8551 10.7123V5.30654ZM26.7254 8.37685C26.7254 7.76429 26.23 7.26562 25.6197 7.26562C25.0038 7.26562 24.5029 7.76429 24.5029 8.37685V10.7143C24.5029 11.3302 25.0038 11.8288 25.6197 11.8288C26.23 11.8288 26.7254 11.3302 26.7254 10.7143V8.37685ZM20.6103 5.30654C20.6103 4.69288 20.1083 4.19531 19.4936 4.19531C18.8788 4.19531 18.3779 4.69288 18.3779 5.30654V10.7123C18.3779 11.3282 18.8788 11.8268 19.4936 11.8268C20.1083 11.8268 20.6103 11.3282 20.6103 10.7123V5.30654ZM14.4801 1.11012C14.4801 0.495352 13.9814 0 13.3655 0C12.7541 0 12.251 0.495352 12.251 1.11012V12.93C12.251 13.5481 12.7541 14.0446 13.3655 14.0446C13.9814 14.0446 14.4801 13.5481 14.4801 12.93V1.11012ZM8.35617 5.30654C8.35617 4.69288 7.85418 4.19531 7.24273 4.19531C6.62686 4.19531 6.12598 4.69288 6.12598 5.30654V10.7123C6.12598 11.3282 6.62686 11.8268 7.24273 11.8268C7.85418 11.8268 8.35617 11.3282 8.35617 10.7123V5.30654ZM2.23019 8.37685C2.23019 7.76429 1.72931 7.26562 1.11454 7.26562C0.500881 7.26562 0 7.76429 0 8.37685V10.7143C0 11.3302 0.500881 11.8288 1.11454 11.8288C1.72931 11.8288 2.23019 11.3302 2.23019 10.7143V8.37685ZM25.2545 18.0665C25.186 18.0488 24.1588 17.7812 23.0642 17.7812C20.9954 17.7812 19.7471 18.9002 19.7471 20.5643C19.7471 22.0404 20.7897 22.7735 22.0436 23.1693C22.1818 23.2157 22.3864 23.2777 22.5213 23.3241C23.0807 23.4988 23.523 23.7598 23.523 24.2109C23.523 24.7151 23.0089 25.0413 21.8921 25.0413C20.9114 25.0413 19.9693 24.7615 19.7692 24.7106V26.7606C19.8809 26.7849 20.9998 27.0028 22.1951 27.0028C23.9133 27.0028 25.8804 26.252 25.8804 24.0163C25.8804 22.9316 25.2158 21.9331 23.7585 21.4687L23.1382 21.2719C22.7689 21.1547 22.1088 20.9657 22.1088 20.4239C22.1088 19.9949 22.5987 19.6941 23.4998 19.6941C24.276 19.6941 25.2203 19.955 25.2545 19.9683V18.0665ZM41.9169 20.0469C43.246 20.0469 44.2389 21.0951 44.2389 22.3887C44.2389 23.6824 43.246 24.7306 41.9169 24.7306C40.5824 24.7306 39.5928 23.6824 39.5928 22.3887C39.5928 21.0951 40.5824 20.0469 41.9169 20.0469ZM46.6202 22.3898C46.6202 19.8445 44.6542 17.7812 41.9176 17.7812C39.1788 17.7812 37.2129 19.8445 37.2129 22.3898C37.2129 24.934 39.1788 26.9983 41.9176 26.9983C44.6542 26.9983 46.6202 24.934 46.6202 22.3898ZM11.4013 18.0975C11.1901 18.0378 10.4095 17.7812 9.35242 17.7812C6.62025 17.7812 4.6123 19.7284 4.6123 22.3898C4.6123 25.2569 6.82701 26.9983 9.35242 26.9983C10.3564 26.9983 11.1215 26.7606 11.4013 26.6821V24.2916C11.3051 24.3458 10.5709 24.7637 9.51275 24.7637C8.01674 24.7637 7.05147 23.7111 7.05147 22.3898C7.05147 21.0243 8.05876 20.0148 9.51275 20.0148C10.5886 20.0148 11.3117 20.4427 11.4013 20.4891V18.0975ZM34.8467 18.0975C34.6355 18.0378 33.8538 17.7812 32.799 17.7812C30.0624 17.7812 28.0566 19.7284 28.0566 22.3898C28.0566 25.2569 30.2725 26.9983 32.799 26.9983C33.7974 26.9983 34.5648 26.7606 34.8467 26.6821V24.2916C34.7483 24.3458 34.0141 24.7637 32.9582 24.7637C31.4633 24.7637 30.498 23.7111 30.498 22.3898C30.498 21.0243 31.5053 20.0148 32.9582 20.0148C34.0318 20.0148 34.7572 20.4427 34.8467 20.4891V18.0975ZM14.4893 26.8406H16.736V17.9375H14.4893V26.8406Z" fill="#fff"/></svg><span>Cisco</span></div>
+          <div class="skill-card"><svg width="24" height="28" viewBox="0 0 256 295" fill="none"><path fill="#000" fill-opacity=".2" d="M235.125 249.359c0 17.355-52.617 31.497-117.54 31.497S.044 266.806.044 249.359c0-17.356 52.618-31.498 117.54-31.498c64.924 0 117.45 14.142 117.541 31.498" transform="translate(10)"/><path fill="#000" d="M63.213 215.474c-11.387-16.346-13.591-69.606 12.947-102.39C89.292 97.383 92.69 86.455 93.7 71.67c.734-16.805-11.846-66.851 35.537-70.616c48.027-3.857 45.364 43.526 45.088 68.596c-.183 21.12 15.52 33.15 26.355 49.68c19.927 30.303 18.274 82.461-3.765 110.745c-27.916 35.354-51.791 20.018-67.678 21.304c-29.752 1.745-30.762 17.54-66.024-35.905"/><path fill="#FFEED7" d="M169.1 122.451c8.265 7.622 29.661 41.69-4.224 62.995c-11.937 7.438 10.653 35.721 21.488 22.039c19.193-24.61 6.98-63.913-4.591-77.963c-7.714-9.917-19.651-13.774-12.672-7.07" transform="translate(10)"/><path fill="#000" stroke="#000" stroke-width=".977" d="M176.805 117.86c13.59 11.02 38.292 49.587 2.204 74.748c-11.846 7.806 10.468 32.508 23.049 19.927c43.618-43.894-1.102-94.308-16.53-111.664c-13.774-15.151-25.987 3.49-8.723 16.989z"/><path fill="#000" d="M133.186 57.712c-.092 5.234 2.48 9.458 5.877 9.458c3.306 0 6.153-4.224 6.245-9.366c.091-5.234-2.48-9.459-5.878-9.459c-3.397 0-6.152 4.225-6.244 9.367m-21.212.092c.459 4.316-1.194 7.989-3.582 8.356c-2.387.276-4.683-2.938-5.142-7.254c-.46-4.316 1.194-7.99 3.581-8.357c2.388-.275 4.684 2.939 5.143 7.255"/><path fill="#FFEED7" d="M71.027 145.684c6.52-14.785 20.386-40.772 20.662-60.883c0-15.978 47.843-19.835 51.7-3.856c3.856 15.978 13.59 39.853 19.834 51.424c6.245 11.478 24.335 48.118 5.051 80.074c-17.356 28.284-69.973 50.69-98.073-3.856c-9.55-18.917-7.806-42.333.826-62.903" transform="translate(10)"/><path fill="#FFEED7" d="M65.15 134.664c-5.601 10.56-17.172 38.293 11.112 53.445c30.395 16.162 30.303 49.312-6.245 33.517c-33.425-14.233-18.641-71.902-9.274-85.676c6.06-9.642 15.243-21.488 4.407-1.286" transform="translate(10)"/><path fill="#000" stroke="#000" stroke-width="1.25" d="M79.925 122.727c-8.907 14.509-30.211 48.669-1.652 66.484c38.384 23.6 27.548 47.108-7.53 25.895c-49.404-29.568-5.97-89.257 13.774-112.03c22.59-25.529 4.316 4.683-4.592 19.65z"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="6.25" d="M51.835 258.542c-20.57-10.928-50.414 2.112-39.578-27.457c2.204-6.704-3.214-16.805.275-23.325c4.133-7.989 13.04-6.244 18.366-11.57c5.234-5.51 8.54-15.06 18.366-13.59c9.734 1.468 16.254 13.406 23.049 28.099c5.05 10.468 22.865 25.253 21.672 37.007c-1.47 17.998-21.948 21.396-42.15 10.836z" transform="translate(10)"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="6.251" d="M194.445 253.49c15.06-18.273 48.578-14.508 25.988-39.577c-4.775-5.418-3.306-16.989-9.183-21.947c-6.887-6.061-14.509-1.102-21.488-4.224c-6.979-3.398-14.325-9.918-22.865-5.327c-8.54 4.684-9.459 16.805-10.285 32.783c-.735 11.479-11.203 30.671-5.602 41.231c8.081 16.346 29.11 14.142 43.435-2.938z" transform="translate(10)"/><path fill="#FFA63F" stroke="#E68C3F" stroke-width="3.75" d="M97.107 66.344c3.673-3.398 12.58-13.774 29.477-2.939c3.122 2.02 5.693 2.204 11.662 4.775c12.03 4.96 6.336 16.897-6.52 20.937c-5.51 1.745-10.468 8.449-20.386 7.806c-8.54-.46-10.744-6.06-15.978-9.091c-9.275-5.234-10.652-12.305-5.602-16.07c5.051-3.765 6.98-5.143 7.347-5.418z" transform="translate(10)"/><path stroke="#E68C3F" stroke-width="2.5" d="M148.43 75.986c-5.05.275-15.979 11.203-27.457 11.203c-11.479 0-18.366-10.652-20.11-10.652"/></svg><span>Linux</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 32 32"><path d="M15.948,2h.065a10.418,10.418,0,0,1,.972.528Q22.414,5.65,27.843,8.774a.792.792,0,0,1,.414.788c-.008,4.389,0,8.777-.005,13.164a.813.813,0,0,1-.356.507q-5.773,3.324-11.547,6.644a.587.587,0,0,1-.657.037Q9.912,26.6,4.143,23.274a.7.7,0,0,1-.4-.666q0-6.582,0-13.163a.693.693,0,0,1,.387-.67Q9.552,5.657,14.974,2.535c.322-.184.638-.379.974-.535" fill="#019639"/><path d="M8.767,10.538q0,5.429,0,10.859a1.509,1.509,0,0,0,.427,1.087,1.647,1.647,0,0,0,2.06.206,1.564,1.564,0,0,0,.685-1.293c0-2.62-.005-5.24,0-7.86q3.583,4.29,7.181,8.568a2.833,2.833,0,0,0,2.6.782,1.561,1.561,0,0,0,1.251-1.371q.008-5.541,0-11.081a1.582,1.582,0,0,0-3.152,0c0,2.662-.016,5.321,0,7.982-2.346-2.766-4.663-5.556-7-8.332A2.817,2.817,0,0,0,10.17,9.033,1.579,1.579,0,0,0,8.767,10.538Z" fill="#fff"/></svg><span>Nginx</span></div>
+          <div class="skill-card"><svg width="28" height="28" fill="#D22128" viewBox="0 0 24 24"><path d="M17.805 2.197v.066h.156v.44h.072v-.44h.156v-.066zm.9 0l-.175.353-.172-.353h-.087v.506h.067V2.3l.172.35h.045l.172-.35v.404h.066v-.506zm-4.257 1c-.204.31-.424.66-.66 1.06l-.04.062a44.457 44.457 0 00-1.265 2.29c-.187.36-.38.742-.577 1.146l2.267-.25c.66-.302.955-.578 1.242-.976a15.5 15.5 0 00.23-.342c.23-.363.46-.763.663-1.16.197-.386.37-.767.505-1.11.083-.22.15-.422.198-.6.042-.158.074-.307.1-.45-.884.15-1.965.295-2.668.33zM11.894 7.78l-.077.16c-.078.16-.157.32-.236.488-.086.18-.172.364-.26.552l-.132.287a75.265 75.265 0 00-1.427 3.3c-.163.397-.327.807-.493 1.23-.15.38-.297.765-.45 1.164l-.02.06c-.15.396-.3.802-.453 1.22l-.01.027.72-.08a.213.213 0 01-.042-.006c.863-.106 2.01-.75 2.75-1.547.342-.367.652-.8.94-1.306.213-.377.413-.795.604-1.258.168-.405.328-.843.48-1.318-.196.105-.423.18-.673.235a2.184 2.184 0 01-.273.046c.806-.31 1.314-.905 1.683-1.64a2.816 2.816 0 01-.968.428c-.06.012-.116.022-.174.03l-.043.006h.002c.278-.118.514-.248.718-.403a2.571 2.571 0 00.637-.698l.063-.104.077-.154a8.107 8.107 0 00.367-.85l.03-.088a3.04 3.04 0 00.123-.463.733.733 0 01-.094.065c-.243.145-.66.277-.996.34l.663-.074-.664.073h-.017l-.1.017c.006-.003.01-.006.017-.008l-2.265.25-.013.022zM8.27 16.45c-.117.323-.236.654-.355.992l-.005.015c-.016.046-.032.094-.05.142-.08.227-.15.432-.31.9.264.12.475.435.675.793a1.44 1.44 0 00-.466-.99c1.293.06 2.41-.27 2.99-1.217.05-.084.096-.173.14-.268-.26.333-.59.474-1.2.44 0 0-.004 0-.005.002l.004-.002c.9-.404 1.354-.79 1.754-1.433.094-.153.186-.32.28-.503-.788.81-1.702 1.04-2.664.865l-.72.078a6.43 6.43 0 00-.067.183zM15.42.112c-.376.222-1 .85-1.748 1.763l.686 1.294c.48-.687.97-1.307 1.462-1.836l.058-.062c-.02.02-.04.04-.057.062-.16.176-.644.74-1.375 1.863.703-.035 1.784-.18 2.666-.33.262-1.47-.258-2.142-.258-2.142s-.66-1.07-1.436-.61zm-3.084 6.402a40.253 40.253 0 011.306-2.26l.04-.064c.224-.352.45-.693.677-1.02l-.685-1.293-.157.192c-.197.245-.403.51-.613.79a39.853 39.853 0 00-2.016 2.97l-.022.038.893 1.763c.19-.378.38-.752.575-1.118zm-3.73 8.32c.158-.406.319-.81.483-1.225.156-.394.32-.79.484-1.19a91.133 91.133 0 011.6-3.604l.205-.424c.12-.243.237-.485.36-.724a.125.125 0 01.02-.04l-.895-1.763-.044.07c-.207.34-.414.687-.617 1.042a38.056 38.056 0 00-1.092 2.04l-.094.193a24.573 24.573 0 00-1.258 3.087 18.492 18.492 0 00-.52 1.997l.896 1.77c.117-.317.24-.638.364-.963zm-1.376-.476a13.38 13.38 0 00-.234 1.692c0 .02-.004.04-.005.06-.28-.45-1.03-.888-1.026-.884.537.778.944 1.55 1.005 2.31-.29.058-.684-.027-1.14-.195.475.436.83.556.97.588-.434.03-.89.328-1.346.67.668-.27 1.21-.38 1.596-.29-.61 1.74-1.23 3.655-1.843 5.69a.538.538 0 00.364-.354c.11-.368.84-2.786 1.978-5.965l.097-.27.028-.078c.12-.332.246-.672.374-1.02l.09-.237v-.004L7.24 14.3c-.003.02-.01.04-.012.06z"/></svg><span>Apache</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#f47421"/><circle cx="50" cy="50" r="21.8" fill="none" stroke="#fff" stroke-width="8.6"/><g id="ub_a"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g><g transform="rotate(120 50 50)"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g><g transform="rotate(240 50 50)"><circle cx="19.4" cy="50" r="6" fill="#fff"/><path stroke="#f47421" stroke-width="3.2" d="M67 50h10"/></g></svg><span>Ubuntu Server</span></div>
+          <div class="skill-card"><svg width="44" height="28" viewBox="0 0 304 182"><path fill="#ffffff" d="m86 66 2 9c0 3 1 5 3 8v2l-1 3-7 4-2 1-3-1-4-5-3-6c-8 9-18 14-29 14-9 0-16-3-20-8-5-4-8-11-8-19s3-15 9-20c6-6 14-8 25-8a79 79 0 0 1 22 3v-7c0-8-2-13-5-16-3-4-8-5-16-5l-11 1a80 80 0 0 0-14 5h-2c-1 0-2-1-2-3v-5l1-3c0-1 1-2 3-2l12-5 16-2c12 0 20 3 26 8 5 6 8 14 8 25v32zM46 82l10-2c4-1 7-4 10-7l3-6 1-9v-4a84 84 0 0 0-19-2c-6 0-11 1-15 4-3 2-4 6-4 11s1 8 3 11c3 2 6 4 11 4zm80 10-4-1-2-3-23-78-1-4 2-2h10l4 1 2 4 17 66 15-66 2-4 4-1h8l4 1 2 4 16 67 17-67 2-4 4-1h9c2 0 3 1 3 2v2l-1 2-24 78-2 4-4 1h-9l-4-1-1-4-16-65-15 64-2 4-4 1h-9zm129 3a66 66 0 0 1-27-6l-3-3-1-2v-5c0-2 1-3 2-3h2l3 1a54 54 0 0 0 23 5c6 0 11-2 14-4 4-2 5-5 5-9l-2-7-10-5-15-5c-7-2-13-6-16-10a24 24 0 0 1 5-34l10-5a44 44 0 0 1 20-2 110 110 0 0 1 12 3l4 2 3 2 1 4v4c0 3-1 4-2 4l-4-2c-6-2-12-3-19-3-6 0-11 0-14 2s-4 5-4 9c0 3 1 5 3 7s5 4 11 6l14 4c7 3 12 6 15 10s5 9 5 14l-3 12-7 8c-3 3-7 5-11 6l-14 2z"/><path d="M274 144A220 220 0 0 1 4 124c-4-3-1-6 2-4a300 300 0 0 0 263 16c5-2 10 4 5 8z" fill="#f90"/><path d="M287 128c-4-5-28-3-38-1-4 0-4-3-1-5 19-13 50-9 53-5 4 5-1 36-18 51-3 2-6 1-5-2 5-10 13-33 9-38z" fill="#f90"/></svg><span>AWS</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Row 2: kanan → kiri -->
-    <div class="marquee-wrapper reveal">
-      <div class="marquee-track marquee-right">
-        <div class="marquee-content">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
+    <div class="marquee-row reveal" style="margin-top: 1rem;">
+      <div class="marquee-track marquee-rev">
+        <div class="marquee-set">
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="#008fe2"><path d="M13.98 11.08h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.95-5.43h2.12a.19.19 0 0 0 .18-.19V3.57a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m0 2.71h2.12a.19.19 0 0 0 .18-.18V6.29a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.89c0 .1.09.18.19.18m-2.93 0h2.12a.19.19 0 0 0 .18-.18V6.29a.18.18 0 0 0-.18-.18H8.1a.18.18 0 0 0-.18.18v1.89c0 .1.08.18.18.18m-2.96 0h2.11a.19.19 0 0 0 .19-.18V6.29a.18.18 0 0 0-.19-.18H5.14a.19.19 0 0 0-.19.18v1.89c0 .1.08.18.19.18m5.89 2.72h2.12a.19.19 0 0 0 .18-.19V9.01a.19.19 0 0 0-.18-.19h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m-2.93 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H8.1a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.96 0h2.11a.18.18 0 0 0 .19-.19V9.01a.18.18 0 0 0-.18-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .1.08.19.19.19m-2.92 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H2.22a.18.18 0 0 0-.19.18v1.9c0 .1.08.18.19.18m21.54-1.19c-.06-.05-.67-.51-1.95-.51-.34 0-.68.03-1.01.09a3.77 3.77 0 0 0-1.72-2.57l-.34-.2-.23.33a4.6 4.6 0 0 0-.6 1.43c-.24.97-.1 1.88.4 2.66a4.7 4.7 0 0 1-1.75.42H.76a.75.75 0 0 0-.76.75 11.38 11.38 0 0 0 .7 4.06 6.03 6.03 0 0 0 2.4 3.12c1.18.73 3.1 1.14 5.28 1.14.98 0 1.96-.08 2.93-.26a12.25 12.25 0 0 0 3.82-1.4 10.5 10.5 0 0 0 2.61-2.13c1.25-1.42 2-3 2.55-4.4h.23c1.37 0 2.21-.55 2.68-1 .3-.3.55-.66.7-1.06l.1-.28Z"/></svg><span>Docker</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 256 295"><defs><linearGradient id="mysql__a" x1="48.548%" x2="51.047%" y1="115.276%" y2="41.364%"><stop offset="0%" stop-color="#FFEED7"/><stop offset="100%" stop-color="#BDBFC2"/></linearGradient></defs><path fill="#FFF" d="M236 194c-14 0-25 1-34 5-3 1-7 1-7 4l3 6c2 3 5 8 9 11l11 8 21 10 11 9 6 4-3-6-5-5c-5-7-11-13-18-18-6-3-18-9-20-15h-1l12-3 18-3 8-2v-2l-9-10c-8-8-18-15-28-22l-18-8c-2-1-6-2-7-4l-7-13-15-30-8-20c-18-30-38-48-68-65-6-4-14-5-22-7l-13-1-8-6C34 5 8-9 1 9c-5 11 7 22 11 28l9 13 3 9c3 8 5 17 9 24l6 10c2 2 4 3 5 6-3 4-3 9-4 13-7 20-4 44 5 59 2 4 9 14 18 10 8-3 6-13 8-22l1-4 8 14c5 9 14 18 22 24 4 3 8 8 13 10l-4-4-9-10c-8-10-14-21-20-32l-7-17-3-6c-3 4-7 7-9 12-3 7-3 17-4 26h-1c-6-1-8-7-10-12-5-12-6-32-1-46 1-4 6-15 4-19-1-3-4-5-6-7l-7-12-10-30-9-13c-3-5-7-8-10-14-1-2-2-5 0-7l2-2c2-2 9 0 11 1 6 3 12 5 17 9l8 6h4c6 1 12 0 17 2 9 3 18 7 25 12 23 14 42 35 54 59 3 4 3 8 5 12l12 26c4 8 7 16 12 23 3 4 14 6 18 8l12 4 18 12c2 2 11 7 12 10Z"/><path fill="#FFF" d="m58 43-7 1 6 7 4 9v-1c3-1 4-4 4-8l-2-4-5-4Z"/></svg><span>MySQL</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 432.071 445.383"><g style="fill-rule:nonzero;clip-rule:nonzero;fill:none;stroke:#fff;stroke-width:12.4651;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4"><path d="M323.205 324.227c2.833-23.601 1.984-27.062 19.563-23.239l4.463.392c13.517.615 31.199-2.174 41.587-7 22.362-10.376 35.622-27.7 13.572-23.148-50.297 10.376-53.755-6.655-53.755-6.655 53.111-78.803 75.313-178.836 56.149-203.322-52.27-66.789-142.748-35.206-144.262-34.386l-.482.089c-9.938-2.062-21.06-3.294-33.554-3.496-22.761-.374-40.032 5.967-53.133 15.904 0 0-161.408-66.498-153.899 83.628 1.597 31.936 45.777 241.655 98.47 178.31 19.259-23.163 37.871-42.748 37.871-42.748 9.242 6.14 20.307 9.272 31.912 8.147l.897-.765c-.281 2.876-.157 5.689.359 9.019-13.572 15.167-9.584 17.83-36.723 23.416-27.457 5.659-11.326 15.734-.797 18.367 12.768 3.193 42.305 7.716 62.268-20.224l-.795 3.188c5.325 4.26 4.965 30.619 5.72 49.452.756 18.834 2.017 36.409 5.856 46.771 3.839 10.36 8.369 37.05 44.036 29.406 29.809-6.388 52.6-15.582 54.677-101.107" style="fill:#000;stroke:#000;stroke-width:37.3953;stroke-linecap:butt;stroke-linejoin:miter"/><path d="M402.395 271.23c-50.302 10.376-53.76-6.655-53.76-6.655 53.111-78.808 75.313-178.843 56.153-203.326-52.27-66.785-142.752-35.2-144.262-34.38l-.486.087c-9.938-2.063-21.06-3.292-33.56-3.496-22.761-.373-40.026 5.967-53.127 15.902 0 0-161.411-66.495-153.904 83.63 1.597 31.938 45.776 241.657 98.471 178.312 19.26-23.163 37.869-42.748 37.869-42.748 9.243 6.14 20.308 9.272 31.908 8.147l.901-.765c-.28 2.876-.152 5.689.361 9.019-13.575 15.167-9.586 17.83-36.723 23.416-27.459 5.659-11.328 15.734-.796 18.367 12.768 3.193 42.307 7.716 62.266-20.224l-.796 3.188c5.319 4.26 9.054 27.711 8.428 48.969-.626 21.259-1.044 35.854 3.147 47.254 4.191 11.4 8.368 37.05 44.042 29.406 29.809-6.388 45.256-22.942 47.405-50.555 1.525-19.631 4.976-16.729 5.194-34.28l2.768-8.309c3.192-26.611.507-35.196 18.872-31.203l4.463.392c13.517.615 31.208-2.174 41.591-7 22.358-10.376 35.618-27.7 13.573-23.148z" style="fill:#336791;stroke:none"/></g></svg><span>PostgreSQL</span></div>
+          <div class="skill-card"><svg width="36" height="36" viewBox="0 0 48 48"><path fill="#b3e5fc" d="M44.104,21.491C41.236,20.16,34,13,24,13S6.764,20.16,3.896,21.491C0.564,23.037,0,25,0,26s1,3,5,3s12.041,5.368,15,5.862c2.922,0.488,4,0.336,4,0.336s1.078,0.152,4-0.336C30.959,34.368,39,29,43,29s5-2,5-3S47.436,23.037,44.104,21.491z"/><path fill="#81d4fa" d="M5,29c4,0,12.041,5.368,15,5.862c2.922,0.488,4,0.336,4,0.336s1.078,0.152,4-0.336C30.959,34.368,39,29,43,29s5-2,5-3H0C0,27,1,29,5,29z"/><path fill="#e1f5fe" d="M38.24,22.439C34.58,19.87,30.851,17.001,24,17v0c0,0-0.001,0-0.001,0s-0.001,0-0.001,0v0c-6.851,0.001-10.58,2.87-14.24,5.439C6.75,24.549,3.997,25.31,3.997,26c0,1,0.943,0.515,3.009,0.828C9,27.13,17.998,31.69,23.998,31.692v0c0,0,0.001,0,0.001,0s0.001,0,0.001,0v0c6-0.001,14.998-4.561,16.992-4.863C43.058,26.515,44.001,27,44.001,26C44.001,25.31,41.248,24.549,38.24,22.439z"/><path fill="#81d4fa" d="M33,23c0-1.626-0.438-3.147-1.192-4.464C29.671,17.62,27.173,17,24,17v0c0,0-0.001,0-0.001,0s-0.001,0-0.001,0v0c-3.171,0-5.669,0.619-7.805,1.535C15.438,19.852,15,21.373,15,23c0,3.725,2.263,6.922,5.49,8.289c1.228,0.248,2.418,0.402,3.508,0.402v0c0,0,0.001,0,0.001,0s0.001,0,0.001,0v0c1.091,0,2.282-0.154,3.511-0.403C30.737,29.921,33,26.725,33,23z"/><circle cx="24" cy="23.5" r="3.5" fill="#455a64"/><circle cx="24" cy="23.5" r="1" fill="#b3e5fc"/><circle cx="28" cy="20" r="1" fill="#e1f5fe"/><path fill="#4fc3f7" d="M7.908,25.255c-0.21-0.475-0.703-0.771-1.269-0.957C5.085,25.104,3.997,25.566,3.997,26c0,1,0.943,0.515,3.009,0.828c0.124,0.019,0.276,0.054,0.452,0.104C7.886,26.479,8.191,25.895,7.908,25.255z"/><path fill="#4fc3f7" d="M40.09,25.258c0.21-0.475,0.703-0.771,1.269-0.957c1.554,0.807,2.642,1.269,2.642,1.703c0,1-0.943,0.515-3.009,0.828c-0.124,0.019-0.276,0.054-0.452,0.104C40.111,26.483,39.807,25.899,40.09,25.258z"/></svg><span>Nmap</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#F05032" d="M23.546 10.93L13.067.452a1.55 1.55 0 0 0-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 0 1 2.327 2.341l2.658 2.66a1.838 1.838 0 0 1 1.903 3.059 1.837 1.837 0 0 1-2.59-2.59l-2.484-2.483v6.539a1.836 1.836 0 0 1 .482 3.395 1.836 1.836 0 0 1-1.999-2.967 1.833 1.833 0 0 1 .594-.377V8.276a1.836 1.836 0 0 1-.996-2.41L8.707 3.164.454 11.418a1.55 1.55 0 0 0 0 2.187l10.48 10.478a1.55 1.55 0 0 0 2.187 0l10.425-10.425a1.55 1.55 0 0 0 0-2.188"/></svg><span>Git</span></div>
+          <div class="skill-card"><img src="assets/img/ethical-hacking.svg" width="36" height="36" style="border-radius:6px;object-fit:cover;" alt="Ethical Hacking"><span>Ethical Hacking</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 1052 1052"><path fill="#f0db4f" d="M0 0h1052v1052H0z"/><path d="M965.9 801.1c-7.7-48-39-88.3-131.7-125.9-32.2-14.8-68.1-25.399-78.8-49.8-3.8-14.2-4.3-22.2-1.9-30.8 6.9-27.9 40.2-36.6 66.6-28.6 17 5.7 33.1 18.801 42.8 39.7 45.4-29.399 45.3-29.2 77-49.399-11.6-18-17.8-26.301-25.4-34-27.3-30.5-64.5-46.2-124-45-10.3 1.3-20.699 2.699-31 4-29.699 7.5-58 23.1-74.6 44-49.8 56.5-35.6 155.399 25 196.1 59.7 44.8 147.4 55 158.6 96.9 10.9 51.3-37.699 67.899-86 62-35.6-7.4-55.399-25.5-76.8-58.4-39.399 22.8-39.399 22.8-79.899 46.1 9.6 21 19.699 30.5 35.8 48.7 76.2 77.3 266.899 73.5 301.1-43.5 1.399-4.001 10.6-30.801 3.199-72.101zm-394-317.6h-98.4c0 85-.399 169.4-.399 254.4 0 54.1 2.8 103.7-6 118.9-14.4 29.899-51.7 26.2-68.7 20.399-17.3-8.5-26.1-20.6-36.3-37.699-2.8-4.9-4.9-8.7-5.601-9-26.699 16.3-53.3 32.699-80 49 13.301 27.3 32.9 51 58 66.399 37.5 22.5 87.9 29.4 140.601 17.3 34.3-10 63.899-30.699 79.399-62.199 22.4-41.3 17.6-91.3 17.4-146.6.5-90.2 0-180.4 0-270.9z" fill="#323330"/></svg><span>JavaScript</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="16 16 32 32"><path fill="url(#python__a)" d="M31.885 16c-8.124 0-7.617 3.523-7.617 3.523l.01 3.65h7.752v1.095H21.197S16 23.678 16 31.876c0 8.196 4.537 7.906 4.537 7.906h2.708v-3.804s-.146-4.537 4.465-4.537h7.688s4.32.07 4.32-4.175v-7.019S40.374 16 31.885 16zm-4.275 2.454a1.394 1.394 0 1 1 0 2.79 1.393 1.393 0 0 1-1.395-1.395c0-.771.624-1.395 1.395-1.395z"/><path fill="url(#python__b)" d="M32.115 47.833c8.124 0 7.617-3.523 7.617-3.523l-.01-3.65H31.97v-1.095h10.832S48 40.155 48 31.958c0-8.197-4.537-7.906-4.537-7.906h-2.708v3.803s.146 4.537-4.465 4.537h-7.688s-4.32-.07-4.32 4.175v7.019s-.656 4.247 7.833 4.247zm4.275-2.454a1.393 1.393 0 0 1-1.395-1.395 1.394 1.394 0 1 1 1.395 1.395z"/><defs><linearGradient id="python__a" x1="19.075" x2="34.898" y1="18.782" y2="34.658" gradientUnits="userSpaceOnUse"><stop stop-color="#387EB8"/><stop offset="1" stop-color="#366994"/></linearGradient><linearGradient id="python__b" x1="28.809" x2="45.803" y1="28.882" y2="45.163" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE052"/><stop offset="1" stop-color="#FFC331"/></linearGradient></defs></svg><span>Python</span></div>
         </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
+        <div class="marquee-set" aria-hidden="true">
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="#008fe2"><path d="M13.98 11.08h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.95-5.43h2.12a.19.19 0 0 0 .18-.19V3.57a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m0 2.71h2.12a.19.19 0 0 0 .18-.18V6.29a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.89c0 .1.09.18.19.18m-2.93 0h2.12a.19.19 0 0 0 .18-.18V6.29a.18.18 0 0 0-.18-.18H8.1a.18.18 0 0 0-.18.18v1.89c0 .1.08.18.18.18m-2.96 0h2.11a.19.19 0 0 0 .19-.18V6.29a.18.18 0 0 0-.19-.18H5.14a.19.19 0 0 0-.19.18v1.89c0 .1.08.18.19.18m5.89 2.72h2.12a.19.19 0 0 0 .18-.19V9.01a.19.19 0 0 0-.18-.19h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m-2.93 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H8.1a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.96 0h2.11a.18.18 0 0 0 .19-.19V9.01a.18.18 0 0 0-.18-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .1.08.19.19.19m-2.92 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H2.22a.18.18 0 0 0-.19.18v1.9c0 .1.08.18.19.18m21.54-1.19c-.06-.05-.67-.51-1.95-.51-.34 0-.68.03-1.01.09a3.77 3.77 0 0 0-1.72-2.57l-.34-.2-.23.33a4.6 4.6 0 0 0-.6 1.43c-.24.97-.1 1.88.4 2.66a4.7 4.7 0 0 1-1.75.42H.76a.75.75 0 0 0-.76.75 11.38 11.38 0 0 0 .7 4.06 6.03 6.03 0 0 0 2.4 3.12c1.18.73 3.1 1.14 5.28 1.14.98 0 1.96-.08 2.93-.26a12.25 12.25 0 0 0 3.82-1.4 10.5 10.5 0 0 0 2.61-2.13c1.25-1.42 2-3 2.55-4.4h.23c1.37 0 2.21-.55 2.68-1 .3-.3.55-.66.7-1.06l.1-.28Z"/></svg><span>Docker</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 256 295"><defs><linearGradient id="mysql__a" x1="48.548%" x2="51.047%" y1="115.276%" y2="41.364%"><stop offset="0%" stop-color="#FFEED7"/><stop offset="100%" stop-color="#BDBFC2"/></linearGradient></defs><path fill="#FFF" d="M236 194c-14 0-25 1-34 5-3 1-7 1-7 4l3 6c2 3 5 8 9 11l11 8 21 10 11 9 6 4-3-6-5-5c-5-7-11-13-18-18-6-3-18-9-20-15h-1l12-3 18-3 8-2v-2l-9-10c-8-8-18-15-28-22l-18-8c-2-1-6-2-7-4l-7-13-15-30-8-20c-18-30-38-48-68-65-6-4-14-5-22-7l-13-1-8-6C34 5 8-9 1 9c-5 11 7 22 11 28l9 13 3 9c3 8 5 17 9 24l6 10c2 2 4 3 5 6-3 4-3 9-4 13-7 20-4 44 5 59 2 4 9 14 18 10 8-3 6-13 8-22l1-4 8 14c5 9 14 18 22 24 4 3 8 8 13 10l-4-4-9-10c-8-10-14-21-20-32l-7-17-3-6c-3 4-7 7-9 12-3 7-3 17-4 26h-1c-6-1-8-7-10-12-5-12-6-32-1-46 1-4 6-15 4-19-1-3-4-5-6-7l-7-12-10-30-9-13c-3-5-7-8-10-14-1-2-2-5 0-7l2-2c2-2 9 0 11 1 6 3 12 5 17 9l8 6h4c6 1 12 0 17 2 9 3 18 7 25 12 23 14 42 35 54 59 3 4 3 8 5 12l12 26c4 8 7 16 12 23 3 4 14 6 18 8l12 4 18 12c2 2 11 7 12 10Z"/><path fill="#FFF" d="m58 43-7 1 6 7 4 9v-1c3-1 4-4 4-8l-2-4-5-4Z"/></svg><span>MySQL</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 432.071 445.383"><g style="fill-rule:nonzero;clip-rule:nonzero;fill:none;stroke:#fff;stroke-width:12.4651;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4"><path d="M323.205 324.227c2.833-23.601 1.984-27.062 19.563-23.239l4.463.392c13.517.615 31.199-2.174 41.587-7 22.362-10.376 35.622-27.7 13.572-23.148-50.297 10.376-53.755-6.655-53.755-6.655 53.111-78.803 75.313-178.836 56.149-203.322-52.27-66.789-142.748-35.206-144.262-34.386l-.482.089c-9.938-2.062-21.06-3.294-33.554-3.496-22.761-.374-40.032 5.967-53.133 15.904 0 0-161.408-66.498-153.899 83.628 1.597 31.936 45.777 241.655 98.47 178.31 19.259-23.163 37.871-42.748 37.871-42.748 9.242 6.14 20.307 9.272 31.912 8.147l.897-.765c-.281 2.876-.157 5.689.359 9.019-13.572 15.167-9.584 17.83-36.723 23.416-27.457 5.659-11.326 15.734-.797 18.367 12.768 3.193 42.305 7.716 62.268-20.224l-.795 3.188c5.325 4.26 4.965 30.619 5.72 49.452.756 18.834 2.017 36.409 5.856 46.771 3.839 10.36 8.369 37.05 44.036 29.406 29.809-6.388 52.6-15.582 54.677-101.107" style="fill:#000;stroke:#000;stroke-width:37.3953;stroke-linecap:butt;stroke-linejoin:miter"/><path d="M402.395 271.23c-50.302 10.376-53.76-6.655-53.76-6.655 53.111-78.808 75.313-178.843 56.153-203.326-52.27-66.785-142.752-35.2-144.262-34.38l-.486.087c-9.938-2.063-21.06-3.292-33.56-3.496-22.761-.373-40.026 5.967-53.127 15.902 0 0-161.411-66.495-153.904 83.63 1.597 31.938 45.776 241.657 98.471 178.312 19.26-23.163 37.869-42.748 37.869-42.748 9.243 6.14 20.308 9.272 31.908 8.147l.901-.765c-.28 2.876-.152 5.689.361 9.019-13.575 15.167-9.586 17.83-36.723 23.416-27.459 5.659-11.328 15.734-.796 18.367 12.768 3.193 42.307 7.716 62.266-20.224l-.796 3.188c5.319 4.26 9.054 27.711 8.428 48.969-.626 21.259-1.044 35.854 3.147 47.254 4.191 11.4 8.368 37.05 44.042 29.406 29.809-6.388 45.256-22.942 47.405-50.555 1.525-19.631 4.976-16.729 5.194-34.28l2.768-8.309c3.192-26.611.507-35.196 18.872-31.203l4.463.392c13.517.615 31.208-2.174 41.591-7 22.358-10.376 35.618-27.7 13.573-23.148z" style="fill:#336791;stroke:none"/></g></svg><span>PostgreSQL</span></div>
+          <div class="skill-card"><svg width="36" height="36" viewBox="0 0 48 48"><path fill="#b3e5fc" d="M44.104,21.491C41.236,20.16,34,13,24,13S6.764,20.16,3.896,21.491C0.564,23.037,0,25,0,26s1,3,5,3s12.041,5.368,15,5.862c2.922,0.488,4,0.336,4,0.336s1.078,0.152,4-0.336C30.959,34.368,39,29,43,29s5-2,5-3S47.436,23.037,44.104,21.491z"/><path fill="#81d4fa" d="M5,29c4,0,12.041,5.368,15,5.862c2.922,0.488,4,0.336,4,0.336s1.078,0.152,4-0.336C30.959,34.368,39,29,43,29s5-2,5-3H0C0,27,1,29,5,29z"/><path fill="#e1f5fe" d="M38.24,22.439C34.58,19.87,30.851,17.001,24,17v0c0,0-0.001,0-0.001,0s-0.001,0-0.001,0v0c-6.851,0.001-10.58,2.87-14.24,5.439C6.75,24.549,3.997,25.31,3.997,26c0,1,0.943,0.515,3.009,0.828C9,27.13,17.998,31.69,23.998,31.692v0c0,0,0.001,0,0.001,0s0.001,0,0.001,0v0c6-0.001,14.998-4.561,16.992-4.863C43.058,26.515,44.001,27,44.001,26C44.001,25.31,41.248,24.549,38.24,22.439z"/><path fill="#81d4fa" d="M33,23c0-1.626-0.438-3.147-1.192-4.464C29.671,17.62,27.173,17,24,17v0c0,0-0.001,0-0.001,0s-0.001,0-0.001,0v0c-3.171,0-5.669,0.619-7.805,1.535C15.438,19.852,15,21.373,15,23c0,3.725,2.263,6.922,5.49,8.289c1.228,0.248,2.418,0.402,3.508,0.402v0c0,0,0.001,0,0.001,0s0.001,0,0.001,0v0c1.091,0,2.282-0.154,3.511-0.403C30.737,29.921,33,26.725,33,23z"/><circle cx="24" cy="23.5" r="3.5" fill="#455a64"/><circle cx="24" cy="23.5" r="1" fill="#b3e5fc"/><circle cx="28" cy="20" r="1" fill="#e1f5fe"/><path fill="#4fc3f7" d="M7.908,25.255c-0.21-0.475-0.703-0.771-1.269-0.957C5.085,25.104,3.997,25.566,3.997,26c0,1,0.943,0.515,3.009,0.828c0.124,0.019,0.276,0.054,0.452,0.104C7.886,26.479,8.191,25.895,7.908,25.255z"/><path fill="#4fc3f7" d="M40.09,25.258c0.21-0.475,0.703-0.771,1.269-0.957c1.554,0.807,2.642,1.269,2.642,1.703c0,1-0.943,0.515-3.009,0.828c-0.124,0.019-0.276,0.054-0.452,0.104C40.111,26.483,39.807,25.899,40.09,25.258z"/></svg><span>Nmap</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#F05032" d="M23.546 10.93L13.067.452a1.55 1.55 0 0 0-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 0 1 2.327 2.341l2.658 2.66a1.838 1.838 0 0 1 1.903 3.059 1.837 1.837 0 0 1-2.59-2.59l-2.484-2.483v6.539a1.836 1.836 0 0 1 .482 3.395 1.836 1.836 0 0 1-1.999-2.967 1.833 1.833 0 0 1 .594-.377V8.276a1.836 1.836 0 0 1-.996-2.41L8.707 3.164.454 11.418a1.55 1.55 0 0 0 0 2.187l10.48 10.478a1.55 1.55 0 0 0 2.187 0l10.425-10.425a1.55 1.55 0 0 0 0-2.188"/></svg><span>Git</span></div>
+          <div class="skill-card"><img src="https://i.pinimg.com/1200x/1b/25/2e/1b252e1edc93ebe1075c784bf088af56.jpg" width="36" height="36" style="border-radius:6px;object-fit:cover;" alt="Ethical Hacking"><span>Ethical Hacking</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 1052 1052"><path fill="#f0db4f" d="M0 0h1052v1052H0z"/><path d="M965.9 801.1c-7.7-48-39-88.3-131.7-125.9-32.2-14.8-68.1-25.399-78.8-49.8-3.8-14.2-4.3-22.2-1.9-30.8 6.9-27.9 40.2-36.6 66.6-28.6 17 5.7 33.1 18.801 42.8 39.7 45.4-29.399 45.3-29.2 77-49.399-11.6-18-17.8-26.301-25.4-34-27.3-30.5-64.5-46.2-124-45-10.3 1.3-20.699 2.699-31 4-29.699 7.5-58 23.1-74.6 44-49.8 56.5-35.6 155.399 25 196.1 59.7 44.8 147.4 55 158.6 96.9 10.9 51.3-37.699 67.899-86 62-35.6-7.4-55.399-25.5-76.8-58.4-39.399 22.8-39.399 22.8-79.899 46.1 9.6 21 19.699 30.5 35.8 48.7 76.2 77.3 266.899 73.5 301.1-43.5 1.399-4.001 10.6-30.801 3.199-72.101zm-394-317.6h-98.4c0 85-.399 169.4-.399 254.4 0 54.1 2.8 103.7-6 118.9-14.4 29.899-51.7 26.2-68.7 20.399-17.3-8.5-26.1-20.6-36.3-37.699-2.8-4.9-4.9-8.7-5.601-9-26.699 16.3-53.3 32.699-80 49 13.301 27.3 32.9 51 58 66.399 37.5 22.5 87.9 29.4 140.601 17.3 34.3-10 63.899-30.699 79.399-62.199 22.4-41.3 17.6-91.3 17.4-146.6.5-90.2 0-180.4 0-270.9z" fill="#323330"/></svg><span>JavaScript</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="16 16 32 32"><path fill="url(#python__a)" d="M31.885 16c-8.124 0-7.617 3.523-7.617 3.523l.01 3.65h7.752v1.095H21.197S16 23.678 16 31.876c0 8.196 4.537 7.906 4.537 7.906h2.708v-3.804s-.146-4.537 4.465-4.537h7.688s4.32.07 4.32-4.175v-7.019S40.374 16 31.885 16zm-4.275 2.454a1.394 1.394 0 1 1 0 2.79 1.393 1.393 0 0 1-1.395-1.395c0-.771.624-1.395 1.395-1.395z"/><path fill="url(#python__b)" d="M32.115 47.833c8.124 0 7.617-3.523 7.617-3.523l-.01-3.65H31.97v-1.095h10.832S48 40.155 48 31.958c0-8.197-4.537-7.906-4.537-7.906h-2.708v3.803s.146 4.537-4.465 4.537h-7.688s-4.32-.07-4.32 4.175v7.019s-.656 4.247 7.833 4.247zm4.275-2.454a1.393 1.393 0 0 1-1.395-1.395 1.394 1.394 0 1 1 1.395 1.395z"/><defs><linearGradient id="python__a" x1="19.075" x2="34.898" y1="18.782" y2="34.658" gradientUnits="userSpaceOnUse"><stop stop-color="#387EB8"/><stop offset="1" stop-color="#366994"/></linearGradient><linearGradient id="python__b" x1="28.809" x2="45.803" y1="28.882" y2="45.163" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE052"/><stop offset="1" stop-color="#FFC331"/></linearGradient></defs></svg><span>Python</span></div>
         </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
-        </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M12 8v4l3 3"/></svg>Docker</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>MySQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Ethical Hacking</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>Git</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>VS Code</span>
-          <span class="skill-badge badge-gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Nmap</span>
+        <div class="marquee-set" aria-hidden="true">
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="#008fe2"><path d="M13.98 11.08h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.95-5.43h2.12a.19.19 0 0 0 .18-.19V3.57a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m0 2.71h2.12a.19.19 0 0 0 .18-.18V6.29a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.89c0 .1.09.18.19.18m-2.93 0h2.12a.19.19 0 0 0 .18-.18V6.29a.18.18 0 0 0-.18-.18H8.1a.18.18 0 0 0-.18.18v1.89c0 .1.08.18.18.18m-2.96 0h2.11a.19.19 0 0 0 .19-.18V6.29a.18.18 0 0 0-.19-.18H5.14a.19.19 0 0 0-.19.18v1.89c0 .1.08.18.19.18m5.89 2.72h2.12a.19.19 0 0 0 .18-.19V9.01a.19.19 0 0 0-.18-.19h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m-2.93 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H8.1a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.96 0h2.11a.18.18 0 0 0 .19-.19V9.01a.18.18 0 0 0-.18-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .1.08.19.19.19m-2.92 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H2.22a.18.18 0 0 0-.19.18v1.9c0 .1.08.18.19.18m21.54-1.19c-.06-.05-.67-.51-1.95-.51-.34 0-.68.03-1.01.09a3.77 3.77 0 0 0-1.72-2.57l-.34-.2-.23.33a4.6 4.6 0 0 0-.6 1.43c-.24.97-.1 1.88.4 2.66a4.7 4.7 0 0 1-1.75.42H.76a.75.75 0 0 0-.76.75 11.38 11.38 0 0 0 .7 4.06 6.03 6.03 0 0 0 2.4 3.12c1.18.73 3.1 1.14 5.28 1.14.98 0 1.96-.08 2.93-.26a12.25 12.25 0 0 0 3.82-1.4 10.5 10.5 0 0 0 2.61-2.13c1.25-1.42 2-3 2.55-4.4h.23c1.37 0 2.21-.55 2.68-1 .3-.3.55-.66.7-1.06l.1-.28Z"/></svg><span>Docker</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 256 295"><defs><linearGradient id="mysql__a" x1="48.548%" x2="51.047%" y1="115.276%" y2="41.364%"><stop offset="0%" stop-color="#FFEED7"/><stop offset="100%" stop-color="#BDBFC2"/></linearGradient></defs><path fill="#FFF" d="M236 194c-14 0-25 1-34 5-3 1-7 1-7 4l3 6c2 3 5 8 9 11l11 8 21 10 11 9 6 4-3-6-5-5c-5-7-11-13-18-18-6-3-18-9-20-15h-1l12-3 18-3 8-2v-2l-9-10c-8-8-18-15-28-22l-18-8c-2-1-6-2-7-4l-7-13-15-30-8-20c-18-30-38-48-68-65-6-4-14-5-22-7l-13-1-8-6C34 5 8-9 1 9c-5 11 7 22 11 28l9 13 3 9c3 8 5 17 9 24l6 10c2 2 4 3 5 6-3 4-3 9-4 13-7 20-4 44 5 59 2 4 9 14 18 10 8-3 6-13 8-22l1-4 8 14c5 9 14 18 22 24 4 3 8 8 13 10l-4-4-9-10c-8-10-14-21-20-32l-7-17-3-6c-3 4-7 7-9 12-3 7-3 17-4 26h-1c-6-1-8-7-10-12-5-12-6-32-1-46 1-4 6-15 4-19-1-3-4-5-6-7l-7-12-10-30-9-13c-3-5-7-8-10-14-1-2-2-5 0-7l2-2c2-2 9 0 11 1 6 3 12 5 17 9l8 6h4c6 1 12 0 17 2 9 3 18 7 25 12 23 14 42 35 54 59 3 4 3 8 5 12l12 26c4 8 7 16 12 23 3 4 14 6 18 8l12 4 18 12c2 2 11 7 12 10Z"/><path fill="#FFF" d="m58 43-7 1 6 7 4 9v-1c3-1 4-4 4-8l-2-4-5-4Z"/></svg><span>MySQL</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 432.071 445.383"><g style="fill-rule:nonzero;clip-rule:nonzero;fill:none;stroke:#fff;stroke-width:12.4651;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4"><path d="M323.205 324.227c2.833-23.601 1.984-27.062 19.563-23.239l4.463.392c13.517.615 31.199-2.174 41.587-7 22.362-10.376 35.622-27.7 13.572-23.148-50.297 10.376-53.755-6.655-53.755-6.655 53.111-78.803 75.313-178.836 56.149-203.322-52.27-66.789-142.748-35.206-144.262-34.386l-.482.089c-9.938-2.062-21.06-3.294-33.554-3.496-22.761-.374-40.032 5.967-53.133 15.904 0 0-161.408-66.498-153.899 83.628 1.597 31.936 45.777 241.655 98.47 178.31 19.259-23.163 37.871-42.748 37.871-42.748 9.242 6.14 20.307 9.272 31.912 8.147l.897-.765c-.281 2.876-.157 5.689.359 9.019-13.572 15.167-9.584 17.83-36.723 23.416-27.457 5.659-11.326 15.734-.797 18.367 12.768 3.193 42.305 7.716 62.268-20.224l-.795 3.188c5.325 4.26 4.965 30.619 5.72 49.452.756 18.834 2.017 36.409 5.856 46.771 3.839 10.36 8.369 37.05 44.036 29.406 29.809-6.388 52.6-15.582 54.677-101.107" style="fill:#000;stroke:#000;stroke-width:37.3953;stroke-linecap:butt;stroke-linejoin:miter"/><path d="M402.395 271.23c-50.302 10.376-53.76-6.655-53.76-6.655 53.111-78.808 75.313-178.843 56.153-203.326-52.27-66.785-142.752-35.2-144.262-34.38l-.486.087c-9.938-2.063-21.06-3.292-33.56-3.496-22.761-.373-40.026 5.967-53.127 15.902 0 0-161.411-66.495-153.904 83.63 1.597 31.938 45.776 241.657 98.471 178.312 19.26-23.163 37.869-42.748 37.869-42.748 9.243 6.14 20.308 9.272 31.908 8.147l.901-.765c-.28 2.876-.152 5.689.361 9.019-13.575 15.167-9.586 17.83-36.723 23.416-27.459 5.659-11.328 15.734-.796 18.367 12.768 3.193 42.307 7.716 62.266-20.224l-.796 3.188c5.319 4.26 9.054 27.711 8.428 48.969-.626 21.259-1.044 35.854 3.147 47.254 4.191 11.4 8.368 37.05 44.042 29.406 29.809-6.388 45.256-22.942 47.405-50.555 1.525-19.631 4.976-16.729 5.194-34.28l2.768-8.309c3.192-26.611.507-35.196 18.872-31.203l4.463.392c13.517.615 31.208-2.174 41.591-7 22.358-10.376 35.618-27.7 13.573-23.148z" style="fill:#336791;stroke:none"/></g></svg><span>PostgreSQL</span></div>
+          <div class="skill-card"><svg width="36" height="36" viewBox="0 0 48 48"><path fill="#b3e5fc" d="M44.104,21.491C41.236,20.16,34,13,24,13S6.764,20.16,3.896,21.491C0.564,23.037,0,25,0,26s1,3,5,3s12.041,5.368,15,5.862c2.922,0.488,4,0.336,4,0.336s1.078,0.152,4-0.336C30.959,34.368,39,29,43,29s5-2,5-3S47.436,23.037,44.104,21.491z"/><path fill="#81d4fa" d="M5,29c4,0,12.041,5.368,15,5.862c2.922,0.488,4,0.336,4,0.336s1.078,0.152,4-0.336C30.959,34.368,39,29,43,29s5-2,5-3H0C0,27,1,29,5,29z"/><path fill="#e1f5fe" d="M38.24,22.439C34.58,19.87,30.851,17.001,24,17v0c0,0-0.001,0-0.001,0s-0.001,0-0.001,0v0c-6.851,0.001-10.58,2.87-14.24,5.439C6.75,24.549,3.997,25.31,3.997,26c0,1,0.943,0.515,3.009,0.828C9,27.13,17.998,31.69,23.998,31.692v0c0,0,0.001,0,0.001,0s0.001,0,0.001,0v0c6-0.001,14.998-4.561,16.992-4.863C43.058,26.515,44.001,27,44.001,26C44.001,25.31,41.248,24.549,38.24,22.439z"/><path fill="#81d4fa" d="M33,23c0-1.626-0.438-3.147-1.192-4.464C29.671,17.62,27.173,17,24,17v0c0,0-0.001,0-0.001,0s-0.001,0-0.001,0v0c-3.171,0-5.669,0.619-7.805,1.535C15.438,19.852,15,21.373,15,23c0,3.725,2.263,6.922,5.49,8.289c1.228,0.248,2.418,0.402,3.508,0.402v0c0,0,0.001,0,0.001,0s0.001,0,0.001,0v0c1.091,0,2.282-0.154,3.511-0.403C30.737,29.921,33,26.725,33,23z"/><circle cx="24" cy="23.5" r="3.5" fill="#455a64"/><circle cx="24" cy="23.5" r="1" fill="#b3e5fc"/><circle cx="28" cy="20" r="1" fill="#e1f5fe"/><path fill="#4fc3f7" d="M7.908,25.255c-0.21-0.475-0.703-0.771-1.269-0.957C5.085,25.104,3.997,25.566,3.997,26c0,1,0.943,0.515,3.009,0.828c0.124,0.019,0.276,0.054,0.452,0.104C7.886,26.479,8.191,25.895,7.908,25.255z"/><path fill="#4fc3f7" d="M40.09,25.258c0.21-0.475,0.703-0.771,1.269-0.957c1.554,0.807,2.642,1.269,2.642,1.703c0,1-0.943,0.515-3.009,0.828c-0.124,0.019-0.276,0.054-0.452,0.104C40.111,26.483,39.807,25.899,40.09,25.258z"/></svg><span>Nmap</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#F05032" d="M23.546 10.93L13.067.452a1.55 1.55 0 0 0-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 0 1 2.327 2.341l2.658 2.66a1.838 1.838 0 0 1 1.903 3.059 1.837 1.837 0 0 1-2.59-2.59l-2.484-2.483v6.539a1.836 1.836 0 0 1 .482 3.395 1.836 1.836 0 0 1-1.999-2.967 1.833 1.833 0 0 1 .594-.377V8.276a1.836 1.836 0 0 1-.996-2.41L8.707 3.164.454 11.418a1.55 1.55 0 0 0 0 2.187l10.48 10.478a1.55 1.55 0 0 0 2.187 0l10.425-10.425a1.55 1.55 0 0 0 0-2.188"/></svg><span>Git</span></div>
+          <div class="skill-card"><img src="https://i.pinimg.com/1200x/1b/25/2e/1b252e1edc93ebe1075c784bf088af56.jpg" width="36" height="36" style="border-radius:6px;object-fit:cover;" alt="Ethical Hacking"><span>Ethical Hacking</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="0 0 1052 1052"><path fill="#f0db4f" d="M0 0h1052v1052H0z"/><path d="M965.9 801.1c-7.7-48-39-88.3-131.7-125.9-32.2-14.8-68.1-25.399-78.8-49.8-3.8-14.2-4.3-22.2-1.9-30.8 6.9-27.9 40.2-36.6 66.6-28.6 17 5.7 33.1 18.801 42.8 39.7 45.4-29.399 45.3-29.2 77-49.399-11.6-18-17.8-26.301-25.4-34-27.3-30.5-64.5-46.2-124-45-10.3 1.3-20.699 2.699-31 4-29.699 7.5-58 23.1-74.6 44-49.8 56.5-35.6 155.399 25 196.1 59.7 44.8 147.4 55 158.6 96.9 10.9 51.3-37.699 67.899-86 62-35.6-7.4-55.399-25.5-76.8-58.4-39.399 22.8-39.399 22.8-79.899 46.1 9.6 21 19.699 30.5 35.8 48.7 76.2 77.3 266.899 73.5 301.1-43.5 1.399-4.001 10.6-30.801 3.199-72.101zm-394-317.6h-98.4c0 85-.399 169.4-.399 254.4 0 54.1 2.8 103.7-6 118.9-14.4 29.899-51.7 26.2-68.7 20.399-17.3-8.5-26.1-20.6-36.3-37.699-2.8-4.9-4.9-8.7-5.601-9-26.699 16.3-53.3 32.699-80 49 13.301 27.3 32.9 51 58 66.399 37.5 22.5 87.9 29.4 140.601 17.3 34.3-10 63.899-30.699 79.399-62.199 22.4-41.3 17.6-91.3 17.4-146.6.5-90.2 0-180.4 0-270.9z" fill="#323330"/></svg><span>JavaScript</span></div>
+          <div class="skill-card"><svg width="28" height="28" viewBox="16 16 32 32"><path fill="url(#python__a)" d="M31.885 16c-8.124 0-7.617 3.523-7.617 3.523l.01 3.65h7.752v1.095H21.197S16 23.678 16 31.876c0 8.196 4.537 7.906 4.537 7.906h2.708v-3.804s-.146-4.537 4.465-4.537h7.688s4.32.07 4.32-4.175v-7.019S40.374 16 31.885 16zm-4.275 2.454a1.394 1.394 0 1 1 0 2.79 1.393 1.393 0 0 1-1.395-1.395c0-.771.624-1.395 1.395-1.395z"/><path fill="url(#python__b)" d="M32.115 47.833c8.124 0 7.617-3.523 7.617-3.523l-.01-3.65H31.97v-1.095h10.832S48 40.155 48 31.958c0-8.197-4.537-7.906-4.537-7.906h-2.708v3.803s.146 4.537-4.465 4.537h-7.688s-4.32-.07-4.32 4.175v7.019s-.656 4.247 7.833 4.247zm4.275-2.454a1.393 1.393 0 0 1-1.395-1.395 1.394 1.394 0 1 1 1.395 1.395z"/><defs><linearGradient id="python__a" x1="19.075" x2="34.898" y1="18.782" y2="34.658" gradientUnits="userSpaceOnUse"><stop stop-color="#387EB8"/><stop offset="1" stop-color="#366994"/></linearGradient><linearGradient id="python__b" x1="28.809" x2="45.803" y1="28.882" y2="45.163" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE052"/><stop offset="1" stop-color="#FFC331"/></linearGradient></defs></svg><span>Python</span></div>
         </div>
       </div>
     </div>
@@ -315,45 +307,38 @@
   <section id="portofolio" class="section portofolio">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">// 04</div>
+        <span class="section-num">04</span>
         <h2 class="section-title">Portofolio</h2>
-        <p class="section-subtitle">Karya & Pencapaian Saya</p>
+        <div class="section-line"></div>
       </div>
 
-      <!-- Tab Navigation -->
-      <div style="text-align: center;">
-        <div class="portofolio-tabs reveal">
-          <div class="tab-btn active" data-tab="proyek">Proyek</div>
-          <div class="tab-btn" data-tab="sertifikat">Sertifikat</div>
-        </div>
+      <div class="porto-tabs reveal">
+        <button class="ptab active" data-tab="proyek">Proyek</button>
+        <button class="ptab" data-tab="sertifikat">Sertifikat</button>
       </div>
 
-      <!-- Tab Content -->
       <div class="tab-content active" id="proyek">
-        <div class="projects-grid" id="projectsGrid">
-          <!-- Projects will be rendered here dynamically -->
-        </div>
+        <div class="projects-grid" id="projectsGrid"></div>
       </div>
-
       <div class="tab-content" id="sertifikat">
-        <div class="certs-grid" id="certsGrid">
-          <!-- Certificates will be rendered here dynamically -->
-        </div>
+        <div class="certs-grid" id="certsGrid"></div>
       </div>
     </div>
   </section>
 
   <!-- Certificate Modal -->
-  <div class="modal-overlay" id="certModal" onclick="closeCertModal()">
-    <button class="modal-close" onclick="closeCertModal()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-        <path d="M18 6L6 18M6 6l12 12"/>
-      </svg>
+  <div class="cert-modal-overlay" id="certModal" onclick="closeCertModal()">
+    <button class="cert-modal-close" onclick="closeCertModal()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="modal-content glass-card" onclick="event.stopPropagation()">
-      <div class="modal-cert-image-wrap">
-        <img id="modalCertImage" src="" alt="Certificate">
-      </div>
+    <div class="cert-modal-inner" onclick="event.stopPropagation()">
+      <button class="cert-nav cert-nav--prev" onclick="navigateCert(-1)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <img id="modalCertImage" src="" alt="Certificate">
+      <button class="cert-nav cert-nav--next" onclick="navigateCert(1)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
   </div>
 
@@ -361,80 +346,76 @@
   <section id="kontak" class="section kontak">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">// 05</div>
+        <span class="section-num">05</span>
         <h2 class="section-title">Hubungi Saya</h2>
-        <p class="section-subtitle">Mari Berkolaborasi</p>
+        <div class="section-line"></div>
       </div>
-      <div class="kontak-grid">
-
-        <!-- Bento contact cards -->
-        <div class="kontak-info reveal">
-
-          <!-- Email -->
-          <a href="mailto:andhikarafi321@gmail.com" class="kontak-bento kontak-bento-full">
-            <div class="kontak-bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            </div>
-            <div>
-              <div class="kontak-bento-label">Email</div>
-              <div class="kontak-bento-value">andhikarafi321@gmail.com</div>
-            </div>
-          </a>
-
-          <!-- WhatsApp -->
-          <a href="https://wa.me/6285772228046" target="_blank" rel="noopener noreferrer" class="kontak-bento kontak-bento-full">
-            <div class="kontak-bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            </div>
-            <div>
-              <div class="kontak-bento-label">WhatsApp</div>
-              <div class="kontak-bento-value">+62 857-7222-8046</div>
-            </div>
-          </a>
-
-          <!-- Lokasi -->
-          <div class="kontak-bento kontak-bento-full">
-            <div class="kontak-bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <div class="kontak-bento-label">Lokasi</div>
-              <div class="kontak-bento-value">Bogor, Jawa Barat, Indonesia</div>
+      <div class="kontak-layout">
+        <div class="kontak-left reveal">
+          <p class="kontak-intro">Punya proyek menarik atau sekadar ingin ngobrol soal teknologi? Saya selalu terbuka untuk diskusi.</p>
+          <div class="kontak-links">
+            <a href="mailto:andhikarafi321@gmail.com" class="kontak-item">
+              <div class="ki-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div class="ki-text">
+                <span class="ki-label">Email</span>
+                <span class="ki-value">andhikarafi321@gmail.com</span>
+              </div>
+              <svg class="ki-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://wa.me/6285772228046" target="_blank" class="kontak-item">
+              <div class="ki-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              </div>
+              <div class="ki-text">
+                <span class="ki-label">WhatsApp</span>
+                <span class="ki-value">+62 857-7222-8046</span>
+              </div>
+              <svg class="ki-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://github.com/dhiksn" target="_blank" class="kontak-item">
+              <div class="ki-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </div>
+              <div class="ki-text">
+                <span class="ki-label">GitHub</span>
+                <span class="ki-value">github.com/dhiksn</span>
+              </div>
+              <svg class="ki-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <div class="kontak-item kontak-item--static">
+              <div class="ki-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="ki-text">
+                <span class="ki-label">Lokasi</span>
+                <span class="ki-value">Bogor, Jawa Barat, Indonesia</span>
+              </div>
             </div>
           </div>
-
-          <!-- GitHub -->
-          <a href="https://github.com/dhiksn" target="_blank" rel="noopener noreferrer" class="kontak-bento kontak-bento-full">
-            <div class="kontak-bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            </div>
-            <div>
-              <div class="kontak-bento-label">GitHub</div>
-              <div class="kontak-bento-value">github.com/dhiksn</div>
-            </div>
-          </a>
-
         </div>
-
-        <div class="kontak-form-wrap reveal">
-          <form class="kontak-form glass-card" id="contactForm" novalidate>
-            <div class="form-group">
-              <label class="form-label">Nama Lengkap</label>
-              <input type="text" class="form-input" id="formName" placeholder="Masukkan nama Anda" />
+        <div class="kontak-right reveal">
+          <form class="kontak-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="formName">Nama</label>
+                <input type="text" class="form-input" id="formName" placeholder="Nama lengkap Anda" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="formEmail">Email</label>
+                <input type="email" class="form-input" id="formEmail" placeholder="nama@email.com" />
+              </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Alamat Email</label>
-              <input type="email" class="form-input" id="formEmail" placeholder="nama@email.com" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Subjek</label>
+              <label class="form-label" for="formSubject">Subjek</label>
               <input type="text" class="form-input" id="formSubject" placeholder="Topik pesan Anda" />
             </div>
             <div class="form-group">
-              <label class="form-label">Pesan</label>
-              <textarea class="form-input form-textarea" id="formMessage" placeholder="Tulis pesan Anda di sini..."></textarea>
+              <label class="form-label" for="formMessage">Pesan</label>
+              <textarea class="form-input form-textarea" id="formMessage" placeholder="Tulis pesan Anda..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+            <button type="submit" class="btn-submit" id="submitBtn">
               <span>Kirim Pesan</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </button>
@@ -446,58 +427,56 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-glow"></div>
     <div class="container">
-      <!-- Top Part -->
-      <div class="footer-top">
-        <div class="footer-left">
-          <div class="footer-logo">AR</div>
-          <div class="footer-tagline">Andhika Rafi · System Administrator | IT Support</div>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">AR<span class="footer-logo-dot">.</span></div>
+          <p class="footer-desc">Andhika Rafi | Network Engineer & IT Support dari Bogor.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/dhiksn" target="_blank" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/andhikarafi" target="_blank" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://instagram.com/andhika_itsu" target="_blank" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
         </div>
-        <div class="footer-socials">
-          <a href="https://github.com/dhiksn" target="_blank" class="social-link" title="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-          <a href="https://linkedin.com/in/andhikarafi" target="_blank" class="social-link" title="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://instagram.com/andhika_itsu" target="_blank" class="social-link" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div class="footer-divider"></div>
-
-      <!-- Bottom Part -->
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2026 Andhika Rafi. All rights reserved.</div>
-        <div class="footer-right">
-          <span class="footer-location">
-            <span class="location-dot"></span>
-            Bogor, ID
-          </span>
+        <div class="footer-copy">
+          <p>© 2026 Andhika Rafi. All rights reserved.</p>
+          <p class="footer-loc">Bogor, Jawa Barat</p>
         </div>
       </div>
     </div>
   </footer>
 
   <!-- Back to Top -->
-  <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+  <button class="back-top" id="backToTop" title="Kembali ke atas">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
 
-  <!-- Toast Notifications -->
-  <div class="form-success" id="formSuccess">
-    <svg class="success-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-    <span>Pesan berhasil terkirim! Saya akan segera menghubungi Anda.</span>
+  <!-- Toasts -->
+  <div class="toast toast--success" id="formSuccess">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span>Pesan berhasil terkirim!</span>
   </div>
-  <div class="form-error-toast" id="formErrorToast">
-    <svg class="error-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  <div class="toast toast--error" id="formErrorToast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
     <span id="formErrorText">Terjadi kesalahan!</span>
   </div>
 
   <script src="assets/js/script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
