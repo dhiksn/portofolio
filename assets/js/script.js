@@ -283,17 +283,22 @@ function renderProjects() {
     const isDoc = p.demotype === 'download';
 
     if (isDoc) {
+      const thumb = p.image
+        ? `<div class="project-img-wrap">
+            <img class="project-img" src="${p.image}" alt="${p.title}" loading="lazy" style="object-position: center 38%;">
+           </div>`
+        : `<div class="project-doc-thumb">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <span class="project-doc-ext">.docx / .pdf</span>
+           </div>`;
       return `
       <div class="project-card reveal" data-delay="${i * 100}">
-        <div class="project-doc-thumb">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
-          <span class="project-doc-ext">.docx / .pdf</span>
-        </div>
+        ${thumb}
         <div class="project-body">
           <h3 class="project-title">${p.title}</h3>
           <p class="project-desc">${p.description}</p>
@@ -409,29 +414,6 @@ window.addEventListener('load', async () => {
     if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth' }), 150);
     history.replaceState(null, '', '/');
   }
-});
-
-/* ========== CUSTOM CURSOR ========== */
-const dot  = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx + 'px';
-  dot.style.top  = my + 'px';
-});
-(function animRing() {
-  rx += (mx - rx) * 0.75;
-  ry += (my - ry) * 0.75;
-  ring.style.left = rx + 'px';
-  ring.style.top  = ry + 'px';
-  requestAnimationFrame(animRing);
-})();
-
-document.querySelectorAll('a, button, .cert-card, .project-card, .ptab, .skill-chip, .nav-link, .nav-cv-btn, .cv-dropdown-item, .hero-social, .btn-hero-primary, .btn-hero-ghost').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
 
 /* ========== NAVBAR ========== */
@@ -730,161 +712,3 @@ document.addEventListener('selectstart', e => {
 /* ========== CONSOLE ========== */
 console.log('%c AR. ', 'background:#fff;color:#000;font-size:1.4rem;font-weight:900;padding:4px 8px;');
 console.log('%cAndhika Rafi · SMK Wikrama Bogor · TJKT · 2026', 'color:#666;font-size:0.85rem;');
-
-/* ========== LANYARD DRAG PHYSICS ========== */
-(function initLanyard() {
-  const card   = document.getElementById('lanyardCard');
-  const scene  = document.getElementById('lanyardScene');
-  const rope   = document.getElementById('lanyardRope');
-  const ropeShadow = document.getElementById('lanyardRopeShadow');
-  const anchor = document.getElementById('lanyardAnchor');
-  if (!card || !scene || !rope) return;
-
-  const CARD_W = 240;
-  const CARD_H = 400;
-
-  // Physics
-  let posX, posY;       // current card CENTER position (relative to scene)
-  let velX = 0, velY = 0;
-  let isDragging = false;
-  let dragOffX = 0, dragOffY = 0;
-  let animFrame;
-
-  // Home position — center horizontally, 70px below anchor
-  function getHome() {
-    return { x: scene.offsetWidth / 2, y: 70 };
-  }
-
-  function init() {
-    const home = getHome();
-    posX = home.x;
-    posY = home.y;
-    applyPos();
-    updateRope();
-  }
-
-  function applyPos() {
-    // posX/posY = center of card
-    card.style.left = (posX - CARD_W / 2) + 'px';
-    card.style.top  = posY + 'px';
-  }
-
-  function getAnchorPos() {
-    // anchor di top center scene
-    return { x: scene.offsetWidth / 2, y: 6 };
-  }
-
-  function updateRope() {
-    const a  = getAnchorPos();
-    const cx = posX;
-    const cy = posY + 22; // titik lubang kartu
-
-    const slack = Math.min(100, Math.abs(cy - a.y) * 0.45 + Math.abs(cx - a.x) * 0.3);
-    const mx    = (a.x + cx) / 2;
-    const my    = (a.y + cy) / 2 + slack;
-    const d     = `M ${a.x} ${a.y} Q ${mx} ${my} ${cx} ${cy}`;
-
-    rope.setAttribute('d', d);
-    if (ropeShadow) ropeShadow.setAttribute('d', d);
-  }
-
-  // Drag — mouse
-  card.addEventListener('mousedown', e => {
-    e.preventDefault();
-    isDragging = true;
-    const rect = scene.getBoundingClientRect();
-    // offset dari center kartu ke posisi klik
-    dragOffX = e.clientX - rect.left - posX;
-    dragOffY = e.clientY - rect.top  - posY;
-    velX = velY = 0;
-    cancelAnimationFrame(animFrame);
-    card.style.cursor = 'grabbing';
-  });
-
-  document.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    const rect = scene.getBoundingClientRect();
-    posX = e.clientX - rect.left - dragOffX;
-    posY = e.clientY - rect.top  - dragOffY;
-    velX = e.movementX;
-    velY = e.movementY;
-    applyPos();
-    updateRope();
-  });
-
-  document.addEventListener('mouseup', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    card.style.cursor = 'grab';
-    springBack();
-  });
-
-  // Drag — touch
-  card.addEventListener('touchstart', e => {
-    isDragging = true;
-    const t    = e.touches[0];
-    const rect = scene.getBoundingClientRect();
-    dragOffX   = t.clientX - rect.left - posX;
-    dragOffY   = t.clientY - rect.top  - posY;
-    velX = velY = 0;
-    cancelAnimationFrame(animFrame);
-  }, { passive: true });
-
-  document.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    const t    = e.touches[0];
-    const rect = scene.getBoundingClientRect();
-    const nx   = t.clientX - rect.left - dragOffX;
-    const ny   = t.clientY - rect.top  - dragOffY;
-    velX = nx - posX;
-    velY = ny - posY;
-    posX = nx; posY = ny;
-    applyPos();
-    updateRope();
-  }, { passive: true });
-
-  document.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    springBack();
-  });
-
-  // Spring back to home with inertia
-  function springBack() {
-    const SPRING  = 0.12;  // stiffness
-    const DAMPING = 0.75;  // damping
-    const GRAVITY = 0.4;
-
-    function tick() {
-      if (isDragging) return;
-
-      const home = getHome();
-      const dx   = home.x - posX;
-      const dy   = home.y - posY;
-
-      velX += dx * SPRING;
-      velY += dy * SPRING + GRAVITY;
-      velX *= DAMPING;
-      velY *= DAMPING;
-      posX += velX;
-      posY += velY;
-
-      applyPos();
-      updateRope();
-
-      if (Math.abs(velX) < 0.1 && Math.abs(velY) < 0.1 &&
-          Math.abs(dx) < 0.5  && Math.abs(dy) < 0.5) {
-        posX = home.x; posY = home.y;
-        applyPos();
-        updateRope();
-        return;
-      }
-      animFrame = requestAnimationFrame(tick);
-    }
-    animFrame = requestAnimationFrame(tick);
-  }
-
-  // Init after DOM ready
-  window.addEventListener('load', init);
-  window.addEventListener('resize', init);
-})();

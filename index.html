@@ -67,10 +67,6 @@
 </head>
 <body>
 
-  <!-- Custom Cursor -->
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
   <!-- Three.js Canvas -->
   <canvas id="threeCanvas"></canvas>
 
@@ -128,8 +124,8 @@
           <span class="role-item">IT Support</span>
         </p>
         <p class="hero-desc">
-          Berfokus pada jaringan komputer, administrasi server Linux, dan keamanan siber.
-          Membangun solusi nyata dari infrastruktur hingga web.
+          Berfokus pada keamanan siber, dukungan teknis IT, dan administrasi sistem.
+          Membantu menjaga keamanan serta kelancaran operasional teknologi informasi.
         </p>
         <div class="hero-actions">
           <a href="/" data-scroll="portofolio" class="btn-hero-primary">
@@ -182,41 +178,23 @@
       </div>
       <div class="tentang-wrapper reveal">
         <div class="tentang-photo-col">
-          <div class="lanyard-scene" id="lanyardScene">
-            <div class="lanyard-anchor" id="lanyardAnchor"></div>
-            <svg class="lanyard-svg" id="lanyardSvg">
-              <path id="lanyardRopeShadow" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-linecap="round"/>
-              <path id="lanyardRope" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <div class="lanyard-card" id="lanyardCard">
-              <div class="lanyard-card-hole"></div>
-              <div class="lanyard-card-header">
-                <span class="lanyard-card-org">SMK WIKRAMA BOGOR</span>
-                <span class="lanyard-card-sub">KARTU PELAJAR</span>
-              </div>
-              <div class="lanyard-card-photo-wrap">
-                <div class="tentang-photo-frame">
-                  <img src="/assets/img/cover2.png" alt="Andhika Rafi" loading="lazy" decoding="async">
-                  <div class="photo-border-anim"></div>
-                </div>
-              </div>
-              <div class="lanyard-card-label">
-                <span class="lanyard-name">Andhika Rafi</span>
-                <span class="lanyard-role">TJKT · KELAS 11</span>
-              </div>
-            </div>
+          <div class="tentang-photo-frame">
+            <img src="/assets/img/cover2.png" alt="Andhika Rafi" loading="lazy" decoding="async">
+            <div class="photo-border-anim"></div>
           </div>
         </div>
         <div class="tentang-text-col">
-          <p class="tentang-intro">
-            Saya pelajar yang <em>serius</em> menekuni teknologi informasi khususnya jaringan komputer dan keamanan siber. Kelas 11 TJKT di SMK Wikrama Bogor, tapi pikiran saya sudah jauh ke depan.
-          </p>
-          <p class="tentang-body">
-            Dari mengkonfigurasi <strong>Mikrotik & Cisco</strong>, mengelola <strong>Ubuntu Server</strong>, hingga membangun aplikasi web dengan <strong>Node.js dan Python</strong>. saya belajar lewat proyek nyata, bukan hanya teori.
-          </p>
-          <p class="tentang-body">
-            Minat saya mencakup <strong>Cyber Security</strong>, containerization dengan <strong>Docker</strong>, serta web development modern. Saya percaya bahwa infrastruktur yang solid adalah fondasi dari semua hal di dunia digital.
-          </p>
+        <p class="tentang-intro">
+          Saya adalah siswa TJKT di SMK Wikrama Bogor yang memiliki minat besar pada <em>Cyber Security</em> dan <em>IT Support</em>. Saya senang mempelajari cara menjaga keamanan sistem serta memastikan perangkat dan jaringan berjalan dengan optimal.
+        </p>
+
+        <p class="tentang-body">
+          Saya memiliki pengalaman dasar dalam <strong>troubleshooting hardware dan software</strong>, administrasi <strong>Linux</strong>, serta konfigurasi jaringan menggunakan <strong>MikroTik</strong> dan <strong>Cisco</strong>. Saya terus mengembangkan kemampuan melalui praktik dan proyek nyata.
+        </p>
+
+        <p class="tentang-body">
+          Saat ini saya fokus mempelajari <strong>keamanan jaringan</strong>, <strong>administrasi sistem</strong>, dan <strong>IT Support</strong>. Saya percaya bahwa sistem yang aman dan andal merupakan fondasi penting bagi setiap organisasi di era digital.
+        </p>
           <div class="tentang-counters">
             <div class="t-counter">
               <strong class="t-counter-num" data-target="3">0</strong>
@@ -262,11 +240,11 @@
               <span class="tl-badge">Kelas 11 · Aktif</span>
             </div>
             <ul class="tl-list">
-              <li>Administrasi Linux Server (Ubuntu, Debian) dan konfigurasi layanan</li>
+              <li>Administrasi Linux Server (Ubuntu, Debian)</li>
               <li>Konfigurasi jaringan Mikrotik dan Cisco, routing, VLAN</li>
               <li>Cloud Computing dengan AWS dan containerization Docker</li>
               <li>Dasar-dasar Cyber Security dan penetration testing</li>
-              <li>Mengikuti workshop dan pelatihan IT dari berbagai institusi</li>
+              <li>Konfigurasi Web Server, DNS Server, dan DHCP Server</li>
             </ul>
           </div>
         </div>
@@ -474,7 +452,7 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="footer-logo">AR<span class="footer-logo-dot">.</span></div>
-          <p class="footer-desc">Andhika Rafi | Network Engineer & IT Support dari Bogor.</p>
+          <p class="footer-desc">Andhika Rafi | Network Engineer & IT Support.</p>
           <div class="footer-socials">
             <a href="https://github.com/dhiksn" target="_blank" aria-label="GitHub">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>

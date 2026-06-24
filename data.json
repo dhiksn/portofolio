@@ -5,6 +5,7 @@
       "title": "Dokumentasi ASAT Praktik TJKT",
       "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
       "demotype": "download",
+      "image": "assets/img/asat-thumb.jpg",
       "downloadFile": "assets/docs/ASAT.docx",
       "pdfFile": "assets/docs/ASAT.pdf"
     },
