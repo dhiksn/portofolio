@@ -6,6 +6,7 @@
       "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
       "demotype": "download",
       "image": "assets/img/asat-thumb.jpg",
+      "readUrl": "project/dokumentasi-asat-tahun-2026",
       "downloadFile": "assets/docs/ASAT.docx",
       "pdfFile": "assets/docs/ASAT.pdf"
     },
@@ -15,6 +16,7 @@
       "description": "Implementasi layanan server Debian 10 meliputi SSH, DHCP, DNS, FTP, Web Server, dan Mail Server. Fokus pada administrasi Linux dan troubleshooting sistem.",
       "demotype": "download",
       "image": "assets/img/superlab-thumb.jpg",
+      "readUrl": "project/dokumentasi-superlab-asj",
       "downloadFile": "assets/docs/Superlab.docx",
       "pdfFile": "assets/docs/Superlab.pdf"
     },

@@ -12,6 +12,11 @@
   status = 200
 
 [[redirects]]
+  from = "/project/dokumentasi-superlab-asj"
+  to   = "/project/dokumentasi-superlab-asj.html"
+  status = 200
+
+[[redirects]]
   from = "/project/donghua"
   to   = "/project/donghua.html"
   status = 200
