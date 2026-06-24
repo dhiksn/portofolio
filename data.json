@@ -10,6 +10,15 @@
       "pdfFile": "assets/docs/ASAT.pdf"
     },
     {
+      "id": 4,
+      "title": "Dokumentasi Superlab ASJ",
+      "description": "Implementasi layanan server Debian 10 meliputi SSH, DHCP, DNS, FTP, Web Server, dan Mail Server. Fokus pada administrasi Linux dan troubleshooting sistem.",
+      "demotype": "download",
+      "image": "assets/img/superlab-thumb.jpg",
+      "downloadFile": "assets/docs/Superlab.docx",
+      "pdfFile": "assets/docs/Superlab.pdf"
+    },
+    {
       "id": 1,
       "title": "Donghua Streaming",
       "description": "Website streaming donghua (anime China) dengan scraper otomatis dari anichin.run, dilengkapi player video, pencarian, dan filter genre.",

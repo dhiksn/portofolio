@@ -152,7 +152,7 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 /* === HERO === */
 .hero {
   min-height: 88vh; display: flex; align-items: center;
-  padding: 5rem 0 2rem;
+  padding: 6rem 0 2rem;
   position: sticky; top: 0;          /* sticky — diam saat section berikutnya naik */
   overflow: hidden; z-index: 1;
   background: transparent;
