@@ -17,11 +17,6 @@
   status = 200
 
 [[redirects]]
-  from = "/project/donghua"
-  to   = "/project/donghua.html"
-  status = 200
-
-[[redirects]]
   from = "/project/raisaver"
   to   = "/project/raisaver.html"
   status = 200

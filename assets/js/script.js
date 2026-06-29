@@ -316,8 +316,7 @@ function renderProjects() {
       </div>`;
     }
 
-    const detail = p.id === 1 ? 'project/donghua'
-                 : p.id === 2 ? 'project/raisaver'
+    const detail = p.id === 1 ? 'project/raisaver'
                  : `project/detail.html?id=${p.id}`;
     return `
     <div class="project-card reveal" data-delay="${i * 100}">

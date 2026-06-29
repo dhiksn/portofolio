@@ -11,7 +11,7 @@
       "pdfFile": "assets/docs/ASAT.pdf"
     },
     {
-      "id": 4,
+      "id": 2,
       "title": "Dokumentasi Superlab ASJ",
       "description": "Implementasi layanan server Debian 10 meliputi SSH, DHCP, DNS, FTP, Web Server, dan Mail Server. Fokus pada administrasi Linux dan troubleshooting sistem.",
       "demotype": "download",
@@ -22,17 +22,6 @@
     },
     {
       "id": 1,
-      "title": "Donghua Streaming",
-      "description": "Website streaming donghua (anime China) dengan scraper otomatis dari anichin.run, dilengkapi player video, pencarian, dan filter genre.",
-      "longDesc": "Platform streaming donghua berbasis web yang mengambil konten secara real-time dari anichin.run menggunakan web scraper dengan Cheerio. Backend dibangun dengan Node.js dan Express yang menyediakan REST API untuk frontend. Fitur meliputi halaman home, ongoing, completed, pencarian, filter genre, jadwal tayang, dan video player terintegrasi.",
-      "tech": ["Node.js", "Express", "Cheerio", "JavaScript", "HTML", "CSS"],
-      "image": "assets/img/donghua1.png",
-      "thumbBg": "donghua",
-      "github": "https://github.com/Kaitsuu23/AniStream",
-      "demo": "https://dongstream.vercel.app/"
-    },
-    {
-      "id": 2,
       "title": "RaiSaver",
       "description": "Platform download video YouTube, Tiktok, dan Instagram tersedia sebagai aplikasi Flutter (Android/iOS) dan website, dengan backend FastAPI dan dukungan resolusi hingga 4K.",
       "longDesc": "RaiSaver adalah platform downloader YouTube, Tiktok, dan Instagram yang hadir dalam dua versi: aplikasi mobile Flutter untuk Android/iOS dengan UI glassmorphism, dan website yang bisa diakses langsung di browser. Backend dibangun dengan FastAPI dan yt-dlp untuk proses download, serta FFmpeg untuk merging video dan audio secara otomatis. Mendukung resolusi hingga 4K, download audio MP3, real-time progress tracking, serta embed thumbnail dan metadata.",
