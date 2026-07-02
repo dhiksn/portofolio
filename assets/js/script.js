@@ -711,3 +711,25 @@ document.addEventListener('selectstart', e => {
 /* ========== CONSOLE ========== */
 console.log('%c AR. ', 'background:#fff;color:#000;font-size:1.4rem;font-weight:900;padding:4px 8px;');
 console.log('%cAndhika Rafi · SMK Wikrama Bogor · TJKT · 2026', 'color:#666;font-size:0.85rem;');
+
+
+/* ========== MUSIC PLAYER ========== */
+(function () {
+  const player  = document.getElementById('musicPlayer');
+  const audio   = document.getElementById('musicAudio');
+  const playBtn = document.getElementById('mpPlay');
+
+  if (!player || !audio || !playBtn) return;
+
+  playBtn.addEventListener('click', function () {
+    if (audio.paused) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  });
+
+  audio.addEventListener('play',  function () { player.classList.add('playing'); });
+  audio.addEventListener('pause', function () { player.classList.remove('playing'); });
+  audio.addEventListener('ended', function () { player.classList.remove('playing'); });
+})();

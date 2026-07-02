@@ -971,6 +971,136 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 .footer-copy { font-size: 0.8rem; color: var(--dim); text-align: right; }
 .footer-loc { margin-top: 0.25rem; font-size: 0.78rem; }
 
+/* === MUSIC PLAYER === */
+.music-player {
+  position: fixed;
+  top: 20px;
+  right: 14px;
+  z-index: 1100;
+}
+.mp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 36px;
+  padding: 0 10px;
+  background: rgba(10,10,10,0.85);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  overflow: hidden;
+  max-width: 36px;
+  transition: max-width 0.4s cubic-bezier(0.4,0,0.2,1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              gap 0.4s ease,
+              padding 0.4s ease;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.75);
+}
+.mp-pill:hover {
+  max-width: 280px;
+  gap: 8px;
+  padding: 0 14px;
+  background: rgba(18,18,18,0.95);
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+/* Note icon */
+.mp-note-icon {
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; width: 16px; height: 16px;
+  position: relative;
+}
+.mp-note-icon svg { width: 16px; height: 16px; }
+
+/* Equalizer icon — hidden by default, shown when playing */
+.mp-icon-note { display: block; }
+.mp-icon-eq {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.mp-icon-eq span {
+  display: block;
+  width: 3px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 2px;
+  animation: eq-bounce 0.9s ease-in-out infinite;
+}
+.mp-icon-eq span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.mp-icon-eq span:nth-child(2) { height: 12px; animation-delay: 0.2s; }
+.mp-icon-eq span:nth-child(3) { height: 8px;  animation-delay: 0.4s; }
+@keyframes eq-bounce {
+  0%,100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
+}
+
+/* Swap icon saat playing */
+.music-player.playing .mp-icon-note { display: none; }
+.music-player.playing .mp-icon-eq   { display: flex; }
+
+/* Label */
+.mp-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: opacity 0.25s ease 0.1s, max-width 0.4s ease;
+  pointer-events: none;
+}
+.mp-pill:hover .mp-label {
+  opacity: 1;
+  max-width: 200px;
+}
+
+/* Animated bars */
+.mp-bars {
+  display: flex; align-items: flex-end; gap: 2px;
+  height: 14px; flex-shrink: 0;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: opacity 0.25s ease 0.15s, max-width 0.4s ease;
+}
+/* Bars di kanan — hanya muncul saat hover DAN tidak playing */
+/* Saat playing, equalizer di kiri sudah cukup sebagai indikator */
+.mp-pill:hover .mp-bars {
+  opacity: 1;
+  max-width: 20px;
+}
+/* Saat playing + hover → sembunyikan bars kanan (sudah ada eq di kiri) */
+.music-player.playing .mp-pill:hover .mp-bars {
+  opacity: 0;
+  max-width: 0;
+}
+.mp-bars span {
+  display: block;
+  width: 3px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+  animation: bar-bounce 0.9s ease-in-out infinite;
+}
+.mp-bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.mp-bars span:nth-child(2) { height: 12px; animation-delay: 0.2s; }
+.mp-bars span:nth-child(3) { height: 8px;  animation-delay: 0.4s; }
+
+/* Bars only animate when playing */
+.music-player:not(.playing) .mp-bars span {
+  animation: none;
+  height: 8px;
+  opacity: 0.4;
+}
+@keyframes bar-bounce {
+  0%,100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
+}
+
 /* === BACK TO TOP === */
 .back-top {
   position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
@@ -1191,6 +1321,10 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 
   /* --- Back to top --- */
   .back-top { bottom: 1.25rem; right: 1.25rem; width: 36px; height: 36px; }
+
+  /* --- Music player --- */
+  .music-player { top: 62px; right: 10px; }
+  .mp-card { width: 230px; }
 }
 
 /* ── Small Mobile (≤480px) ── */

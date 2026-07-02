@@ -70,6 +70,28 @@
   <!-- Three.js Canvas -->
   <canvas id="threeCanvas"></canvas>
 
+  <!-- Floating Music Player -->
+  <div class="music-player" id="musicPlayer">
+    <audio id="musicAudio" src="assets/Ariana_Grande_-_hate_that_i_made_you_love_me.mp3" loop preload="metadata"></audio>
+    <button class="mp-pill" id="mpPlay" aria-label="Play/Pause">
+      <!-- Music note / equalizer icon -->
+      <span class="mp-note-icon">
+        <!-- Note (default, saat pause) -->
+        <svg class="mp-icon-note" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+        <!-- Equalizer (saat playing) -->
+        <span class="mp-icon-eq">
+          <span></span><span></span><span></span>
+        </span>
+      </span>
+      <!-- Song title (on hover) -->
+      <span class="mp-label">hate that i made you love me</span>
+      <!-- Bars (on hover) -->
+      <span class="mp-bars">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </div>
+
   <!-- Floating Navbar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
