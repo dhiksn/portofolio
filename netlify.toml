@@ -21,6 +21,11 @@
   to   = "/project/raisaver.html"
   status = 200
 
+[[redirects]]
+  from = "/project/autodeploy"
+  to   = "/project/autodeploy.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]

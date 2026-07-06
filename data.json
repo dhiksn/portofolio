@@ -21,7 +21,7 @@
       "pdfFile": "assets/docs/Superlab.pdf"
     },
     {
-      "id": 5,
+      "id": 4,
       "title": "AutoDeploy AI",
       "description": "CLI tool yang mengotomatisasi deploy ke GitHub — git init otomatis, AI generate commit message via Groq/OpenAI/Ollama, dan auto push dalam satu command.",
       "longDesc": "AutoDeploy AI adalah global CLI yang menyederhanakan workflow git deploy. Cukup jalankan `autodeploy` dari folder mana pun — tool ini akan otomatis git init jika belum ada, validasi repo GitHub, generate commit message menggunakan AI (Groq, OpenAI, atau Ollama), lalu push ke GitHub. Dilengkapi setup wizard interaktif saat pertama kali dijalankan, spinner animasi di setiap step, dan command `autodeploy --uninstall` untuk cleanup total.",
