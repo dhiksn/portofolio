@@ -317,6 +317,7 @@ function renderProjects() {
     }
 
     const detail = p.id === 1 ? 'project/raisaver'
+                 : p.id === 4 ? 'project/autodeploy'
                  : `project/detail.html?id=${p.id}`;
     return `
     <div class="project-card reveal" data-delay="${i * 100}">
