@@ -46,47 +46,41 @@
     {
       "id": 1,
       "title": "Cisco Dasar",
-      "issuer": "Cisco Dasar dari ID-Networkers",
-      "year": "6 Mei 2026",
-      "color": "#00D4FF",
       "image": "sertifikat/cisco.webp"
     },
     {
       "id": 2,
       "title": "Cyber Security Dasar",
-      "issuer": "Cyber Security Dasar dari ID-Networkers",
-      "year": "4 Mei 2026",
-      "color": "#FF6B6B",
       "image": "sertifikat/cyber.webp"
     },
     {
       "id": 3,
-      "title": "Linux Dasar",
-      "issuer": "Linux Dasar dari ID-Networkers",
-      "year": "4 Mei 2026",
-      "color": "#00FFB3",
-      "image": "sertifikat/linux.webp"
-    },
-    {
-      "id": 4,
       "title": "Jaringan Komputer Dasar",
-      "issuer": "Jaringan Komputer Dasar dari ID-Networkers",
-      "year": "4 Mei 2026",
-      "color": "#FF9F43",
       "image": "sertifikat/jaringan.webp"
     },
     {
+      "id": 4,
+      "title": "Linux",
+      "image": "sertifikat/linux.webp"
+    },
+    {
       "id": 5,
-      "title": "Introduction to CyberSecurity",
-      "issuer": "Introduction to CyberSecurity dari NetaCad",
-      "year": "13 Januari 2026",
-      "image": "sertifikat/introduction.webp"
+      "title": "Virtual Machine Fundamental",
+      "image": "sertifikat/vm.webp"
     },
     {
       "id": 6,
+      "title": "Network Fundamental",
+      "image": "sertifikat/n-fun.webp"
+    },
+    {
+      "id": 7,
+      "title": "Introduction to CyberSecurity",
+      "image": "sertifikat/introduction.webp"
+    },
+    {
+      "id": 8,
       "title": "Introduction to Kali Linux Basics",
-      "issuer": "Introduction to Kali Linux Basics dari Simplilearn",
-      "year": "4 Juni 2026",
       "image": "sertifikat/kali-linux.webp"
     }
   ]

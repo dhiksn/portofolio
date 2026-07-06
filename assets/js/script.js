@@ -375,11 +375,6 @@ function renderCertificates() {
         <img class="cert-img" src="${c.image}" alt="${c.title}" loading="lazy"
              onload="this.classList.add('img-loaded');document.getElementById('cw-${i}').classList.add('loaded')"
              decoding="async">
-        <div class="cert-info">
-          <div class="cert-name">${c.title}</div>
-          <div class="cert-issuer">${c.issuer}</div>
-          <div class="cert-year">${c.year}</div>
-        </div>
       </div>
     </div>
   `).join('');
