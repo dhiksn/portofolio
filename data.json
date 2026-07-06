@@ -21,6 +21,16 @@
       "pdfFile": "assets/docs/Superlab.pdf"
     },
     {
+      "id": 5,
+      "title": "AutoDeploy AI",
+      "description": "CLI tool yang mengotomatisasi deploy ke GitHub — git init otomatis, AI generate commit message via Groq/OpenAI/Ollama, dan auto push dalam satu command.",
+      "longDesc": "AutoDeploy AI adalah global CLI yang menyederhanakan workflow git deploy. Cukup jalankan `autodeploy` dari folder mana pun — tool ini akan otomatis git init jika belum ada, validasi repo GitHub, generate commit message menggunakan AI (Groq, OpenAI, atau Ollama), lalu push ke GitHub. Dilengkapi setup wizard interaktif saat pertama kali dijalankan, spinner animasi di setiap step, dan command `autodeploy --uninstall` untuk cleanup total.",
+      "tech": ["Python", "Groq", "OpenAI", "Ollama", "Git", "PyPI"],
+      "image": "assets/img/autodeploy-thumb.png",
+      "github": "https://github.com/dhiksn/auto-deploy",
+      "demo": "https://pypi.org/project/autodeploy-ai/"
+    },
+    {
       "id": 1,
       "title": "RaiSaver",
       "description": "Platform download video YouTube, Tiktok, dan Instagram tersedia sebagai aplikasi Flutter (Android/iOS) dan website, dengan backend FastAPI dan dukungan resolusi hingga 4K.",

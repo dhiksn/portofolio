@@ -317,6 +317,7 @@ function renderProjects() {
     }
 
     const detail = p.id === 1 ? 'project/raisaver'
+                 : p.id === 5 ? 'project/autodeploy'
                  : `project/detail.html?id=${p.id}`;
     return `
     <div class="project-card reveal" data-delay="${i * 100}">
@@ -331,7 +332,7 @@ function renderProjects() {
         </div>
         <div class="project-btns">
           <a href="${p.demo}" target="_blank" rel="noopener" class="proj-btn proj-primary">
-            Live Demo
+            ${p.demo.includes('pypi.org') ? 'PyPI' : 'Live Demo'}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
           <a href="${detail}" class="proj-btn proj-ghost">
