@@ -1,6 +1,16 @@
 {
   "projects": [
     {
+      "id": 4,
+      "title": "AutoDeploy AI",
+      "description": "CLI tool yang mengotomatisasi deploy ke GitHub — git init otomatis, AI generate commit message via Groq/OpenAI/Ollama, dan auto push dalam satu command.",
+      "longDesc": "AutoDeploy AI adalah global CLI yang menyederhanakan workflow git deploy. Cukup jalankan `autodeploy` dari folder mana pun — tool ini akan otomatis git init jika belum ada, validasi repo GitHub, generate commit message menggunakan AI (Groq, OpenAI, atau Ollama), lalu push ke GitHub. Dilengkapi setup wizard interaktif saat pertama kali dijalankan, spinner animasi di setiap step, dan command `autodeploy --uninstall` untuk cleanup total.",
+      "tech": ["Python", "Groq", "OpenAI", "Ollama", "Git", "PyPI"],
+      "image": "assets/img/autodeploy-thumb.png",
+      "github": "https://github.com/dhiksn/auto-deploy",
+      "demo": "https://pypi.org/project/autodeploy-ai/"
+    },
+    {
       "id": 3,
       "title": "Dokumentasi ASAT Praktik TJKT",
       "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
@@ -19,16 +29,6 @@
       "readUrl": "project/dokumentasi-superlab-asj",
       "downloadFile": "assets/docs/Superlab.docx",
       "pdfFile": "assets/docs/Superlab.pdf"
-    },
-    {
-      "id": 4,
-      "title": "AutoDeploy AI",
-      "description": "CLI tool yang mengotomatisasi deploy ke GitHub — git init otomatis, AI generate commit message via Groq/OpenAI/Ollama, dan auto push dalam satu command.",
-      "longDesc": "AutoDeploy AI adalah global CLI yang menyederhanakan workflow git deploy. Cukup jalankan `autodeploy` dari folder mana pun — tool ini akan otomatis git init jika belum ada, validasi repo GitHub, generate commit message menggunakan AI (Groq, OpenAI, atau Ollama), lalu push ke GitHub. Dilengkapi setup wizard interaktif saat pertama kali dijalankan, spinner animasi di setiap step, dan command `autodeploy --uninstall` untuk cleanup total.",
-      "tech": ["Python", "Groq", "OpenAI", "Ollama", "Git", "PyPI"],
-      "image": "assets/img/autodeploy-thumb.png",
-      "github": "https://github.com/dhiksn/auto-deploy",
-      "demo": "https://pypi.org/project/autodeploy-ai/"
     },
     {
       "id": 1,
