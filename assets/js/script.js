@@ -26,13 +26,13 @@ let portfolioData = null;
 
   /* ---- CONFIG ---- */
   const isMobile     = W < 768;
-  const N            = isMobile ? 60 : 120;   // node count
-  const LINK_DIST    = isMobile ? 130 : 170;  // max px to draw a line
-  const MOUSE_RADIUS = 160;  // px — attraction zone radius
-  const ATTRACT      = 0.018; // pull strength toward mouse
-  const REPEL_NEAR   = 60;   // px — hard repel zone (avoid cursor overlap)
+  const N            = isMobile ? 40 : 80;    // dikurangi dari 60/120
+  const LINK_DIST    = isMobile ? 120 : 150;  // dikurangi sedikit
+  const MOUSE_RADIUS = 160;
+  const ATTRACT      = 0.018;
+  const REPEL_NEAR   = 60;
   const REPEL_STR    = 0.55;
-  const BASE_SPEED   = 0.22;  // idle drift speed
+  const BASE_SPEED   = 0.22;
   const FRICTION     = 0.985;
   const MAX_SPEED    = 3.5;
 
@@ -130,8 +130,14 @@ let portfolioData = null;
   document.addEventListener('mouseleave', () => { mActive = false; });
 
   /* ---- ANIMATE ---- */
+  let paused = false;
+  document.addEventListener('visibilitychange', () => {
+    paused = document.hidden;
+  });
+
   function animate() {
     requestAnimationFrame(animate);
+    if (paused) return;
 
     nodes.forEach(n => {
       if (mActive) {

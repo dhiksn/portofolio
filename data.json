@@ -6,7 +6,7 @@
       "description": "CLI tool yang mengotomatisasi deploy ke GitHub — git init otomatis, AI generate commit message via Groq/OpenAI/Ollama, dan auto push dalam satu command.",
       "longDesc": "AutoDeploy AI adalah global CLI yang menyederhanakan workflow git deploy. Cukup jalankan `autodeploy` dari folder mana pun — tool ini akan otomatis git init jika belum ada, validasi repo GitHub, generate commit message menggunakan AI (Groq, OpenAI, atau Ollama), lalu push ke GitHub. Dilengkapi setup wizard interaktif saat pertama kali dijalankan, spinner animasi di setiap step, dan command `autodeploy --uninstall` untuk cleanup total.",
       "tech": ["Python", "Groq", "OpenAI", "Ollama", "Git", "PyPI"],
-      "image": "assets/img/autodeploy-thumb.png",
+      "image": "assets/img/autodeploy-thumb.webp",
       "github": "https://github.com/dhiksn/auto-deploy",
       "demo": "https://pypi.org/project/autodeploy-ai/"
     },
@@ -15,7 +15,7 @@
       "title": "Dokumentasi ASAT Praktik TJKT",
       "description": "Dokumentasi lengkap hasil pelaksanaan ASAT (Asesmen Sumatif Akhir Tahun) Praktik jurusan Teknik Jaringan Komputer dan Telekomunikasi.",
       "demotype": "download",
-      "image": "assets/img/asat-thumb.jpg",
+      "image": "assets/img/asat-thumb.webp",
       "readUrl": "project/dokumentasi-asat-tahun-2026",
       "downloadFile": "assets/docs/ASAT.docx",
       "pdfFile": "assets/docs/ASAT.pdf"
@@ -25,7 +25,7 @@
       "title": "Dokumentasi Superlab ASJ",
       "description": "Implementasi layanan server Debian 10 meliputi SSH, DHCP, DNS, FTP, Web Server, dan Mail Server. Fokus pada administrasi Linux dan troubleshooting sistem.",
       "demotype": "download",
-      "image": "assets/img/superlab-thumb.jpg",
+      "image": "assets/img/superlab-thumb.webp",
       "readUrl": "project/dokumentasi-superlab-asj",
       "downloadFile": "assets/docs/Superlab.docx",
       "pdfFile": "assets/docs/Superlab.pdf"

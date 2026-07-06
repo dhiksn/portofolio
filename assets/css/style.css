@@ -71,10 +71,9 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 .navbar {
   position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
   z-index: 1000; width: calc(100% - 32px); max-width: 820px;
-  background: rgba(5,5,5,0.75);
+  background: rgba(5,5,5,0.88);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 999px;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   transition: var(--t) var(--ease);
 }
 .navbar.scrolled {
