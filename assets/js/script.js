@@ -371,8 +371,10 @@ function renderCertificates() {
     <div class="cert-card reveal" data-delay="${i * 80}"
       onclick="openCertModal(this)"
       data-image="${c.image}">
-      <div class="cert-img-wrap">
-        <img class="cert-img" src="${c.image}" alt="${c.title}" loading="lazy">
+      <div class="cert-img-wrap" id="cw-${i}">
+        <img class="cert-img" src="${c.image}" alt="${c.title}" loading="lazy"
+             onload="this.classList.add('img-loaded');document.getElementById('cw-${i}').classList.add('loaded')"
+             decoding="async">
         <div class="cert-info">
           <div class="cert-name">${c.title}</div>
           <div class="cert-issuer">${c.issuer}</div>

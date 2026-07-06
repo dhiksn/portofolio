@@ -49,7 +49,7 @@
       "issuer": "Cisco Dasar dari ID-Networkers",
       "year": "6 Mei 2026",
       "color": "#00D4FF",
-      "image": "sertifikat/cisco.png"
+      "image": "sertifikat/cisco.webp"
     },
     {
       "id": 2,
@@ -57,7 +57,7 @@
       "issuer": "Cyber Security Dasar dari ID-Networkers",
       "year": "4 Mei 2026",
       "color": "#FF6B6B",
-      "image": "sertifikat/cyber.png"
+      "image": "sertifikat/cyber.webp"
     },
     {
       "id": 3,
@@ -65,7 +65,7 @@
       "issuer": "Linux Dasar dari ID-Networkers",
       "year": "4 Mei 2026",
       "color": "#00FFB3",
-      "image": "sertifikat/linux.png"
+      "image": "sertifikat/linux.webp"
     },
     {
       "id": 4,
@@ -73,21 +73,21 @@
       "issuer": "Jaringan Komputer Dasar dari ID-Networkers",
       "year": "4 Mei 2026",
       "color": "#FF9F43",
-      "image": "sertifikat/jaringan.png"
+      "image": "sertifikat/jaringan.webp"
     },
     {
       "id": 5,
       "title": "Introduction to CyberSecurity",
       "issuer": "Introduction to CyberSecurity dari NetaCad",
       "year": "13 Januari 2026",
-      "image": "sertifikat/introduction.png"
+      "image": "sertifikat/introduction.webp"
     },
     {
       "id": 6,
       "title": "Introduction to Kali Linux Basics",
       "issuer": "Introduction to Kali Linux Basics dari Simplilearn",
       "year": "4 Juni 2026",
-      "image": "sertifikat/kali-linux.png"
+      "image": "sertifikat/kali-linux.webp"
     }
   ]
 }
