@@ -55,10 +55,22 @@ let portfolioData = null;
   const dotPos  = new Float32Array(N * 3);
   const dotGeo  = new THREE.BufferGeometry();
   dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPos, 3));
+
+  // Buat circular texture supaya partikel bulat
+  const dotCanvas = document.createElement('canvas');
+  dotCanvas.width = dotCanvas.height = 32;
+  const dotCtx = dotCanvas.getContext('2d');
+  dotCtx.beginPath();
+  dotCtx.arc(16, 16, 14, 0, Math.PI * 2);
+  dotCtx.fillStyle = '#ffffff';
+  dotCtx.fill();
+  const dotTex = new THREE.CanvasTexture(dotCanvas);
+
   const dotMat  = new THREE.PointsMaterial({
-    color: 0xffffff, size: 2.8,
+    color: 0xffffff, size: 3.5,
     sizeAttenuation: false,
     transparent: true, opacity: 0.85,
+    map: dotTex, alphaTest: 0.1,
   });
   scene.add(new THREE.Points(dotGeo, dotMat));
 

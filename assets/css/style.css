@@ -414,13 +414,14 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 }
 .keahlian {
   background: #060606;
-  overflow: hidden;
   position: relative; z-index: 20;
   border-radius: 20px 20px 0 0;
   box-shadow: 0 -20px 80px rgba(0,0,0,0.9);
   will-change: transform;
   transform: translateY(40px);
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-top: 0;
+  padding-bottom: 2rem;
 }
 .keahlian.slide-in {
   transform: translateY(0);
@@ -660,19 +661,20 @@ input, textarea { -webkit-user-select: text; user-select: text; }
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin: 1.5rem 0 0;
+  margin: 0;
+  padding: 2rem 0;
 }
 
 .skills-banner {
   width: 100%;
   overflow: hidden;
-  padding: 1.1rem 0;
+  padding: 1.4rem 0;
   background: rgba(255,255,255,0.04);
   border-top: 1px solid rgba(255,255,255,0.07);
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
-.skills-banner--fwd  { transform: rotate(-2deg) scaleX(1.05); }
-.skills-banner--rev  { transform: rotate(2deg)  scaleX(1.05); margin-top: 1.5rem; }
+.skills-banner--fwd  { transform: rotate(-1.5deg) scaleX(1.04); }
+.skills-banner--rev  { display: none; }
 
 .skills-banner-track {
   display: flex;
@@ -698,17 +700,17 @@ input, textarea { -webkit-user-select: text; user-select: text; }
 }
 
 .sk-item {
-  font-size: 0.78rem;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.75);
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   white-space: nowrap;
 }
 .sk-sep {
-  color: rgba(255,255,255,0.25);
-  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.75rem;
   flex-shrink: 0;
 }
 
